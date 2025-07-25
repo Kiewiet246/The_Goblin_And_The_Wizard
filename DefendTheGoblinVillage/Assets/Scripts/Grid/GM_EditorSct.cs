@@ -12,7 +12,12 @@ public class GM_EditorSct : Editor
 
       if (GUILayout.Button("Clear Grid"))
       {
-         gridManager.ClearGrid();
+         gridManager.ClearGridEditor();
+      }
+
+      if (GUILayout.Button("Generate Grid"))
+      {
+         gridManager.CreateGrid();
       }
    }
 }
