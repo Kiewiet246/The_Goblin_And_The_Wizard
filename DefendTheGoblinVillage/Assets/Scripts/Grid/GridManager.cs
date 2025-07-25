@@ -67,12 +67,12 @@ public class GridManager : MonoBehaviour
 
               if (pointyTop)
               {
-                  rotation = Quaternion.Euler(90, 0, 0);
+                  rotation = Quaternion.Euler(-90, 0, 0);
               }
 
               else
               {
-                  rotation = Quaternion.Euler(90, 0, 90);
+                  rotation = Quaternion.Euler(-90, 0, 90);
               }
               
               GameObject tile = Instantiate(tilePrefab, gridPosition, rotation, transform);
