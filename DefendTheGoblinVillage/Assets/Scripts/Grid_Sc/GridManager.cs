@@ -130,7 +130,7 @@ public class GridManager : MonoBehaviour
 
         else
         {
-            shouldOffset = (column % 2 != 0);
+            shouldOffset = (column % 2 == 0);
             width = 2f * size;
             height = Mathf.Sqrt(3) * size;
             horizontalDist = width * (3f / 4f);
@@ -146,8 +146,15 @@ public class GridManager : MonoBehaviour
 
     private Vector3Int GetCubeCoordinate(Vector2Int coordinate)
     {
-        var q = coordinate.x - (coordinate.y+ (coordinate.y % 2 ))/2;
-        var r = coordinate.y;
+        var q = coordinate.x;
+        var r = coordinate.y - (coordinate.x - (coordinate.x % 2))/2;
+        if (coordinate.x != 0)
+        {
+            bool shouldOffset = (coordinate.x % 2 == 0);
+          //  r = (shouldOffset) ? coordinate.y : coordinate.y;
+        }
+        //var q = coordinate.x;
+        
         return new Vector3Int(q, r, -q-r);
     }
 
