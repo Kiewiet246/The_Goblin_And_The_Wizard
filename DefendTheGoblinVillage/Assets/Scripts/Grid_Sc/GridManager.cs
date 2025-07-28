@@ -16,6 +16,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private List<Vector3Int> cubeCords = new List<Vector3Int>();
     [SerializeField] private List<GameObject> cubeObjects = new List<GameObject>();
     [SerializeField] private Vector3Int[] possibleNeighbors;
+    [SerializeField] private TileInfo startTile, endTile;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -87,6 +88,8 @@ public class GridManager : MonoBehaviour
               }
               
               GameObject tile = Instantiate(tilePrefab, gridPosition, rotation, transform);
+              
+              tile.transform.localScale *= tileRadius;
               tile.name = "Tile_" + coordinates.x + "_" + coordinates.y;
               
               TileInfo tileInfo = tile.GetComponent<TileInfo>();
@@ -124,7 +127,7 @@ public class GridManager : MonoBehaviour
             verticalDist = height * (3f / 4f);
 
             offset = (shouldOffset) ? width / 2f : 0;
-            xPos = (column * horizontalDist) + offset;
+            xPos = (column * horizontalDist) - offset;
             yPos = (row * verticalDist);
         }
 
@@ -146,14 +149,18 @@ public class GridManager : MonoBehaviour
 
     private Vector3Int GetCubeCoordinate(Vector2Int coordinate)
     {
-        var q = coordinate.x;
-        var r = coordinate.y - (coordinate.x - (coordinate.x % 2))/2;
-        if (coordinate.x != 0)
+        var q = new int();
+        var r = new int();
+        if (pointyTop)
         {
-            bool shouldOffset = (coordinate.x % 2 == 0);
-          //  r = (shouldOffset) ? coordinate.y : coordinate.y;
+            q = coordinate.x - (coordinate.y - (coordinate.y % 2))/2;
+            r = coordinate.y;
         }
-        //var q = coordinate.x;
+        else
+        {
+            q = coordinate.x;
+            r = coordinate.y - (coordinate.x - (coordinate.x % 2))/2; 
+        }
         
         return new Vector3Int(q, r, -q-r);
     }
@@ -185,5 +192,75 @@ public class GridManager : MonoBehaviour
                 tileInfo.neighborTiles.Add(neighborTileInfo);
             }
         }
+    }
+
+    public void RandomLocations()
+    {
+        int randomStart = Random.Range(0, transform.childCount);
+        startTile = transform.GetChild(randomStart).gameObject.GetComponent<TileInfo>();
+        int randomEnd = Random.Range(0, transform.childCount);
+        endTile = transform.GetChild(randomEnd).gameObject.GetComponent<TileInfo>();
+        
+        FindPath();
+    }
+
+    public void FindPath()
+    {
+        foreach (Transform child in transform)
+        {
+            TileInfo tileInfo = child.GetComponent<TileInfo>();
+            tileInfo.SetDefualtTiles();
+        }
+
+        if (startTile != null && endTile != null)
+        {
+            Queue<TileInfo> highlightPath = Floodview(startTile, endTile);
+            while (highlightPath.Count > 0)
+            {
+                TileInfo highlightTile = highlightPath.Dequeue();
+                highlightTile.SetPathTile();
+            }
+        }
+    }
+
+    public Queue<TileInfo> Floodview(TileInfo start, TileInfo goal)
+    {
+        Dictionary<TileInfo, TileInfo> nextTileToGoal = new Dictionary<TileInfo, TileInfo>();
+        Queue<TileInfo> frontier = new Queue<TileInfo>();
+        List<TileInfo> visited = new List<TileInfo>();
+        frontier.Enqueue(goal);
+
+        while (frontier.Count > 0)
+        {
+            TileInfo curTile = frontier.Dequeue();
+            
+            foreach (TileInfo neighbor in curTile.neighborTiles)
+            {
+                if (visited.Contains(neighbor) == false && frontier.Contains(neighbor) == false)
+                {
+                    frontier.Enqueue(neighbor);
+                    nextTileToGoal[neighbor] = curTile;  
+                }
+            }
+            
+            visited.Add(curTile);
+        }
+
+        if (visited.Contains(start) == false)
+        {
+            Debug.Log("No path found");
+            return null;
+        }
+        
+        Queue<TileInfo> path = new Queue<TileInfo>();
+        path.Enqueue(start);
+        TileInfo curPathTile = start;
+
+        while (curPathTile != goal)
+        {
+            curPathTile = nextTileToGoal[curPathTile];
+            path.Enqueue(curPathTile);
+        }
+        return path;
     }
 }

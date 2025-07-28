@@ -142,3 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeCoordinates: {x: 0, y: 0, z: 0}
   neighborTiles: []
+  materials:
+  - {fileID: 2100000, guid: ae1acd96ba97f374884e01a8cafec675, type: 2}
+  - {fileID: 2100000, guid: b462fcc8c8a07c641906b11f50c0deb5, type: 2}
+  isPath: 0

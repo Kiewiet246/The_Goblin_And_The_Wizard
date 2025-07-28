@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a79a8a66d5472842b385f68660fe506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: {x: 5, y: 5}
+  gridSize: {x: 20, y: 10}
   tileRadius: 1
   pointyTop: 0
   tilePrefab: {fileID: 2752143501809922513, guid: fbb1721d20b5dee4babbe3ae5d3f4149, type: 3}
@@ -161,6 +161,8 @@ MonoBehaviour:
   - {x: -1, y: 1, z: 0}
   - {x: -1, y: 0, z: 1}
   - {x: 0, y: -1, z: 1}
+  startTile: {fileID: 0}
+  endTile: {fileID: 0}
 --- !u!4 &81624640
 Transform:
   m_ObjectHideFlags: 0
@@ -263,7 +265,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.42, y: 17.81, z: 2.62}
+  m_LocalPosition: {x: 16, y: 18.86, z: 7.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

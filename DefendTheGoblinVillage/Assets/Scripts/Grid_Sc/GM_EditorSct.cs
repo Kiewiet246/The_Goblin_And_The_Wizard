@@ -19,5 +19,15 @@ public class GM_EditorSct : Editor
       {
          gridManager.CreateGrid();
       }
+      
+      if (GUILayout.Button("Find Path"))
+      {
+         gridManager.FindPath();
+      }
+
+      if (GUILayout.Button("Generate Path"))
+      {
+         gridManager.RandomLocations();
+      }
    }
 }
