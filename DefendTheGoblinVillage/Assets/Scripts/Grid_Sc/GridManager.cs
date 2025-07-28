@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-
+using UnityEngine.UI;
+using TMPro;
 
 public class GridManager : MonoBehaviour
 {
     [Header("Grid Settings")] [SerializeField]
     private Vector2Int gridSize;
     [SerializeField] private float tileRadius;
-    [SerializeField] private bool pointyTop = false;
+    public bool pointyTop = false;
     [SerializeField] private GameObject tilePrefab;
 
     [Header("Navigation")]
@@ -18,19 +18,46 @@ public class GridManager : MonoBehaviour
     [SerializeField] private List<GameObject> cubeObjects = new List<GameObject>();
     [SerializeField] private Vector3Int[] possibleNeighbors;
     [SerializeField] private TileInfo startTile, endTile;
+
+
+    [SerializeField] private Slider xSlider;
+    [SerializeField] private Slider ySlider;
+    
+    public TextMeshProUGUI xtext, ytext;
+    
+    [SerializeField] int MaxX, MaxY, MinX, MinY;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        xSlider.value = gridSize.x;
+        xSlider.maxValue = MaxX;
+        xSlider.minValue = MinX;
         
+        ySlider.value = gridSize.y;
+        ySlider.maxValue = MaxY;
+        ySlider.minValue = MinY;
     }
 
     // Update is called once per frame
     void Update()
     {
+        gridSize.x = (int)xSlider.value;
+        xtext.text = "X: "+ gridSize.x.ToString();
         
+        gridSize.y = (int)ySlider.value;
+        ytext.text = "Y: " + gridSize.y.ToString();
     }
 
+    public void PointyTop()
+    {
+        pointyTop = true;
+    }
+
+    public void FlatTop()
+    {
+        pointyTop = false;
+    }
     
     public void ClearGridEditor()
     {
@@ -180,8 +207,11 @@ public class GridManager : MonoBehaviour
         foreach (Transform child in transform)
         {
             TileInfo tileInfo = child.GetComponent<TileInfo>();
+            tileInfo.neighborTiles.Clear();
             FindNeighbors(tileInfo);
         }
+        
+        FindPath();
     }
     
     public void FindNeighbors(TileInfo tileInfo)
@@ -190,7 +220,6 @@ public class GridManager : MonoBehaviour
         {
             if (tiles.TryGetValue(tileInfo.cubeCoordinates + neighbor, out TileInfo neighborTileInfo))
             {
-                if (neighborTileInfo.terrainType != TileInfo.TerrainType.Stone && tileInfo.canStep(tileInfo.height, neighborTileInfo.height))
                 tileInfo.neighborTiles.Add(neighborTileInfo);
             }
         }
@@ -200,18 +229,24 @@ public class GridManager : MonoBehaviour
     {
         int randomStart = Random.Range(0, transform.childCount);
         startTile = transform.GetChild(randomStart).gameObject.GetComponent<TileInfo>();
+        startTile.StartTile();
         int randomEnd = Random.Range(0, transform.childCount);
         endTile = transform.GetChild(randomEnd).gameObject.GetComponent<TileInfo>();
+        endTile.StopTile();
         
-        FindPath();
+        StartListingNeighbors();
     }
 
     public void FindPath()
     {
         foreach (Transform child in transform)
         {
-            TileInfo tileInfo = child.GetComponent<TileInfo>();
-            tileInfo.SetDefualtTiles();
+            if (child != startTile.transform && child != endTile.transform)
+            {
+                TileInfo tileInfo = child.GetComponent<TileInfo>();
+                tileInfo.SetDefualtTiles();
+            }
+            
         }
 
         if (startTile != null && endTile != null)
@@ -222,6 +257,8 @@ public class GridManager : MonoBehaviour
                 TileInfo highlightTile = highlightPath.Dequeue();
                 highlightTile.SetPathTile();
             }
+            
+            endTile.StopTile();
         }
     }
 
@@ -282,7 +319,7 @@ public class GridManager : MonoBehaviour
             TileInfo curTile = frontier.Dequeue();
             if (curTile == start)
             {
-                break;
+               // break;
             }
             foreach (TileInfo neighbor in curTile.neighborTiles)
             {
@@ -305,7 +342,7 @@ public class GridManager : MonoBehaviour
         }
         
         Queue<TileInfo> path = new Queue<TileInfo>();
-        path.Enqueue(start);
+       // path.Enqueue(start);
         TileInfo curPathTile = start;
 
         while (curPathTile != goal)
@@ -314,5 +351,35 @@ public class GridManager : MonoBehaviour
             path.Enqueue(curPathTile);
         }
         return path;
+    }
+
+    public void AssignStartLoc(TileInfo start)
+    {
+        if (startTile != null)
+        {
+            startTile.SetDefualtTiles();
+        }
+        
+        startTile = start;
+        start.StartTile();
+        if (endTile != null)
+        {
+            StartListingNeighbors();
+        }
+    }
+
+    public void AssignGoalLoc(TileInfo goal)
+    {
+        if (endTile != null)
+        {
+            endTile.SetDefualtTiles();
+        }
+        endTile = goal;
+        endTile.StopTile();
+        if (startTile != null)
+        {
+            StartListingNeighbors();
+        }
+        
     }
 }

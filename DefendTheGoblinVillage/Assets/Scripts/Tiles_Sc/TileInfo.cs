@@ -12,6 +12,7 @@ public class TileInfo : MonoBehaviour
     public int costValue = 0;
     [SerializeField] [Range(0, 5)] private int heightRange;
     public int height;
+    [SerializeField]private List<GameObject> tilePrefabs;
     
     [SerializeField] private int stepRange = 1;
     [SerializeField]
@@ -25,19 +26,22 @@ public class TileInfo : MonoBehaviour
     [SerializeField] private float adjustHeight = 1f;
     public enum TerrainType
     {
-        Normal = 5,
-        Muddy = 10,
-        Forest = 15,
+        Normal = 1,
+        Muddy = 5,
+        Forest = 20,
         Stone = 1000
     }
 
     [Header("Structure")]
     public StructureType structureType;
+
+    [SerializeField] private GameObject Tower;
+    [SerializeField] private GameObject Wall;
     public enum StructureType
     {
         normal = 0,
         normalTower = 10,
-        wall = 20
+        wall = 30
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,9 +56,8 @@ public class TileInfo : MonoBehaviour
     private void TileIsBorn()
     {
         height = Random.Range(0, heightRange);
-        CreateTilesAbove(height);
-
-        int random = Random.Range(0, 101);
+       // CreateTilesAbove(height);
+        int random = Random.Range(0, 40);
 
         if (random <= 40)
         {
@@ -78,10 +81,32 @@ public class TileInfo : MonoBehaviour
 
     private void CreateTilesAbove(int i)
     {
+        RemoveTile();
         for (int j = 1; j <= height; j++)
         {
-            Instantiate(Tile, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j), transform.position.z), transform.rotation, transform);
+           GameObject tileAdded = Instantiate(Tile, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j), transform.position.z), transform.rotation, transform);
+           tilePrefabs.Add(tileAdded);
         }
+    }
+
+    public void RemoveTile()
+    {
+        if (tilePrefabs.Count > 0)
+        {
+            GameObject tileToRemove = tilePrefabs[tilePrefabs.Count - 1];
+            tilePrefabs.Remove(tileToRemove);
+            Destroy(tileToRemove);
+        }
+    }
+
+    public void AddTile()
+    {
+        if (tilePrefabs.Count < heightRange)
+        {
+            GameObject tileAdded =  Instantiate(Tile, new Vector3(transform.position.x,transform.position.y + (adjustHeight*(tilePrefabs.Count+1)), transform.position.z), transform.rotation, transform);
+            tilePrefabs.Add(tileAdded);
+        }
+        
     }
 
     // Update is called once per frame
@@ -111,7 +136,7 @@ public class TileInfo : MonoBehaviour
 
     public void SetDefualtTiles()
     {
-       // isPath = false;
+        isPath = false;
        gameObject.GetComponent<MeshRenderer>().material = materials[0]; 
        ChildrenMaterial(materials[0]);
     }
@@ -145,7 +170,7 @@ public class TileInfo : MonoBehaviour
     {
         if (transform.childCount > 0)
         {
-            foreach (Transform child in transform )
+            foreach (GameObject child in tilePrefabs )
             {
                 child.gameObject.GetComponent<MeshRenderer>().material = mat;
             }
@@ -154,7 +179,7 @@ public class TileInfo : MonoBehaviour
 
     public int GetCostValue()
     {
-        costValue += (int)terrainType + (int)structureType + height;
+        costValue = (int)terrainType + (int)structureType + tilePrefabs.Count;
         return costValue;
     }
 
@@ -170,5 +195,98 @@ public class TileInfo : MonoBehaviour
             return false;
         }
         
+    }
+
+    public void CallTower()
+    {
+        if (Tower.activeSelf == false)
+        {
+            ActivateTower();
+        }
+
+        else
+        {
+            DeactivateTower();
+        }
+        
+        Wall.SetActive(false);
+    }
+
+    public void CallWall()
+    {
+        if (Wall.activeSelf == false)
+        {
+            ActivateWall();
+        }
+        else
+        {
+            DeactivateWall();
+        }
+        
+        Tower.SetActive(false);
+    }
+
+    public void ActivateTower()
+    {
+        structureType = StructureType.normalTower;
+        Debug.Log(structureType.ToString());
+        Tower.SetActive(true);
+        Tower.transform.position = Vector3.zero;
+        Tower.transform.position = new Vector3(transform.position.x, transform.position.y + adjustHeight*(tilePrefabs.Count+1), transform.position.z);
+    }
+
+    public void DeactivateTower()
+    {
+        structureType = StructureType.normal;
+        Tower.SetActive(false);
+    }
+
+    public void ActivateWall()
+    {
+        structureType = StructureType.wall;
+        Wall.SetActive(true);
+        Wall.transform.position = Vector3.zero;
+        Wall.transform.position = new Vector3(transform.position.x, transform.position.y + adjustHeight*(tilePrefabs.Count+1), transform.position.z);
+    }
+
+    public void DeactivateWall()
+    {
+        structureType = StructureType.normal;
+        Wall.SetActive(false);
+    }
+
+    public void ChangeTheTerrain()
+    {
+        switch (terrainType)
+        {
+            case TerrainType.Normal:
+                terrainType = TerrainType.Muddy;
+                break;
+            case TerrainType.Muddy:
+                terrainType = TerrainType.Forest;
+                break;
+            case TerrainType.Forest:
+                terrainType = TerrainType.Stone;
+                break;
+            case TerrainType.Stone:
+                terrainType = TerrainType.Normal;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    public void StartTile()
+    {
+        isPath = true;
+        gameObject.GetComponent<MeshRenderer>().material = materials[5];
+        ChildrenMaterial(materials[5]);
+    }
+
+    public void StopTile()
+    {
+        isPath = true;
+        gameObject.GetComponent<MeshRenderer>().material = materials[6];
+        ChildrenMaterial(materials[6]);
     }
 }
