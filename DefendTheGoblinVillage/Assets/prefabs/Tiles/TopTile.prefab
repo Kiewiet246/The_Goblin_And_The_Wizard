@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3094248092766735488
+--- !u!1001 &6080071289277891866
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -58,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: -4575734979276873811, guid: fd8791db1b17f804b8458c33c58b8fe0, type: 3}
     - target: {fileID: 919132149155446097, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
       propertyPath: m_Name
-      value: Hex_Tile
+      value: TopTile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -66,26 +78,23 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3961171272395154194}
+      addedObject: {fileID: 4864489273274673257}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4368550380208649128}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7289620486402308111}
+      addedObject: {fileID: 1612446762309101713}
   m_SourcePrefab: {fileID: 100100000, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
---- !u!1 &2752143501809922513 stripped
+--- !u!1 &6386571900578494539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
-  m_PrefabInstance: {fileID: 3094248092766735488}
+  m_PrefabInstance: {fileID: 6080071289277891866}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &3961171272395154194
+--- !u!54 &4864489273274673257
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2752143501809922513}
+  m_GameObject: {fileID: 6386571900578494539}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -106,13 +115,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &4368550380208649128
+--- !u!64 &1612446762309101713
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2752143501809922513}
+  m_GameObject: {fileID: 6386571900578494539}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -128,32 +137,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4575734979276873811, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
---- !u!114 &7289620486402308111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2752143501809922513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d889a4c6116d3274386af38df1568a3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cubeCoordinates: {x: 0, y: 0, z: 0}
-  neighborTiles: []
-  costValue: 5
-  heightRange: 4
-  height: 0
-  stepRange: 1
-  materials:
-  - {fileID: 2100000, guid: ae1acd96ba97f374884e01a8cafec675, type: 2}
-  - {fileID: 2100000, guid: b462fcc8c8a07c641906b11f50c0deb5, type: 2}
-  - {fileID: 2100000, guid: e79486a1e24b004429b5f24851219643, type: 2}
-  - {fileID: 2100000, guid: 05658c30f7135e34c93d8a9bb99dc455, type: 2}
-  - {fileID: 2100000, guid: 8c595dec1a12e884cae44ee7987fe2b7, type: 2}
-  isPath: 0
-  terrainType: 0
-  Tile: {fileID: 6386571900578494539, guid: a0c5c99d6a5b73448b9484365c0394fc, type: 3}
-  adjustHeight: 0.5
-  structureType: 0

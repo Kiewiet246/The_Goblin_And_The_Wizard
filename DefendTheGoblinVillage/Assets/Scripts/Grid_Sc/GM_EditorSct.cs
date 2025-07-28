@@ -19,6 +19,11 @@ public class GM_EditorSct : Editor
       {
          gridManager.CreateGrid();
       }
+
+      if (GUILayout.Button("Find Neighbors"))
+      {
+         gridManager.StartListingNeighbors();
+      }
       
       if (GUILayout.Button("Find Path"))
       {

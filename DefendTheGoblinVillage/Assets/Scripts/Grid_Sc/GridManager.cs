@@ -102,7 +102,7 @@ public class GridManager : MonoBehaviour
         }
         
         RegisterTiles();
-        StartListingNeighbors();
+        //StartListingNeighbors();
     }
 
     private Vector3 GetPositionForHexFromCoordinate(Vector2Int coordinate)
@@ -190,6 +190,7 @@ public class GridManager : MonoBehaviour
         {
             if (tiles.TryGetValue(tileInfo.cubeCoordinates + neighbor, out TileInfo neighborTileInfo))
             {
+                if (neighborTileInfo.terrainType != TileInfo.TerrainType.Stone && tileInfo.canStep(tileInfo.height, neighborTileInfo.height))
                 tileInfo.neighborTiles.Add(neighborTileInfo);
             }
         }
@@ -285,7 +286,7 @@ public class GridManager : MonoBehaviour
             }
             foreach (TileInfo neighbor in curTile.neighborTiles)
             {
-                int newCost = travelCost[curTile] + neighbor.costValue;
+                int newCost = travelCost[curTile] + neighbor.GetCostValue();
                 if (travelCost.ContainsKey(neighbor) == false || newCost < travelCost[neighbor])
                 {
                     travelCost[neighbor] = newCost;
