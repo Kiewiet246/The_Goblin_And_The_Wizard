@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -214,7 +215,7 @@ public class GridManager : MonoBehaviour
 
         if (startTile != null && endTile != null)
         {
-            Queue<TileInfo> highlightPath = Floodview(startTile, endTile);
+            Queue<TileInfo> highlightPath = Djikstra(startTile, endTile);
             while (highlightPath.Count > 0)
             {
                 TileInfo highlightTile = highlightPath.Dequeue();
@@ -247,6 +248,56 @@ public class GridManager : MonoBehaviour
         }
 
         if (visited.Contains(start) == false)
+        {
+            Debug.Log("No path found");
+            return null;
+        }
+        
+        Queue<TileInfo> path = new Queue<TileInfo>();
+        path.Enqueue(start);
+        TileInfo curPathTile = start;
+
+        while (curPathTile != goal)
+        {
+            curPathTile = nextTileToGoal[curPathTile];
+            path.Enqueue(curPathTile);
+        }
+        return path;
+    }
+
+    public Queue<TileInfo> Djikstra(TileInfo start, TileInfo goal)
+    {
+        Dictionary<TileInfo, TileInfo> nextTileToGoal = new Dictionary<TileInfo, TileInfo>();
+        Dictionary<TileInfo, int> travelCost = new Dictionary<TileInfo, int>();
+        
+        PriorityQueue<TileInfo> frontier = new PriorityQueue<TileInfo>();
+        
+        
+        frontier.Enqueue(goal, 0);
+        travelCost[goal] = 0;
+
+        while (frontier.Count > 0)
+        {
+            TileInfo curTile = frontier.Dequeue();
+            if (curTile == start)
+            {
+                break;
+            }
+            foreach (TileInfo neighbor in curTile.neighborTiles)
+            {
+                int newCost = travelCost[curTile] + neighbor.costValue;
+                if (travelCost.ContainsKey(neighbor) == false || newCost < travelCost[neighbor])
+                {
+                    travelCost[neighbor] = newCost;
+                    int priority = newCost;
+                    
+                    frontier.Enqueue(neighbor, priority);
+                    nextTileToGoal[neighbor] = curTile;  
+                }
+            }
+        }
+
+        if (nextTileToGoal.ContainsKey(start) == false)
         {
             Debug.Log("No path found");
             return null;

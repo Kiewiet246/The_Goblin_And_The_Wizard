@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class TileInfo : MonoBehaviour
 {
+    [Header("Grid info")]
     public Vector3Int cubeCoordinates;
-    
     public List<TileInfo> neighborTiles;
+    public int costValue;
     
     [SerializeField]
     private List<Material> materials;
-
     [SerializeField] private bool isPath = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
