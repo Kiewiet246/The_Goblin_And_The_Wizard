@@ -56,9 +56,9 @@ public class TileInfo : MonoBehaviour
 
     private void TileIsBorn()
     {
-       // height = Random.Range(0, heightRange);
-       // CreateTilesAbove(height);
-        int random = Random.Range(0, 40);
+       height = Random.Range(0, heightRange);
+       CreateTilesAbove(height);
+        int random = Random.Range(0, 101);
 
         if (random <= 40)
         {
@@ -85,7 +85,7 @@ public class TileInfo : MonoBehaviour
         RemoveTile();
         for (int j = 1; j <= height; j++)
         {
-           GameObject tileAdded = Instantiate(Tile, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j), transform.position.z), transform.rotation, transform);
+           GameObject tileAdded = Instantiate(Tile, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j*(transform.localScale.y/100f)), transform.position.z), transform.rotation, transform);
            tilesOnTOp.Add(tileAdded);
         }
     }

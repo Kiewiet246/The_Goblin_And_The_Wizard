@@ -367,9 +367,9 @@ MonoBehaviour:
   cubeCoordinates: {x: 0, y: 0, z: 0}
   neighborTiles: []
   costValue: 5
-  heightRange: 4
+  heightRange: 5
   height: 0
-  tilePrefabs: []
+  tilesOnTOp: []
   stepRange: 1
   materials:
   - {fileID: 2100000, guid: ae1acd96ba97f374884e01a8cafec675, type: 2}
