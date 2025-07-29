@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 
@@ -12,7 +13,7 @@ public class TileInfo : MonoBehaviour
     public int costValue = 0;
     [SerializeField] [Range(0, 5)] private int heightRange;
     public int height;
-    [SerializeField]private List<GameObject> tilePrefabs;
+    public List<GameObject> tilesOnTOp;
     
     [SerializeField] private int stepRange = 1;
     [SerializeField]
@@ -55,7 +56,7 @@ public class TileInfo : MonoBehaviour
 
     private void TileIsBorn()
     {
-        height = Random.Range(0, heightRange);
+       // height = Random.Range(0, heightRange);
        // CreateTilesAbove(height);
         int random = Random.Range(0, 40);
 
@@ -85,26 +86,26 @@ public class TileInfo : MonoBehaviour
         for (int j = 1; j <= height; j++)
         {
            GameObject tileAdded = Instantiate(Tile, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j), transform.position.z), transform.rotation, transform);
-           tilePrefabs.Add(tileAdded);
+           tilesOnTOp.Add(tileAdded);
         }
     }
 
     public void RemoveTile()
     {
-        if (tilePrefabs.Count > 0)
+        if (tilesOnTOp.Count > 0)
         {
-            GameObject tileToRemove = tilePrefabs[tilePrefabs.Count - 1];
-            tilePrefabs.Remove(tileToRemove);
+            GameObject tileToRemove = tilesOnTOp[tilesOnTOp.Count - 1];
+            tilesOnTOp.Remove(tileToRemove);
             Destroy(tileToRemove);
         }
     }
 
     public void AddTile()
     {
-        if (tilePrefabs.Count < heightRange)
+        if (tilesOnTOp.Count < heightRange)
         {
-            GameObject tileAdded =  Instantiate(Tile, new Vector3(transform.position.x,transform.position.y + (adjustHeight*(tilePrefabs.Count+1)), transform.position.z), transform.rotation, transform);
-            tilePrefabs.Add(tileAdded);
+            GameObject tileAdded =  Instantiate(Tile, new Vector3(transform.position.x,transform.position.y + (adjustHeight*(tilesOnTOp.Count+1)), transform.position.z), transform.rotation, transform);
+            tilesOnTOp.Add(tileAdded);
         }
         
     }
@@ -170,7 +171,7 @@ public class TileInfo : MonoBehaviour
     {
         if (transform.childCount > 0)
         {
-            foreach (GameObject child in tilePrefabs )
+            foreach (GameObject child in tilesOnTOp )
             {
                 child.gameObject.GetComponent<MeshRenderer>().material = mat;
             }
@@ -179,13 +180,13 @@ public class TileInfo : MonoBehaviour
 
     public int GetCostValue()
     {
-        costValue = (int)terrainType + (int)structureType + tilePrefabs.Count;
+        costValue = (int)terrainType + (int)structureType + tilesOnTOp.Count;
         return costValue;
     }
 
     public bool canStep(int ownHeight, int neighborHeight)
     {
-        int heightDiff = neighborHeight - ownHeight;
+        int heightDiff = Math.Abs(neighborHeight - ownHeight);
         if (heightDiff <= stepRange)
         {
             return true;
@@ -232,7 +233,7 @@ public class TileInfo : MonoBehaviour
         Debug.Log(structureType.ToString());
         Tower.SetActive(true);
         Tower.transform.position = Vector3.zero;
-        Tower.transform.position = new Vector3(transform.position.x, transform.position.y + adjustHeight*(tilePrefabs.Count+1), transform.position.z);
+        Tower.transform.position = new Vector3(transform.position.x, transform.position.y + adjustHeight*(tilesOnTOp.Count+1), transform.position.z);
     }
 
     public void DeactivateTower()
@@ -246,7 +247,7 @@ public class TileInfo : MonoBehaviour
         structureType = StructureType.wall;
         Wall.SetActive(true);
         Wall.transform.position = Vector3.zero;
-        Wall.transform.position = new Vector3(transform.position.x, transform.position.y + adjustHeight*(tilePrefabs.Count+1), transform.position.z);
+        Wall.transform.position = new Vector3(transform.position.x, transform.position.y + adjustHeight*(tilesOnTOp.Count+1), transform.position.z);
     }
 
     public void DeactivateWall()

@@ -220,6 +220,7 @@ public class GridManager : MonoBehaviour
         {
             if (tiles.TryGetValue(tileInfo.cubeCoordinates + neighbor, out TileInfo neighborTileInfo))
             {
+                if (tileInfo.canStep(tileInfo.tilesOnTOp.Count, neighborTileInfo.tilesOnTOp.Count))
                 tileInfo.neighborTiles.Add(neighborTileInfo);
             }
         }
