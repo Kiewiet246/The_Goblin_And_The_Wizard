@@ -45,6 +45,9 @@ public class TileInfo : MonoBehaviour
         wall = 30
     }
     
+    [Header("HighLight")]
+    [SerializeField] private GameObject highLight;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
