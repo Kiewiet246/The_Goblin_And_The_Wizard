@@ -30,23 +30,29 @@ public class GridManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        xSlider.value = gridSize.x;
-        xSlider.maxValue = MaxX;
-        xSlider.minValue = MinX;
+        if (xSlider != null && ySlider != null)
+        {
+            xSlider.value = gridSize.x;
+            xSlider.maxValue = MaxX;
+            xSlider.minValue = MinX;
         
-        ySlider.value = gridSize.y;
-        ySlider.maxValue = MaxY;
-        ySlider.minValue = MinY;
+            ySlider.value = gridSize.y;
+            ySlider.maxValue = MaxY;
+            ySlider.minValue = MinY;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        gridSize.x = (int)xSlider.value;
-        xtext.text = "X: "+ gridSize.x.ToString();
+        if (xSlider != null && ySlider != null)
+        {
+            gridSize.x = (int)xSlider.value;
+            xtext.text = "X: "+ gridSize.x.ToString();
         
-        gridSize.y = (int)ySlider.value;
-        ytext.text = "Y: " + gridSize.y.ToString();
+            gridSize.y = (int)ySlider.value;
+            ytext.text = "Y: " + gridSize.y.ToString();
+        }
     }
 
     public void PointyTop()
@@ -76,24 +82,32 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    private void ClearGrid()
+    public void ClearGrid()
     {
+        cubeCords.Clear();
+        cubeObjects.Clear();
+        tiles.Clear();
+        
         if (transform.childCount != 0)
         {
             Debug.Log("Kill the grid");
             int childCount = transform.childCount;
             for (int i = 0; i < childCount; i++)
             {
-                Destroy(transform.GetChild(0).gameObject);
+                Destroy(transform.GetChild(i).gameObject);
             }
         }
     }
 
     public void CreateGrid()
     {
+        tiles.Clear();
+        cubeCords.Clear();
+        cubeObjects.Clear();
         
-        ClearGridEditor();
-       // ClearGrid();
+        ClearGrid();
+        //ClearGridEditor();
+        
         
         for (int x = 0; x < gridSize.x; x++)
         {
@@ -129,7 +143,7 @@ public class GridManager : MonoBehaviour
         }
         
         RegisterTiles();
-        //StartListingNeighbors();
+        StartListingNeighbors();
     }
 
     private Vector3 GetPositionForHexFromCoordinate(Vector2Int coordinate)
@@ -211,7 +225,7 @@ public class GridManager : MonoBehaviour
             FindNeighbors(tileInfo);
         }
         
-        FindPath();
+       // FindPath();
     }
     
     public void FindNeighbors(TileInfo tileInfo)

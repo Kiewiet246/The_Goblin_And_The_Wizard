@@ -370,7 +370,7 @@ MonoBehaviour:
   cubeCoordinates: {x: 0, y: 0, z: 0}
   neighborTiles: []
   costValue: 5
-  heightRange: 5
+  heightRange: 0
   height: 0
   tilesOnTOp: []
   stepRange: 1
@@ -383,6 +383,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 91b72ca1a086ca841b25397424dea4f0, type: 2}
   - {fileID: 2100000, guid: 33559f3968a353147a8aa79be8ebc164, type: 2}
   isPath: 0
+  randomTerrain: 0
   terrainType: 0
   Tile: {fileID: 6386571900578494539, guid: a0c5c99d6a5b73448b9484365c0394fc, type: 3}
   adjustHeight: 0.5

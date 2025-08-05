@@ -21,6 +21,7 @@ public class TileInfo : MonoBehaviour
     [SerializeField] private bool isPath = false;
     
     [Header("Terrain")]
+    [SerializeField] private bool randomTerrain = false;
     public TerrainType terrainType;
 
     [SerializeField] private GameObject Tile;
@@ -61,26 +62,34 @@ public class TileInfo : MonoBehaviour
     {
        height = Random.Range(0, heightRange);
        CreateTilesAbove(height);
-        int random = Random.Range(0, 101);
 
-        if (random <= 40)
-        {
-            terrainType = TerrainType.Normal;
-        }
+       if (randomTerrain)
+       {
+           int random = Random.Range(0, 101);
+           if (random <= 40)
+           {
+               terrainType = TerrainType.Normal;
+           }
         
-        else if (random <= 60)
-        {
-            terrainType = TerrainType.Muddy;
-        }
-        else if (random <= 80)
-        {
-            terrainType = TerrainType.Forest;
-        }
+           else if (random <= 60)
+           {
+               terrainType = TerrainType.Muddy;
+           }
+           else if (random <= 80)
+           {
+               terrainType = TerrainType.Forest;
+           }
         
-        else if (random <= 100)
-        {
-            terrainType = TerrainType.Stone;
-        }
+           else if (random <= 100)
+           {
+               terrainType = TerrainType.Stone;
+           }
+       }
+
+       else
+       {
+           terrainType = TerrainType.Normal;
+       }
     }
 
     private void CreateTilesAbove(int i)
