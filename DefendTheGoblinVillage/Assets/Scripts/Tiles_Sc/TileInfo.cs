@@ -242,7 +242,7 @@ public class TileInfo : MonoBehaviour
     public void ActivateTower()
     {
         structureType = StructureType.normalTower;
-        Debug.Log(structureType.ToString());
+        //Debug.Log(structureType.ToString());
         Tower.SetActive(true);
         Tower.transform.position = Vector3.zero;
         Tower.transform.position = new Vector3(transform.position.x, transform.position.y + adjustHeight*(tilesOnTOp.Count+1), transform.position.z);
@@ -301,5 +301,15 @@ public class TileInfo : MonoBehaviour
         isPath = true;
         gameObject.GetComponent<MeshRenderer>().material = materials[6];
         ChildrenMaterial(materials[6]);
+    }
+
+    public void SetHighlight()
+    {
+        highLight.SetActive(true);
+    }
+
+    public void DimHighlight()
+    {
+        highLight.SetActive(false);
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3411614596627667459}
   - component: {fileID: 9136552560354147703}
   - component: {fileID: 812846609787394886}
+  - component: {fileID: 3712812549206238101}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -110,6 +111,23 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &3712812549206238101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4218912952213699682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945a386f8dd692a4bb9be19ad0986c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridManager: {fileID: 0}
+  tileInfo: {fileID: 7289620486402308111}
+  tileInfos: []
+  range: 3
+  rangeType: 0
 --- !u!1 &7855661582802538812
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +388,7 @@ MonoBehaviour:
   cubeCoordinates: {x: 0, y: 0, z: 0}
   neighborTiles: []
   costValue: 5
-  heightRange: 0
+  heightRange: 1
   height: 0
   tilesOnTOp: []
   stepRange: 1
@@ -383,7 +401,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 91b72ca1a086ca841b25397424dea4f0, type: 2}
   - {fileID: 2100000, guid: 33559f3968a353147a8aa79be8ebc164, type: 2}
   isPath: 0
-  randomTerrain: 0
+  randomTerrain: 1
   terrainType: 0
   Tile: {fileID: 6386571900578494539, guid: a0c5c99d6a5b73448b9484365c0394fc, type: 3}
   adjustHeight: 0.5

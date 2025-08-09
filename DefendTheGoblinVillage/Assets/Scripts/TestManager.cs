@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class TestManager : MonoBehaviour
 {
     public GridManager gridManager;
 
+
+    public Vector3Int targetTower;
 
     void Update()
     {
@@ -16,5 +19,18 @@ public class TestManager : MonoBehaviour
         {
             gridManager.CreateGrid();
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            gridManager.tiles.TryGetValue(targetTower, out TileInfo tile);
+            TowerTesting(tile);
+        }
+    }
+
+
+
+    public void TowerTesting(TileInfo tileInfo)
+    {
+        tileInfo.CallTower();
     }
 }

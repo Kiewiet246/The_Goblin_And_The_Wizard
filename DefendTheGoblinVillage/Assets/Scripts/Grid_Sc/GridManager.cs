@@ -13,7 +13,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject tilePrefab;
 
     [Header("Navigation")]
-     private Dictionary<Vector3Int, TileInfo> tiles = new Dictionary<Vector3Int, TileInfo>();
+    public Dictionary<Vector3Int, TileInfo> tiles = new Dictionary<Vector3Int, TileInfo>();
     [SerializeField] private List<Vector3Int> cubeCords = new List<Vector3Int>();
     [SerializeField] private List<GameObject> cubeObjects = new List<GameObject>();
     [SerializeField] private Vector3Int[] possibleNeighbors;
@@ -380,6 +380,7 @@ public class GridManager : MonoBehaviour
         if (endTile != null)
         {
             StartListingNeighbors();
+            FindPath();
         }
     }
 
@@ -394,6 +395,7 @@ public class GridManager : MonoBehaviour
         if (startTile != null)
         {
             StartListingNeighbors();
+            FindPath();
         }
         
     }
