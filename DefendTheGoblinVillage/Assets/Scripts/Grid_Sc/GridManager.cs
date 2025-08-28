@@ -3,15 +3,19 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.ProBuilder;
 
 public class GridManager : MonoBehaviour
 {
     [Header("Grid Settings")] [SerializeField]
-    private Vector2Int gridSize;
+    public Vector2Int gridSize;
     [SerializeField] private float tileRadius;
     public bool pointyTop = false;
     [SerializeField] private GameObject tilePrefab;
 
+    [Header("Noise")]
+    [SerializeField] private NoiseScript noiseScript;
+    
     [Header("Navigation")]
     public Dictionary<Vector3Int, TileInfo> tiles = new Dictionary<Vector3Int, TileInfo>();
     [SerializeField] private List<Vector3Int> cubeCords = new List<Vector3Int>();
@@ -105,9 +109,10 @@ public class GridManager : MonoBehaviour
         cubeCords.Clear();
         cubeObjects.Clear();
         
-        ClearGrid();
-        //ClearGridEditor();
+       // ClearGrid();
+        ClearGridEditor();
         
+        noiseScript.UpdateValues();
         
         for (int x = 0; x < gridSize.x; x++)
         {
@@ -136,6 +141,9 @@ public class GridManager : MonoBehaviour
               
               TileInfo tileInfo = tile.GetComponent<TileInfo>();
               tileInfo.cubeCoordinates = GetCubeCoordinate(coordinates);
+              
+              noiseScript.GenerateTerrain(x, y, tileInfo);
+              noiseScript.GenerateHeight(x,y, tileInfo);
               
               cubeObjects.Add(tile);
               cubeCords.Add(GetCubeCoordinate(coordinates));

@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class TileInfo : MonoBehaviour
 {
+    [FormerlySerializedAs("noiseNum")] public float noiseNumT, noiseNumH;
     [Header("Grid info")]
     public Vector3Int cubeCoordinates;
     public List<TileInfo> neighborTiles;
@@ -53,15 +54,15 @@ public class TileInfo : MonoBehaviour
     void Start()
     {
         costValue = 0;
-        SetDefualtTiles();
-        TileIsBorn();
+     //   SetDefualtTiles();
+     //   TileIsBorn();
         structureType = StructureType.normal;
     }
 
-    private void TileIsBorn()
+    private void TileIsBorn() //Complete Random Generation
     {
        height = Random.Range(0, heightRange);
-       CreateTilesAbove(height);
+       CreateTilesAbove();
 
        if (randomTerrain)
        {
@@ -92,7 +93,7 @@ public class TileInfo : MonoBehaviour
        }
     }
 
-    private void CreateTilesAbove(int i)
+    public void CreateTilesAbove()
     {
         RemoveTile();
         for (int j = 1; j <= height; j++)
