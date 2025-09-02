@@ -25,6 +25,11 @@ public class TestManager : MonoBehaviour
             gridManager.tiles.TryGetValue(targetTower, out TileInfo tile);
             TowerTesting(tile);
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            gridManager.RandomLocations();
+        }
     }
 
 

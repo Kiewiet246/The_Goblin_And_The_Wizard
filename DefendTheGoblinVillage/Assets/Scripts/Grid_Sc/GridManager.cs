@@ -256,8 +256,8 @@ public class GridManager : MonoBehaviour
         int randomEnd = Random.Range(0, transform.childCount);
         endTile = transform.GetChild(randomEnd).gameObject.GetComponent<TileInfo>();
         endTile.StopTile();
-        
-        StartListingNeighbors();
+        FindPath();
+       // StartListingNeighbors();
     }
 
     public void FindPath()
