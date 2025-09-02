@@ -256,12 +256,16 @@ public class GridManager : MonoBehaviour
         int randomEnd = Random.Range(0, transform.childCount);
         endTile = transform.GetChild(randomEnd).gameObject.GetComponent<TileInfo>();
         endTile.StopTile();
-        FindPath();
+        //FindPath();
+       
        // StartListingNeighbors();
     }
 
-    public void FindPath()
+    public Queue<TileInfo> FindPath()
     {
+        Debug.Log("Hello");
+        Queue<TileInfo> thePath = new Queue<TileInfo>();
+        thePath.Enqueue(startTile);
         foreach (Transform child in transform)
         {
             if (child != startTile.transform && child != endTile.transform)
@@ -275,14 +279,20 @@ public class GridManager : MonoBehaviour
         if (startTile != null && endTile != null)
         {
             Queue<TileInfo> highlightPath = Djikstra(startTile, endTile);
+            //thePath = highlightPath;
+            Debug.Log(thePath.Count);
             while (highlightPath.Count > 0)
             {
                 TileInfo highlightTile = highlightPath.Dequeue();
                 highlightTile.SetPathTile();
+                thePath.Enqueue(highlightTile);
             }
             
             endTile.StopTile();
+           // thePath.Enqueue(endTile);
         }
+        
+        return thePath;
     }
 
     public Queue<TileInfo> Floodview(TileInfo start, TileInfo goal)

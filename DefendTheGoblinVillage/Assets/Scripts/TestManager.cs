@@ -5,6 +5,7 @@ public class TestManager : MonoBehaviour
 {
     public GridManager gridManager;
 
+    public EnemyManager enemyManager;
 
     public Vector3Int targetTower;
 
@@ -29,6 +30,12 @@ public class TestManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             gridManager.RandomLocations();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            gridManager.RandomLocations();
+            enemyManager.SetPath();
         }
     }
 
