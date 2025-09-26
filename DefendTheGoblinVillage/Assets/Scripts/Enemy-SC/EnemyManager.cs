@@ -20,7 +20,7 @@ public class EnemyManager : MonoBehaviour
 
     public void SetPath()
     {
-        Debug.Log("Set path");
+       // Debug.Log("Set path");
         Queue<TileInfo> createPath = gridManager.FindPath();
         int count = createPath.Count;
        // Debug.Log(count);

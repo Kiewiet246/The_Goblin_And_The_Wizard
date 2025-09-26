@@ -9,6 +9,7 @@ public class TestManager : MonoBehaviour
 
     public Vector3Int targetTower;
 
+    public SetDestsScript setDestsScript;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -19,6 +20,7 @@ public class TestManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             gridManager.CreateGrid();
+            setDestsScript.SetDestinations();
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -34,8 +36,13 @@ public class TestManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            gridManager.RandomLocations();
+            //gridManager.RandomLocations();
             enemyManager.SetPath();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            setDestsScript.SetDestinations();
         }
     }
 

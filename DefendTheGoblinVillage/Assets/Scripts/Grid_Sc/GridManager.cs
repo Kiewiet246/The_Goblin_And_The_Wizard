@@ -21,7 +21,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private List<Vector3Int> cubeCords = new List<Vector3Int>();
     [SerializeField] private List<GameObject> cubeObjects = new List<GameObject>();
     [SerializeField] private Vector3Int[] possibleNeighbors;
-    [SerializeField] private TileInfo startTile, endTile;
+    public TileInfo startTile, endTile;
 
 
     [SerializeField] private Slider xSlider;
@@ -77,7 +77,7 @@ public class GridManager : MonoBehaviour
         
         if (transform.childCount != 0)
         {
-            Debug.Log("Kill the grid");
+          //  Debug.Log("Kill the grid");
             int childCount = transform.childCount;
             for (int i = 0; i < childCount; i++)
             {
@@ -114,9 +114,9 @@ public class GridManager : MonoBehaviour
         
         noiseScript.UpdateValues();
         
-        for (int x = 0; x < gridSize.x; x++)
+        for (int x = 0; x <= gridSize.x; x++)
         {
-            for (int y = 0; y < gridSize.y; y++)
+            for (int y = 0; y <= gridSize.y; y++)
             {
               //  GameObject hexTile = new GameObject("HexTile: " + x + "; " + y);
               Vector2Int coordinates = new Vector2Int(x, y);
@@ -263,7 +263,7 @@ public class GridManager : MonoBehaviour
 
     public Queue<TileInfo> FindPath()
     {
-        Debug.Log("Hello");
+        //Debug.Log("Hello");
         Queue<TileInfo> thePath = new Queue<TileInfo>();
         thePath.Enqueue(startTile);
         foreach (Transform child in transform)
@@ -280,7 +280,7 @@ public class GridManager : MonoBehaviour
         {
             Queue<TileInfo> highlightPath = Djikstra(startTile, endTile);
             //thePath = highlightPath;
-            Debug.Log(thePath.Count);
+          //  Debug.Log(thePath.Count);
             while (highlightPath.Count > 0)
             {
                 TileInfo highlightTile = highlightPath.Dequeue();
@@ -397,7 +397,7 @@ public class GridManager : MonoBehaviour
         start.StartTile();
         if (endTile != null)
         {
-            StartListingNeighbors();
+          //  StartListingNeighbors();
             FindPath();
         }
     }
@@ -412,7 +412,7 @@ public class GridManager : MonoBehaviour
         endTile.StopTile();
         if (startTile != null)
         {
-            StartListingNeighbors();
+           // StartListingNeighbors();
             FindPath();
         }
         

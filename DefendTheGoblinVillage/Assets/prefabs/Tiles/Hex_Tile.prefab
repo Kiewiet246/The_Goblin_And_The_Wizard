@@ -385,6 +385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d889a4c6116d3274386af38df1568a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noiseNumT: 0
+  noiseNumH: 0
   cubeCoordinates: {x: 0, y: 0, z: 0}
   neighborTiles: []
   costValue: 5

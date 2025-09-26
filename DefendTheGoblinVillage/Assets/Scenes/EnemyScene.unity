@@ -177,12 +177,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6748324892181889101, guid: 4f358cced07166b4497193833efb98dd, type: 3}
+      propertyPath: pointyTop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748324892181889101, guid: 4f358cced07166b4497193833efb98dd, type: 3}
       propertyPath: gridSize.x
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6748324892181889101, guid: 4f358cced07166b4497193833efb98dd, type: 3}
       propertyPath: gridSize.y
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748324892181889101, guid: 4f358cced07166b4497193833efb98dd, type: 3}
+      propertyPath: tileRadius
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6748324892181889101, guid: 4f358cced07166b4497193833efb98dd, type: 3}
       propertyPath: noiseScript
@@ -199,6 +207,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3721673321447689150, guid: 4f358cced07166b4497193833efb98dd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 825824253}
+    - targetCorrespondingSourceObject: {fileID: 3721673321447689150, guid: 4f358cced07166b4497193833efb98dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 825824254}
   m_SourcePrefab: {fileID: 100100000, guid: 4f358cced07166b4497193833efb98dd, type: 3}
 --- !u!1 &501980950
 GameObject:
@@ -232,6 +243,7 @@ MonoBehaviour:
   gridManager: {fileID: 825824249}
   enemyManager: {fileID: 825824253}
   targetTower: {x: 5, y: 2, z: -7}
+  setDestsScript: {fileID: 825824254}
 --- !u!4 &501980952
 Transform:
   m_ObjectHideFlags: 0
@@ -301,6 +313,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridManager: {fileID: 825824249}
   pathTiles: []
+--- !u!114 &825824254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40726755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ca8c36f9b746e4d8641924aa313430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridManager: {fileID: 825824249}
+  xAxistart: 0
+  yAxisStart: 0
+  xTarget: 0
+  yTarget: 0
+  xTotalQuadrantsVil: 8
+  xTargetQuadrantsVil: 8
+  yTotalQuadrantsVil: 8
+  yTargetQuadrantsVil: 8
+  randomYVil: 1
+  randomXVil: 0
+  xTotalSectorsCit: 4
+  yTotalSectorsCit: 4
+  xTargetSectorsCit: 1
+  yTargetSectorsCit: 1
+  randomCitY: 1
+  randomCitX: 0
 --- !u!1 &1134861764
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +402,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 42.3
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -388,7 +429,7 @@ Transform:
   m_GameObject: {fileID: 1134861764}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 32.07, y: 34, z: 15.55}
+  m_LocalPosition: {x: 32.07, y: 55, z: 15.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

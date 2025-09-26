@@ -33,8 +33,8 @@ public class NoiseScript : MonoBehaviour
 
          scaleH = Random.Range(1, scaleMaxH);
          scaleT = Random.Range(1, scaleMaxT);
-         Debug.Log("H: " + scaleH);
-         Debug.Log("T: " + scaleT);
+         //Debug.Log("H: " + scaleH);
+        // Debug.Log("T: " + scaleT);
         
         width = gridManager.gridSize.x;
         height = gridManager.gridSize.y;
