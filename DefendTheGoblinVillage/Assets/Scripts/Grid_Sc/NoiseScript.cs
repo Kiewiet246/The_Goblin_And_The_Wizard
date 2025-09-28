@@ -64,7 +64,6 @@ public class NoiseScript : MonoBehaviour
         {
             tile.terrainType = TileInfo.TerrainType.Muddy;
         }
-
     }
 
     public void GenerateHeight(int x, int y, TileInfo tile)
@@ -99,6 +98,7 @@ public class NoiseScript : MonoBehaviour
         }
         
         tile.CreateTilesAbove();
+        tile.SetTerrain();
     }
     
     

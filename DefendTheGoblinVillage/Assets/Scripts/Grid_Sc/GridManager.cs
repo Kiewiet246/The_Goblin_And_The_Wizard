@@ -49,14 +49,14 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (xSlider != null && ySlider != null)
-        {
-            gridSize.x = (int)xSlider.value;
-            xtext.text = "X: "+ gridSize.x.ToString();
-        
-            gridSize.y = (int)ySlider.value;
-            ytext.text = "Y: " + gridSize.y.ToString();
-        }
+        // if (xSlider != null && ySlider != null)
+        // {
+        //     gridSize.x = (int)xSlider.value;
+        //     xtext.text = "X: "+ gridSize.x.ToString();
+        //
+        //     gridSize.y = (int)ySlider.value;
+        //     ytext.text = "Y: " + gridSize.y.ToString();
+        // }
     }
 
     public void PointyTop()
@@ -261,24 +261,24 @@ public class GridManager : MonoBehaviour
        // StartListingNeighbors();
     }
 
-    public Queue<TileInfo> FindPath()
+    public Queue<TileInfo> FindPath(TileInfo start, TileInfo end)
     {
         //Debug.Log("Hello");
         Queue<TileInfo> thePath = new Queue<TileInfo>();
-        thePath.Enqueue(startTile);
+        thePath.Enqueue(start);
         foreach (Transform child in transform)
         {
-            if (child != startTile.transform && child != endTile.transform)
+            if (child != start.transform && child != end.transform)
             {
                 TileInfo tileInfo = child.GetComponent<TileInfo>();
-                tileInfo.SetDefualtTiles();
+               // tileInfo.SetDefualtTiles();
             }
             
         }
 
-        if (startTile != null && endTile != null)
+        if (start != null && end != null)
         {
-            Queue<TileInfo> highlightPath = Djikstra(startTile, endTile);
+            Queue<TileInfo> highlightPath = Djikstra(start, end);
             //thePath = highlightPath;
           //  Debug.Log(thePath.Count);
             while (highlightPath.Count > 0)
@@ -288,7 +288,7 @@ public class GridManager : MonoBehaviour
                 thePath.Enqueue(highlightTile);
             }
             
-            endTile.StopTile();
+            end.StopTile();
            // thePath.Enqueue(endTile);
         }
         
@@ -386,35 +386,35 @@ public class GridManager : MonoBehaviour
         return path;
     }
 
-    public void AssignStartLoc(TileInfo start)
-    {
-        if (startTile != null)
-        {
-            startTile.SetDefualtTiles();
-        }
-        
-        startTile = start;
-        start.StartTile();
-        if (endTile != null)
-        {
-          //  StartListingNeighbors();
-            FindPath();
-        }
-    }
-
-    public void AssignGoalLoc(TileInfo goal)
-    {
-        if (endTile != null)
-        {
-            endTile.SetDefualtTiles();
-        }
-        endTile = goal;
-        endTile.StopTile();
-        if (startTile != null)
-        {
-           // StartListingNeighbors();
-            FindPath();
-        }
-        
-    }
+    // public void AssignStartLoc(TileInfo start)
+    // {
+    //     if (startTile != null)
+    //     {
+    //         startTile.SetDefualtTiles();
+    //     }
+    //     
+    //     startTile = start;
+    //     start.StartTile();
+    //     if (endTile != null)
+    //     {
+    //       //  StartListingNeighbors();
+    //         FindPath();
+    //     }
+    // }
+    //
+    // public void AssignGoalLoc(TileInfo goal)
+    // {
+    //     if (endTile != null)
+    //     {
+    //         endTile.SetDefualtTiles();
+    //     }
+    //     endTile = goal;
+    //     endTile.StopTile();
+    //     if (startTile != null)
+    //     {
+    //        // StartListingNeighbors();
+    //         FindPath();
+    //     }
+    //     
+    // }
 }

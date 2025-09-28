@@ -6,6 +6,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GridManager gridManager;
     [SerializeField] private List<Transform> pathTiles;
     
+    [SerializeField] private TileInfo saveStartTile, saveEndTile;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,7 +22,9 @@ public class EnemyManager : MonoBehaviour
     public void SetPath()
     {
        // Debug.Log("Set path");
-        Queue<TileInfo> createPath = gridManager.FindPath();
+       saveStartTile = gridManager.startTile;
+       saveEndTile = gridManager.endTile;
+        Queue<TileInfo> createPath = gridManager.FindPath(saveStartTile, saveEndTile);
         int count = createPath.Count;
        // Debug.Log(count);
 
@@ -30,5 +33,11 @@ public class EnemyManager : MonoBehaviour
             Transform pathTile = createPath.Dequeue().transform;
             pathTiles.Add(pathTile);
         }
+    }
+
+
+    public void AdjustPath()
+    {
+        
     }
 }

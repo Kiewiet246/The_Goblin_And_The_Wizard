@@ -24,7 +24,8 @@ public class TileInfo : MonoBehaviour
     [Header("Terrain")]
     [SerializeField] private bool randomTerrain = false;
     public TerrainType terrainType;
-
+    [SerializeField] private MeshRenderer terrainMesh;
+    
     [SerializeField] private GameObject Tile;
     [SerializeField] private float adjustHeight = 1f;
     public enum TerrainType
@@ -126,57 +127,66 @@ public class TileInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isPath)
+        
+    }
+
+    public void SetTerrain()
+    {
+        Debug.Log(name + " : " + terrainType);
+        switch (terrainType)
         {
-            switch (terrainType)
-            {
-                case TerrainType.Normal:
-                SetDefualtTiles();
-                    break;
-                case TerrainType.Muddy:
-                    SetMuddyTiles();
-                    break;
-                case TerrainType.Forest:
-                    SetForestTiles();
-                    break;
-                case TerrainType.Stone:
-                    SetStoneTiles();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            case TerrainType.Normal:
+               
+            SetDefualtTiles();
+                break;
+            case TerrainType.Muddy:
+                
+                SetMuddyTiles();
+                break;
+            case TerrainType.Forest:
+                
+                SetForestTiles();
+                break;
+            case TerrainType.Stone:
+                
+                SetStoneTiles();
+                break;
         }
     }
 
     public void SetDefualtTiles()
     {
+        Debug.Log("Nor");
         isPath = false;
-       gameObject.GetComponent<MeshRenderer>().material = materials[0]; 
+        terrainMesh.material = materials[0]; 
        ChildrenMaterial(materials[0]);
     }
 
     private void SetMuddyTiles()
     {
-        gameObject.GetComponent<MeshRenderer>().material = materials[2];
+        Debug.Log("mud");
+        terrainMesh.material = materials[2];
         ChildrenMaterial(materials[2]);
     }
 
     private void SetForestTiles()
     {
-        gameObject.GetComponent<MeshRenderer>().material = materials[3];
+        Debug.Log("For");
+        terrainMesh.material = materials[3];
         ChildrenMaterial(materials[3]);
     }
 
     private void SetStoneTiles()
     {
-        gameObject.GetComponent<MeshRenderer>().material = materials[4];
+        Debug.Log("St");
+        terrainMesh.material = materials[4];
         ChildrenMaterial(materials[4]);
     }
 
     public void SetPathTile()
     {
         isPath = true;
-        gameObject.GetComponent<MeshRenderer>().material = materials[1];
+        terrainMesh.material = materials[1];
         ChildrenMaterial(materials[1]);
     }
 

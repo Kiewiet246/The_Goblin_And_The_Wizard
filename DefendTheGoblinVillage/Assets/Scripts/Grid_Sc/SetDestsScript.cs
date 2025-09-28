@@ -137,7 +137,6 @@ public class SetDestsScript : MonoBehaviour
        int yTopBracket = Mathf.RoundToInt(gridManager.gridSize.y * selectedQuadrantY);
        int lowerNumY = yTargetQuadrantsVil - 1;
        float prevQuadrantY = (float)lowerNumY / yTotalQuadrantsVil;
-       Debug.Log(prevQuadrantY);
        int yBottomBracket = Mathf.RoundToInt(gridManager.gridSize.y * prevQuadrantY);
        
        yTarget = UnityEngine.Random.Range(yBottomBracket, yTopBracket);
