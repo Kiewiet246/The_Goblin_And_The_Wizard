@@ -76,25 +76,25 @@ public class NoiseScript : MonoBehaviour
 
         tile.height = 0;
 
-        if (noiseValue <= lFiveTh)
-        {
-            tile.height = 5;
-        }
-        else if (noiseValue <= lFourTh)
+        if (noiseValue < lFiveTh)
         {
             tile.height = 4;
         }
-        else if (noiseValue <= lThreeTh)
+        else if (noiseValue < lFourTh)
         {
             tile.height = 3;
         }
-        else if (noiseValue <= lTwoTh)
+        else if (noiseValue < lThreeTh)
         {
             tile.height = 2;
         }
-        else
+        else if (noiseValue < lTwoTh)
         {
             tile.height = 1;
+        }
+        else
+        {
+            tile.height = 0;
         }
         
         tile.CreateTilesAbove();

@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    [Header("Grid Stuff")]
     [SerializeField] private GridManager gridManager;
-    [SerializeField] private List<TileInfo> pathTiles;
-    
     [SerializeField] private TileInfo saveStartTile, saveEndTile;
 
+    [Header("Pathfinding Stuff")]
     [SerializeField] private LineRenderer enemyPath;
+    [SerializeField] private List<TileInfo> pathTiles;
 
+    [Header("Enemies Stuff")]
+    [SerializeField] private List<LeaderScript> enemies;
+    
+    [Header("Extra")]
     [SerializeField] private float adjustable;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,8 +37,7 @@ public class EnemyManager : MonoBehaviour
         Queue<TileInfo> createPath = gridManager.FindPath(saveStartTile, saveEndTile);
         int count = createPath.Count;
         enemyPath.positionCount = count;
-       // Debug.Log(count);
-
+       
         for (int i = 0; i < count; i++)
         {
             TileInfo pathTile = createPath.Dequeue();
@@ -51,16 +55,25 @@ public class EnemyManager : MonoBehaviour
             pathPos = new Vector3(pathPos.x, pathPos.y + adjustable, pathPos.z);
             enemyPath.SetPosition(i, pathPos);
         }
+        
+        GiveLeadersPath();
+    }
+
+    public void GiveLeadersPath()
+    {
+        if (enemies != null)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].SetWaypoints(pathTiles);
+            }
+        }
     }
 
     public void ClearPath()
     {
         enemyPath.positionCount = 0;
     }
-
-
-    public void AdjustPath()
-    {
-        
-    }
+    
+    
 }

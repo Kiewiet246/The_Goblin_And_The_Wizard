@@ -155,7 +155,6 @@ public class TileInfo : MonoBehaviour
 
     public void SetDefualtTiles()
     {
-        
         isPath = false;
         terrainMesh.material = materials[0]; 
        ChildrenMaterial(materials[0]);
@@ -184,7 +183,7 @@ public class TileInfo : MonoBehaviour
 
     public void SetPathTile()
     {
-        isPath = true;
+       // isPath = true;
         terrainMesh.material = materials[1];
         ChildrenMaterial(materials[1]);
     }

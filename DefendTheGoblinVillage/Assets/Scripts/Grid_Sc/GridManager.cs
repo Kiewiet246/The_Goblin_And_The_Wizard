@@ -30,7 +30,8 @@ public class GridManager : MonoBehaviour
     public TextMeshProUGUI xtext, ytext;
     
     [SerializeField] int MaxX, MaxY, MinX, MinY;
-    
+
+    [SerializeField] private bool check;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -232,8 +233,6 @@ public class GridManager : MonoBehaviour
             tileInfo.neighborTiles.Clear();
             FindNeighbors(tileInfo);
         }
-        
-       // FindPath();
     }
     
     public void FindNeighbors(TileInfo tileInfo)
@@ -256,42 +255,25 @@ public class GridManager : MonoBehaviour
         int randomEnd = Random.Range(0, transform.childCount);
         endTile = transform.GetChild(randomEnd).gameObject.GetComponent<TileInfo>();
         endTile.StopTile();
-        //FindPath();
-       
-       // StartListingNeighbors();
     }
 
     public Queue<TileInfo> FindPath(TileInfo start, TileInfo end)
     {
-        //Debug.Log("Hello");
         Queue<TileInfo> thePath = new Queue<TileInfo>();
         thePath.Enqueue(start);
-        foreach (Transform child in transform)
-        {
-            if (child != start.transform && child != end.transform)
-            {
-                TileInfo tileInfo = child.GetComponent<TileInfo>();
-               // tileInfo.SetDefualtTiles();
-            }
-            
-        }
 
         if (start != null && end != null)
         {
             Queue<TileInfo> highlightPath = Djikstra(start, end);
-            //thePath = highlightPath;
-          //  Debug.Log(thePath.Count);
             while (highlightPath.Count > 0)
             {
                 TileInfo highlightTile = highlightPath.Dequeue();
-                //highlightTile.SetPathTile();
                 thePath.Enqueue(highlightTile);
             }
             
             end.StopTile();
-           // thePath.Enqueue(endTile);
+          
         }
-        
         return thePath;
     }
 
@@ -343,7 +325,6 @@ public class GridManager : MonoBehaviour
         
         PriorityQueue<TileInfo> frontier = new PriorityQueue<TileInfo>();
         
-        
         frontier.Enqueue(goal, 0);
         travelCost[goal] = 0;
 
@@ -352,7 +333,7 @@ public class GridManager : MonoBehaviour
             TileInfo curTile = frontier.Dequeue();
             if (curTile == start)
             {
-               // break;
+                break;
             }
             foreach (TileInfo neighbor in curTile.neighborTiles)
             {
@@ -416,5 +397,13 @@ public class GridManager : MonoBehaviour
     //         FindPath();
     //     }
     //     
+    // }
+
+    // public void ResetMat()
+    // {
+    //     for (int i = 0; i < transform.childCount; i++)
+    //     {
+    //         transform.GetChild(i).GetComponent<TileInfo>().SetTerrain();
+    //     }
     // }
 }
