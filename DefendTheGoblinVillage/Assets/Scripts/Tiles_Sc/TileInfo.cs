@@ -30,10 +30,10 @@ public class TileInfo : MonoBehaviour
     [SerializeField] private float adjustHeight = 1f;
     public enum TerrainType
     {
-        Normal = 1,
-        Muddy = 5,
-        Forest = 20,
-        Stone = 1000
+        Normal = 5,
+        Muddy = 30,
+        Forest = 10,
+        Stone = 90
     }
 
     [Header("Structure")]
@@ -132,7 +132,6 @@ public class TileInfo : MonoBehaviour
 
     public void SetTerrain()
     {
-        Debug.Log(name + " : " + terrainType);
         switch (terrainType)
         {
             case TerrainType.Normal:
@@ -156,7 +155,7 @@ public class TileInfo : MonoBehaviour
 
     public void SetDefualtTiles()
     {
-        Debug.Log("Nor");
+        
         isPath = false;
         terrainMesh.material = materials[0]; 
        ChildrenMaterial(materials[0]);
@@ -164,21 +163,21 @@ public class TileInfo : MonoBehaviour
 
     private void SetMuddyTiles()
     {
-        Debug.Log("mud");
+        
         terrainMesh.material = materials[2];
         ChildrenMaterial(materials[2]);
     }
 
     private void SetForestTiles()
     {
-        Debug.Log("For");
+        
         terrainMesh.material = materials[3];
         ChildrenMaterial(materials[3]);
     }
 
     private void SetStoneTiles()
     {
-        Debug.Log("St");
+        
         terrainMesh.material = materials[4];
         ChildrenMaterial(materials[4]);
     }

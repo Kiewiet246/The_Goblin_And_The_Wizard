@@ -284,7 +284,7 @@ public class GridManager : MonoBehaviour
             while (highlightPath.Count > 0)
             {
                 TileInfo highlightTile = highlightPath.Dequeue();
-                highlightTile.SetPathTile();
+                //highlightTile.SetPathTile();
                 thePath.Enqueue(highlightTile);
             }
             

@@ -21,6 +21,7 @@ public class TestManager : MonoBehaviour
         {
             gridManager.CreateGrid();
             setDestsScript.SetDestinations();
+            enemyManager.ClearPath();
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -31,7 +32,7 @@ public class TestManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            gridManager.RandomLocations();
+            setDestsScript.JustToCallStart();
         }
 
         if (Input.GetKeyDown(KeyCode.E))

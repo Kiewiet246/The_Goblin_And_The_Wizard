@@ -51,6 +51,11 @@ public class SetDestsScript : MonoBehaviour
        // gridManager.FindPath();
     }
 
+    public void JustToCallStart()
+    {
+        Start();
+    }
+
     private void RandomSectorsCits()
     {
         if (randomCitX)

@@ -291,7 +291,7 @@ PrefabInstance:
     - target: {fileID: -5754084199372789682, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -4575734979276873811, guid: fd8791db1b17f804b8458c33c58b8fe0, type: 3}
+      objectReference: {fileID: -4575734979276873811, guid: 25a674c82e35a844c96508405efa231c, type: 3}
     - target: {fileID: 919132149155446097, guid: 424f98263fbf3974aa492024f20b5671, type: 3}
       propertyPath: m_Name
       value: Hex_Tile
@@ -430,6 +430,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3277005631474101099}
     m_Modifications:
+    - target: {fileID: 2178257144213678691, guid: eccf8aac5dc4109479f49b5c44343494, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -4575734979276873811, guid: 25a674c82e35a844c96508405efa231c, type: 3}
     - target: {fileID: 2512641824195051388, guid: eccf8aac5dc4109479f49b5c44343494, type: 3}
       propertyPath: m_Name
       value: TileHighight
