@@ -18,10 +18,13 @@ public class LeaderScript : MonoBehaviour
     
     [Header("Followers")]
     [SerializeField] private List<EnemyContoller> followers;
+
+    [Header("Other")] [SerializeField] private EnemyManager enemyManager;
+    [SerializeField] private int difficulty = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        ActivateFollowers();
     }
 
     // Update is called once per frame
@@ -35,6 +38,32 @@ public class LeaderScript : MonoBehaviour
         MoveEnemy();
         CheckDistToTarget();
         CheckForStep();
+    }
+
+    public void SetEemyMan(EnemyManager enMan)
+    {
+        enemyManager = enMan;
+    }
+
+    public void SetDifficulty(int newDifficulty)
+    {
+       difficulty = newDifficulty; 
+    }
+
+    public void ActivateFollowers()
+    {
+        for (int i = 0; i < difficulty; i++)
+        {
+            followers[i].gameObject.SetActive(true);
+        }
+    }
+
+    public void DeactivateFollowers()
+    {
+        for (int i = 0; i < followers.Count; i++)
+        {
+            followers[i].gameObject.SetActive(false);
+        }
     }
 
     private void MoveEnemy()
@@ -64,6 +93,11 @@ public class LeaderScript : MonoBehaviour
                     leaderTarget = new Vector3(waypoints[0].transform.position.x, transform.position.y, waypoints[0].transform.position.z);
                     //AssignTargetForFollowers();
                 }
+                
+                else if (waypoints.Count == 0)
+                {
+                    enemyManager.RemoveLeaderFromField(this);
+                }
             }
         }
     }
@@ -88,15 +122,19 @@ public class LeaderScript : MonoBehaviour
 
     public void SetWaypoints(List<TileInfo> newWaypoints)
     {
-        if (waypoints != null)
+        if (waypoints.Count == 0)
         {
             for (int i = 0; i < newWaypoints.Count; i++)
             {
                 waypoints.Add(newWaypoints[i]);
             }
-            
             leaderTarget =  leaderTarget = new Vector3(waypoints[0].transform.position.x, transform.position.y, waypoints[0].transform.position.z);
          //   AssignTargetForFollowers();
+        }
+
+        else
+        {
+            
         }
         
     }

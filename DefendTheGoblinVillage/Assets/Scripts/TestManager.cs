@@ -39,6 +39,12 @@ public class TestManager : MonoBehaviour
         {
             //gridManager.RandomLocations();
             enemyManager.SetPath();
+            enemyManager.IncreaseWave();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            enemyManager.IncreaseWave();
         }
         
         if (Input.GetKeyDown(KeyCode.S))
