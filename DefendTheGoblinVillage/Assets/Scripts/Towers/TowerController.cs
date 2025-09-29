@@ -14,7 +14,8 @@ public class TowerController : MonoBehaviour
 
     [Header("Show Range")]
     [SerializeField] private SphereCollider sphereCollider;
-    [SerializeField] private int steps;
+    [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] private float boxRecenter;
     [SerializeField] private List<TileInfo> tilesInRange;
     
     [Header("Range Types")] [SerializeField]
@@ -37,7 +38,7 @@ public class TowerController : MonoBehaviour
         ArcherTower = 10,
         CanonTower = 15,
         WallTower = 20,
-        BalistanTower =  5,
+        BalistaTower =  5,
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -93,6 +94,11 @@ public class TowerController : MonoBehaviour
         switch (rangeType)
         {
             case RangeType.SingleLine:
+                float notRadius = Mathf.RoundToInt(calRange / 2);
+                boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, notRadius);
+                boxRecenter = Mathf.RoundToInt(notRadius / 2);
+                boxCollider.center = new Vector3(boxCollider.center.x, boxCollider.center.y,boxCollider.center.z + boxRecenter);
+                FindTilesInRangeBox();
                 break;
             case RangeType.Radius:
                 sphereCollider.radius = calRange;
@@ -103,6 +109,22 @@ public class TowerController : MonoBehaviour
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    private void FindTilesInRangeBox()
+    {
+        Debug.Log("Find Tiles In Range");
+        Vector3 startPos = transform.TransformPoint(boxCollider.center);
+        Collider[] colliders = Physics.OverlapBox(startPos, boxCollider.size, transform.rotation);
+        
+        foreach (Collider tile in colliders)
+        {
+            if (tile.GetComponent<TileInfo>() != null)
+            {
+                tilesInRange.Add(tile.GetComponent<TileInfo>());
+            }
+            
         }
     }
 
@@ -123,8 +145,9 @@ public class TowerController : MonoBehaviour
     {
         for (int i = 0; i < tilesInRange.Count; i++)
         {
-            float dist = Vector3.Distance(transform.position, tilesInRange[i].transform.position);
+            float dist = Vector3.Distance(towerTile.transform.position, tilesInRange[i].transform.position);
             dist = Mathf.RoundToInt(dist);
+            Debug.Log(dist + " : " + tilesInRange[i].name);
             if (dist <= calRange)
             {
                 tilesInRange[i].SetHighlight();
@@ -144,11 +167,12 @@ public class TowerController : MonoBehaviour
 
     public void RotateTower()
     {
+        HideRange();
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y+angle, 0);
         if (rangeType == RangeType.SingleLine)
         {
             tilesInRange.Clear();
-            UpdateCollider();
+            FindTilesInRangeBox();
         }
     }
 }

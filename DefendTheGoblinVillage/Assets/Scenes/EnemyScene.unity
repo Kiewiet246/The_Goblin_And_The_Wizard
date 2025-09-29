@@ -418,13 +418,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerParents: {fileID: 497300174}
-  spawnTowerType: 10
+  spawnTowerType: 5
   gridManager: {fileID: 825824249}
   adjustment: 4.5
   archerTowerPrefab: {fileID: 9043126469732066870, guid: 6b7d3e612891e794799e0f3909fe3b1a, type: 3}
   canonTowerPrefab: {fileID: 0}
   wallTowerPrefab: {fileID: 0}
-  ballistaTowerPrefab: {fileID: 0}
+  ballistaTowerPrefab: {fileID: 4624593814749473481, guid: bb69ce111b5bd824c82f6f9ba79ec5a7, type: 3}
 --- !u!1 &1134861764
 GameObject:
   m_ObjectHideFlags: 0

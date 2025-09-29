@@ -67,7 +67,7 @@ public class TowerManager : MonoBehaviour
                    spawnPoint.structureWeight = (int)towerController.towerType;
                }
                break;
-           case TowerController.TowerType.BalistanTower:
+           case TowerController.TowerType.BalistaTower:
                if (ballistaTowerPrefab != null)
                {
                    GameObject ballista = Instantiate(ballistaTowerPrefab,spawnPosition, Quaternion.identity, towerParents);
