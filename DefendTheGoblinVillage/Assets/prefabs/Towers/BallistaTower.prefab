@@ -295,6 +295,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2874036966271551789, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 7315289145558994041}
     - target: {fileID: 5601243295043933093, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
       propertyPath: m_Name
       value: BigArrow (1)
@@ -366,6 +370,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2874036966271551789, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 7315289145558994041}
     - target: {fileID: 5601243295043933093, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
       propertyPath: m_Name
       value: BigArrow (9)
@@ -437,6 +445,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2874036966271551789, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 7315289145558994041}
     - target: {fileID: 5601243295043933093, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
       propertyPath: m_Name
       value: BigArrow (6)
@@ -508,6 +520,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2874036966271551789, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 7315289145558994041}
     - target: {fileID: 5601243295043933093, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
       propertyPath: m_Name
       value: BigArrow (8)
@@ -579,6 +595,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2874036966271551789, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 7315289145558994041}
     - target: {fileID: 5601243295043933093, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
       propertyPath: m_Name
       value: BigArrow (10)
@@ -650,6 +670,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2874036966271551789, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 7315289145558994041}
     - target: {fileID: 5601243295043933093, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
       propertyPath: m_Name
       value: BigArrow (7)
@@ -721,6 +745,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2874036966271551789, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 7315289145558994041}
     - target: {fileID: 5601243295043933093, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
       propertyPath: m_Name
       value: BigArrow
@@ -792,6 +820,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2874036966271551789, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 7315289145558994041}
     - target: {fileID: 5601243295043933093, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
       propertyPath: m_Name
       value: BigArrow (5)
@@ -863,6 +895,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2874036966271551789, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 7315289145558994041}
     - target: {fileID: 5601243295043933093, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
       propertyPath: m_Name
       value: BigArrow (3)
@@ -934,6 +970,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2874036966271551789, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 7315289145558994041}
     - target: {fileID: 5601243295043933093, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
       propertyPath: m_Name
       value: BigArrow (4)
@@ -1005,6 +1045,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2874036966271551789, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 7315289145558994041}
     - target: {fileID: 5601243295043933093, guid: 8f75150bef1b0e340bdec5c9c0c75444, type: 3}
       propertyPath: m_Name
       value: BigArrow (2)
