@@ -162,6 +162,7 @@ public class EnemyManager : MonoBehaviour
             Vector3 placePos = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y+ saveStartTile.height+adjustable, saveStartTile.transform.position.z);
             leader.transform.position = placePos;
             leader.transform.parent = fieldEnemiesParent;
+            leader.health = 6;
             SetLeaderDifficulty(leader);
             GiveLeadersPath();
         }

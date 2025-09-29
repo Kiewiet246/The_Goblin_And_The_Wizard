@@ -19,6 +19,9 @@ public class LeaderScript : MonoBehaviour
     [Header("Followers")]
     [SerializeField] private List<EnemyContoller> followers;
 
+    [Header("Health")]
+    public int health = 6;
+    
     [Header("Other")] [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private int difficulty = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -38,6 +41,15 @@ public class LeaderScript : MonoBehaviour
         MoveEnemy();
         CheckDistToTarget();
         CheckForStep();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            enemyManager.RemoveLeaderFromField(this);
+        }
     }
 
     public void SetEemyMan(EnemyManager enMan)

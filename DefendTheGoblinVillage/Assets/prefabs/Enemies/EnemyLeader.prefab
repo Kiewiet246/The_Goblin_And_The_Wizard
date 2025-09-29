@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 1182471341771851369}
   m_Layer: 3
   m_Name: EnemyLeader
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -259,6 +259,8 @@ MonoBehaviour:
   - {fileID: 449919635128837249}
   - {fileID: 8285390419206601743}
   - {fileID: 1191953968234241048}
+  health: 6
+  enemyManager: {fileID: 0}
   difficulty: 1
 --- !u!1 &3774450359347052049
 GameObject:

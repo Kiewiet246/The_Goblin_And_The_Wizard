@@ -38,6 +38,7 @@ public class TileInfo : MonoBehaviour
     }
 
     [Header("Structure")] public int structureWeight;
+    public GameObject structure;
     
     [Header("HighLight")]
     [SerializeField] private GameObject highLight;

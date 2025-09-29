@@ -31,55 +31,94 @@ public class TowerManager : MonoBehaviour
 
     public void CreateTower(TileInfo spawnPoint)
     {
-       Vector3 spawnPosition = new Vector3(spawnPoint.transform.position.x, (spawnPoint.transform.position.y+spawnPoint.tilesOnTOp.Count()+adjustment), spawnPoint.transform.position.z);
-       switch (spawnTowerType)
-       {
-           case TowerController.TowerType.ArcherTower:
-               if (archerTowerPrefab != null)
-               {
-                   GameObject archer = Instantiate(archerTowerPrefab, spawnPosition, Quaternion.identity, towerParents);
-                   TowerController towerController = archer.GetComponent<TowerController>();
-                   towerController.gridManager = this.gridManager;
-                   towerController.towerTile = spawnPoint;
-                   towerController.CalculateRange();
-                   spawnPoint.structureWeight = (int)towerController.towerType;
-               }
-               break;
-           case TowerController.TowerType.CanonTower:
-               if (canonTowerPrefab != null)
-               {
-                   GameObject canon = Instantiate(canonTowerPrefab, spawnPosition, Quaternion.identity, towerParents);
-                   TowerController towerController = canon.GetComponent<TowerController>();
-                   towerController.gridManager = this.gridManager;
-                   towerController.towerTile = spawnPoint;
-                   towerController.CalculateRange();
-                   spawnPoint.structureWeight = (int)towerController.towerType;
-               }
-               break;
-           case TowerController.TowerType.WallTower:
-               if (wallTowerPrefab != null)
-               {
-                   GameObject wall = Instantiate(wallTowerPrefab, spawnPosition, Quaternion.identity, towerParents);
-                   TowerController towerController = wall.GetComponent<TowerController>();
-                   towerController.gridManager = this.gridManager;
-                   towerController.towerTile = spawnPoint;
-                   towerController.CalculateRange();
-                   spawnPoint.structureWeight = (int)towerController.towerType;
-               }
-               break;
-           case TowerController.TowerType.BalistaTower:
-               if (ballistaTowerPrefab != null)
-               {
-                   GameObject ballista = Instantiate(ballistaTowerPrefab,spawnPosition, Quaternion.identity, towerParents);
-                   TowerController towerController = ballista.GetComponent<TowerController>();
-                   towerController.gridManager = this.gridManager;
-                   towerController.towerTile = spawnPoint;
-                   towerController.CalculateRange();
-                   spawnPoint.structureWeight = (int)towerController.towerType;
-               }
-               break;
-           default:
-               throw new ArgumentOutOfRangeException();
-       }
+        if (spawnPoint.structure == null)
+        {
+            Vector3 spawnPosition = new Vector3(spawnPoint.transform.position.x,
+                (spawnPoint.transform.position.y + spawnPoint.tilesOnTOp.Count() + adjustment),
+                spawnPoint.transform.position.z);
+            switch (spawnTowerType)
+            {
+                case TowerController.TowerType.ArcherTower:
+                    if (archerTowerPrefab != null)
+                    {
+                        GameObject archer = Instantiate(archerTowerPrefab, spawnPosition, Quaternion.identity,
+                            towerParents);
+                        TowerController towerController = archer.GetComponent<TowerController>();
+                        towerController.gridManager = this.gridManager;
+                        towerController.towerTile = spawnPoint;
+                        towerController.CalculateRange();
+                        spawnPoint.structureWeight = (int)towerController.towerType;
+                        spawnPoint.structure = archer;
+                    }
+
+                    break;
+                case TowerController.TowerType.CanonTower:
+                    if (canonTowerPrefab != null)
+                    {
+                        GameObject canon = Instantiate(canonTowerPrefab, spawnPosition, Quaternion.identity,
+                            towerParents);
+                        TowerController towerController = canon.GetComponent<TowerController>();
+                        towerController.gridManager = this.gridManager;
+                        towerController.towerTile = spawnPoint;
+                        towerController.CalculateRange();
+                        spawnPoint.structureWeight = (int)towerController.towerType;
+                        spawnPoint.structure = canon;
+                    }
+
+                    break;
+                case TowerController.TowerType.WallTower:
+                    if (wallTowerPrefab != null)
+                    {
+                        GameObject wall = Instantiate(wallTowerPrefab, spawnPosition, Quaternion.identity,
+                            towerParents);
+                        TowerController towerController = wall.GetComponent<TowerController>();
+                        towerController.gridManager = this.gridManager;
+                        towerController.towerTile = spawnPoint;
+                        towerController.CalculateRange();
+                        spawnPoint.structureWeight = (int)towerController.towerType;
+                        spawnPoint.structure = wall;
+                    }
+
+                    break;
+                case TowerController.TowerType.BalistaTower:
+                    if (ballistaTowerPrefab != null)
+                    {
+                        GameObject ballista = Instantiate(ballistaTowerPrefab, spawnPosition, Quaternion.identity,
+                            towerParents);
+                        TowerController towerController = ballista.GetComponent<TowerController>();
+                        towerController.gridManager = this.gridManager;
+                        towerController.towerTile = spawnPoint;
+                        towerController.CalculateRange();
+                        spawnPoint.structureWeight = (int)towerController.towerType;
+                        spawnPoint.structure = ballista;
+                    }
+
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
     }
+    
+    #region ForButtons
+    public void SetArcher()
+    {
+        spawnTowerType = TowerController.TowerType.ArcherTower;
+    }
+
+    public void SetCanon()
+    {
+        spawnTowerType = TowerController.TowerType.CanonTower;
+    }
+
+    public void SetWall()
+    {
+        spawnTowerType = TowerController.TowerType.WallTower;
+    }
+
+    public void SetBallista()
+    {
+        spawnTowerType = TowerController.TowerType.BalistaTower;
+    }
+    #endregion
 }

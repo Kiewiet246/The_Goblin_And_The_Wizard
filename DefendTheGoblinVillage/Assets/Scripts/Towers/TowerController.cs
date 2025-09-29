@@ -32,6 +32,7 @@ public class TowerController : MonoBehaviour
     [Header("Rotation Values")]
     [SerializeField] private float angle = 60f;
 
+    #region Tower Type
     public TowerType towerType;
     public enum TowerType
     {
@@ -40,10 +41,22 @@ public class TowerController : MonoBehaviour
         WallTower = 20,
         BalistaTower =  5,
     }
+    #endregion
+    
+    [Header("Health Values")]
+    [SerializeField] private int health;
+    
+    [Header("Attack Variables")]
+    [SerializeField] private List<LeaderScript> leaders;
+    [SerializeField] private int damage = 1;
+    [SerializeField] private float attackRate = 1;
+    [SerializeField] private float currentTime;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
        // CalculateRange();
+       health = (int)towerType;
     }
 
     // Update is called once per frame
@@ -51,6 +64,68 @@ public class TowerController : MonoBehaviour
     {
         
     }
+
+    void FixedUpdate()
+    {
+        if (leaders.Count > 0)
+        {
+            Countdown();
+        }
+        else
+        {
+            currentTime = Time.time;
+        }
+    }
+    
+    public void Countdown()
+    {
+        float difference = Time.time - currentTime;
+        if (difference >= attackRate)
+        {
+            leaders[0].TakeDamage(damage);
+            if (leaders[0].health <= 0)
+            {
+                leaders.RemoveAt(0);
+                currentTime = Time.time;
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.name);
+        if (other.CompareTag("Enemy"))
+        {
+            if (other.GetComponent<LeaderScript>())
+            {
+                leaders.Add(other.GetComponent<LeaderScript>());
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            if (other.GetComponent<LeaderScript>())
+            {
+                leaders.Remove(other.GetComponent<LeaderScript>());
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            towerTile.structureWeight = 0;
+            towerTile.structure = null;
+            Destroy(gameObject);
+        }
+    }
+    
+    
 
     #region Calculate Range
 
@@ -101,7 +176,7 @@ public class TowerController : MonoBehaviour
                 FindTilesInRangeBox();
                 break;
             case RangeType.Radius:
-                sphereCollider.radius = calRange;
+                sphereCollider.radius = calRange/2;
                 FindTilesInRangeSphere();
                // ShowRange();
                 break;
