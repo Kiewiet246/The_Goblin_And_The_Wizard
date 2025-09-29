@@ -12,6 +12,8 @@ public class TestManager : MonoBehaviour
     public SetDestsScript setDestsScript;
     
     public TowerController towerController;
+    
+    public TowerManager towerManager;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -58,12 +60,27 @@ public class TestManager : MonoBehaviour
         {
             towerController.CalculateRange();
         }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            towerController.HideRange();
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            towerController.ShowRange();
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            towerController.RotateTower();
+        }
     }
 
 
 
     public void TowerTesting(TileInfo tileInfo)
     {
-        tileInfo.CallTower();
+        towerManager.CreateTower(tileInfo);
     }
 }

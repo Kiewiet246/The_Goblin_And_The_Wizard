@@ -50,7 +50,7 @@ public class MouseInteraction : MonoBehaviour
                     //gridManager.AssignGoalLoc(hit.collider.gameObject.GetComponentInParent<TileInfo>());
                     break;
                 case MouseState.ChangeStructure:
-                    hit.collider.gameObject.GetComponentInParent<TileInfo>().CallWall();
+                    //hit.collider.gameObject.GetComponentInParent<TileInfo>().CallWall();
                     break;
                 case MouseState.ChangeTerrain:
                     break;
@@ -80,7 +80,7 @@ public class MouseInteraction : MonoBehaviour
                     //gridManager.AssignStartLoc(hit.collider.gameObject.GetComponentInParent<TileInfo>());
                     break;
                 case MouseState.ChangeStructure:
-                    hit.collider.gameObject.GetComponentInParent<TileInfo>().CallTower();
+                   // hit.collider.gameObject.GetComponentInParent<TileInfo>().CallTower();
                     break;
                 case MouseState.ChangeTerrain:
                     hit.collider.gameObject.GetComponentInParent<TileInfo>().ChangeTheTerrain();

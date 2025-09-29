@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -27,7 +28,7 @@ public class TileInfo : MonoBehaviour
     [SerializeField] private MeshRenderer terrainMesh;
     
     [SerializeField] private GameObject Tile;
-    [SerializeField] private float adjustHeight = 1f;
+    public float adjustHeight = 1f;
     public enum TerrainType
     {
         Normal = 5,
@@ -36,17 +37,7 @@ public class TileInfo : MonoBehaviour
         Stone = 90
     }
 
-    [Header("Structure")]
-    public StructureType structureType;
-
-    [SerializeField] private GameObject Tower;
-    [SerializeField] private GameObject Wall;
-    public enum StructureType
-    {
-        normal = 0,
-        normalTower = 10,
-        wall = 30
-    }
+    [Header("Structure")] public int structureWeight;
     
     [Header("HighLight")]
     [SerializeField] private GameObject highLight;
@@ -57,7 +48,7 @@ public class TileInfo : MonoBehaviour
         costValue = 0;
      //   SetDefualtTiles();
      //   TileIsBorn();
-        structureType = StructureType.normal;
+       // structureType = StructureType.normal;
     }
 
     private void TileIsBorn() //Complete Random Generation
@@ -201,7 +192,7 @@ public class TileInfo : MonoBehaviour
 
     public int GetCostValue()
     {
-        costValue = (int)terrainType + (int)structureType + tilesOnTOp.Count;
+        costValue = (int)terrainType + structureWeight + tilesOnTOp.Count;
         return costValue;
     }
 
@@ -217,64 +208,6 @@ public class TileInfo : MonoBehaviour
             return false;
         }
         
-    }
-
-    public void CallTower()
-    {
-        if (Tower.activeSelf == false)
-        {
-            ActivateTower();
-        }
-
-        else
-        {
-            DeactivateTower();
-        }
-        
-        Wall.SetActive(false);
-    }
-
-    public void CallWall()
-    {
-        if (Wall.activeSelf == false)
-        {
-            ActivateWall();
-        }
-        else
-        {
-            DeactivateWall();
-        }
-        
-        Tower.SetActive(false);
-    }
-
-    public void ActivateTower()
-    {
-        structureType = StructureType.normalTower;
-        //Debug.Log(structureType.ToString());
-        Tower.SetActive(true);
-        Tower.transform.position = Vector3.zero;
-        Tower.transform.position = new Vector3(transform.position.x, transform.position.y + adjustHeight*(tilesOnTOp.Count+1), transform.position.z);
-    }
-
-    public void DeactivateTower()
-    {
-        structureType = StructureType.normal;
-        Tower.SetActive(false);
-    }
-
-    public void ActivateWall()
-    {
-        structureType = StructureType.wall;
-        Wall.SetActive(true);
-        Wall.transform.position = Vector3.zero;
-        Wall.transform.position = new Vector3(transform.position.x, transform.position.y + adjustHeight*(tilesOnTOp.Count+1), transform.position.z);
-    }
-
-    public void DeactivateWall()
-    {
-        structureType = StructureType.normal;
-        Wall.SetActive(false);
     }
 
     public void ChangeTheTerrain()
@@ -315,6 +248,11 @@ public class TileInfo : MonoBehaviour
     public void SetHighlight()
     {
         highLight.SetActive(true);
+        if (tilesOnTOp.Count > 0)
+        {
+            highLight.transform.position = new Vector3(transform.position.x, transform.position.y + tilesOnTOp.Last().transform.position.y+ 0.5f, transform.position.z);
+        }
+        
     }
 
     public void DimHighlight()
