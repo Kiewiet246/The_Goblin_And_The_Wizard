@@ -10,6 +10,8 @@ public class TestManager : MonoBehaviour
     public Vector3Int targetTower;
 
     public SetDestsScript setDestsScript;
+    
+    public TowerController towerController;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -50,6 +52,11 @@ public class TestManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             setDestsScript.SetDestinations();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            towerController.CalculateRange();
         }
     }
 
