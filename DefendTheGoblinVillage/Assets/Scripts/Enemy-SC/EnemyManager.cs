@@ -89,11 +89,20 @@ public class EnemyManager : MonoBehaviour
             enemyPath.SetPosition(i, pathPos);
         }
        // GiveLeadersPath();
-       canSpawn = true;
+      // canSpawn = true;
+    }
+
+    public void CheckIfPathHasChanged(TileInfo checkTile)
+    {
+        if (pathTiles.Contains(checkTile))
+        {
+            AdjustPath();
+        }
     }
 
     public void AdjustPath()
     {
+        pathTiles.Clear();
         Queue<TileInfo> createPath = gridManager.FindPath(saveStartTile, saveEndTile);
         int count = createPath.Count;
         enemyPath.positionCount = count;
@@ -111,21 +120,14 @@ public class EnemyManager : MonoBehaviour
             {
                 pathPos = pathTile.transform.position;
             }
-            
             pathPos = new Vector3(pathPos.x, pathPos.y + adjustable, pathPos.z);
             enemyPath.SetPosition(i, pathPos);
         }
     }
 
-    public void GiveLeadersPath()
+    public void GiveLeadersPath(LeaderScript leader)
     {
-        if (enemiesInField != null)
-        {
-            for (int i = 0; i < enemiesInField.Count; i++)
-            {
-                enemiesInField[i].SetWaypoints(pathTiles);
-            }
-        }
+       leader.SetWaypoints(pathTiles);
     }
 
     public void ClearPath()
@@ -164,7 +166,7 @@ public class EnemyManager : MonoBehaviour
             leader.transform.parent = fieldEnemiesParent;
             leader.health = 6;
             SetLeaderDifficulty(leader);
-            GiveLeadersPath();
+            GiveLeadersPath(leader);
         }
 
         if (enemiesSpawnedInWave == totalEnemiesInWave)
@@ -207,4 +209,5 @@ public class EnemyManager : MonoBehaviour
         totalEnemiesInWave += 5;
     }
     #endregion
+    
 }

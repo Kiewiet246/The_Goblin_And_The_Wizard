@@ -21,9 +21,13 @@ public class LeaderScript : MonoBehaviour
 
     [Header("Health")]
     public int health = 6;
+
+    public int damage = 3;
     
     [Header("Other")] [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private int difficulty = 1;
+
+    public Vector3 endPoint;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -84,7 +88,7 @@ public class LeaderScript : MonoBehaviour
         {
             Vector3 direction = leaderTarget - transform.position;
             Vector3 movement = direction.normalized * (movementSpeed * Time.deltaTime);
-            Vector3 endPoint = transform.position + movement;
+           endPoint = transform.position + movement;
 
             rb.MovePosition(endPoint);
         }
@@ -165,5 +169,16 @@ public class LeaderScript : MonoBehaviour
             Debug.Log("Null Follows");
         }
     }
-    
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Tower"))
+        {
+            if (collision.gameObject.GetComponent<TowerController>())
+            {
+                collision.gameObject.GetComponent<TowerController>().TakeDamage(damage);
+                enemyManager.RemoveLeaderFromField(this);
+            }
+        }
+    }
 }

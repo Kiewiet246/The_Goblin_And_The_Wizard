@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6269408796285474708}
   - component: {fileID: 1811412088384415886}
   - component: {fileID: 3030348161849865723}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WallTower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   calRange: 0
   towerTile: {fileID: 0}
   gridManager: {fileID: 0}
+  towerManager: {fileID: 0}
   sphereCollider: {fileID: 0}
   boxCollider: {fileID: 0}
   boxRecenter: 0
@@ -134,3 +135,11 @@ MonoBehaviour:
   rangeType: 2
   angle: 60
   towerType: 20
+  health: 0
+  leaders: []
+  damage: 1
+  attackRate: 1
+  currentTime: 0
+  canShoot: 1
+  projectileSpeed: 20
+  projectiles: []

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -9,7 +10,9 @@ public class TowerManager : MonoBehaviour
     private Transform towerParents;
     [SerializeField] private TowerController.TowerType spawnTowerType;
     [SerializeField] private GridManager gridManager;
+    [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private float adjustment = 1f;
+    public List<TowerController> towers;
     
     [Header("Tower Prefabs")]
     [SerializeField] private GameObject archerTowerPrefab;
@@ -45,10 +48,12 @@ public class TowerManager : MonoBehaviour
                             towerParents);
                         TowerController towerController = archer.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
+                        towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
                         spawnPoint.structureWeight = (int)towerController.towerType;
                         spawnPoint.structure = archer;
+                        towers.Add(towerController);
                     }
 
                     break;
@@ -59,10 +64,12 @@ public class TowerManager : MonoBehaviour
                             towerParents);
                         TowerController towerController = canon.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
+                        towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
                         spawnPoint.structureWeight = (int)towerController.towerType;
                         spawnPoint.structure = canon;
+                        towers.Add(towerController);
                     }
 
                     break;
@@ -73,10 +80,12 @@ public class TowerManager : MonoBehaviour
                             towerParents);
                         TowerController towerController = wall.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
+                        towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
                         spawnPoint.structureWeight = (int)towerController.towerType;
                         spawnPoint.structure = wall;
+                        towers.Add(towerController);
                     }
 
                     break;
@@ -87,17 +96,25 @@ public class TowerManager : MonoBehaviour
                             towerParents);
                         TowerController towerController = ballista.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
+                        towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
                         spawnPoint.structureWeight = (int)towerController.towerType;
                         spawnPoint.structure = ballista;
+                        towers.Add(towerController);
                     }
 
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            enemyManager.CheckIfPathHasChanged(spawnPoint);
         }
+    }
+
+    public void ATowerDied(TileInfo openTile)
+    {
+        enemyManager.CheckIfPathHasChanged(openTile);
     }
     
     #region ForButtons

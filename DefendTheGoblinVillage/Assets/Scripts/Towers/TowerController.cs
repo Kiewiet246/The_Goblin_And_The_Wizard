@@ -11,6 +11,7 @@ public class TowerController : MonoBehaviour
     [SerializeField] private float calRange;
     public TileInfo towerTile;
     public GridManager gridManager;
+    public TowerManager towerManager;
 
     [Header("Show Range")]
     [SerializeField] private SphereCollider sphereCollider;
@@ -44,14 +45,17 @@ public class TowerController : MonoBehaviour
     #endregion
     
     [Header("Health Values")]
-    [SerializeField] private int health;
+    public int health;
     
     [Header("Attack Variables")]
     [SerializeField] private List<LeaderScript> leaders;
-    [SerializeField] private int damage = 1;
+    public int damage = 1;
     [SerializeField] private float attackRate = 1;
     [SerializeField] private float currentTime;
-    
+    [SerializeField] private bool canShoot = true;
+
+    [SerializeField] private float projectileSpeed = 20f;
+    public List<Rigidbody> projectiles;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -62,7 +66,7 @@ public class TowerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     void FixedUpdate()
@@ -82,18 +86,33 @@ public class TowerController : MonoBehaviour
         float difference = Time.time - currentTime;
         if (difference >= attackRate)
         {
-            leaders[0].TakeDamage(damage);
-            if (leaders[0].health <= 0)
+            if (canShoot)
             {
-                leaders.RemoveAt(0);
-                currentTime = Time.time;
+                AttackTheLeaders();
             }
         }
     }
 
+    private void AttackTheLeaders()
+    {
+        if (leaders[0].gameObject.activeSelf == false)
+        {
+            leaders.RemoveAt(0);
+        }
+        currentTime = Time.time;
+        Vector3 direction = (leaders[0].endPoint - transform.position).normalized;
+        Rigidbody rb = projectiles[0];
+        
+        rb.gameObject.SetActive(true);
+        rb.gameObject.GetComponent<Projectile>().StartProjectile();
+        Vector3 pos  = transform.position;
+        rb.position = pos;
+        rb.AddForce(direction * projectileSpeed, ForceMode.Impulse);
+        projectiles.Remove(rb);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
         if (other.CompareTag("Enemy"))
         {
             if (other.GetComponent<LeaderScript>())
@@ -121,6 +140,8 @@ public class TowerController : MonoBehaviour
         {
             towerTile.structureWeight = 0;
             towerTile.structure = null;
+            towerManager.ATowerDied(towerTile);
+            towerManager.towers.Remove(this);
             Destroy(gameObject);
         }
     }
@@ -131,7 +152,6 @@ public class TowerController : MonoBehaviour
 
     public void CalculateRange()
     {
-        Debug.Log("Test");
         if (towerTile != null)
         {
             range = range + towerTile.height;
@@ -189,7 +209,6 @@ public class TowerController : MonoBehaviour
 
     private void FindTilesInRangeBox()
     {
-        Debug.Log("Find Tiles In Range");
         Vector3 startPos = transform.TransformPoint(boxCollider.center);
         Collider[] colliders = Physics.OverlapBox(startPos, boxCollider.size, transform.rotation);
         
@@ -243,11 +262,13 @@ public class TowerController : MonoBehaviour
     public void RotateTower()
     {
         HideRange();
+        
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y+angle, 0);
         if (rangeType == RangeType.SingleLine)
         {
             tilesInRange.Clear();
             FindTilesInRangeBox();
+            ShowRange();
         }
     }
 }

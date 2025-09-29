@@ -248,7 +248,7 @@ MonoBehaviour:
   distanceToTarget: 0
   closeEnough: 1
   rb: {fileID: 3321055648117032380}
-  movementSpeed: 3
+  movementSpeed: 2
   jumpForce: 2
   sightRange: 3
   layer: 6
@@ -262,6 +262,7 @@ MonoBehaviour:
   health: 6
   enemyManager: {fileID: 0}
   difficulty: 1
+  endPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &3774450359347052049
 GameObject:
   m_ObjectHideFlags: 0
