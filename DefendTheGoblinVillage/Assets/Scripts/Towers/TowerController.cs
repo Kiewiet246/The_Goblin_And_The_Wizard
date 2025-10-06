@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -98,6 +99,7 @@ public class TowerController : MonoBehaviour
         if (leaders[0].gameObject.activeSelf == false)
         {
             leaders.RemoveAt(0);
+            return;
         }
         currentTime = Time.time;
         Vector3 direction = (leaders[0].endPoint - transform.position).normalized;
@@ -241,7 +243,7 @@ public class TowerController : MonoBehaviour
         {
             float dist = Vector3.Distance(towerTile.transform.position, tilesInRange[i].transform.position);
             dist = Mathf.RoundToInt(dist);
-            Debug.Log(dist + " : " + tilesInRange[i].name);
+           // Debug.Log(dist + " : " + tilesInRange[i].name);
             if (dist <= calRange)
             {
                 tilesInRange[i].SetHighlight();
