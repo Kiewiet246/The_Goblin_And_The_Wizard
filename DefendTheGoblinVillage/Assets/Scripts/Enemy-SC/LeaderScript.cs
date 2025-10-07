@@ -144,7 +144,7 @@ public class LeaderScript : MonoBehaviour
             {
                 waypoints.Add(newWaypoints[i]);
             }
-            leaderTarget =  leaderTarget = new Vector3(waypoints[0].transform.position.x, transform.position.y, waypoints[0].transform.position.z);
+            leaderTarget = new Vector3(waypoints[0].transform.position.x, transform.position.y, waypoints[0].transform.position.z);
          //   AssignTargetForFollowers();
         }
 

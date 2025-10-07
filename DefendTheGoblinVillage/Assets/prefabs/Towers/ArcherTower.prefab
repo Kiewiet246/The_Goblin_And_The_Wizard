@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 1
+  maxDistance: 0
   calRange: 0
   towerTile: {fileID: 0}
   gridManager: {fileID: 0}
@@ -205,7 +206,7 @@ MonoBehaviour:
   attackRate: 2
   currentTime: 0
   canShoot: 1
-  projectileSpeed: 50
+  projectileSpeed: 10
   projectiles:
   - {fileID: 4976372096249141380}
   - {fileID: 6629585797539427386}

@@ -9,6 +9,7 @@ public class TowerController : MonoBehaviour
     #region Range Variables
     [Header("Range Values")]
     [SerializeField] private int range;
+    public float maxDistance;
     [SerializeField] private float calRange;
     public TileInfo towerTile;
     public GridManager gridManager;
@@ -54,7 +55,8 @@ public class TowerController : MonoBehaviour
     [SerializeField] private float attackRate = 1;
     [SerializeField] private float currentTime;
     [SerializeField] private bool canShoot = true;
-
+    [SerializeField] private LeaderScript targetedLeader;
+    
     [SerializeField] private float projectileSpeed = 20f;
     public List<Rigidbody> projectiles;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -96,21 +98,41 @@ public class TowerController : MonoBehaviour
 
     private void AttackTheLeaders()
     {
-        if (leaders[0].gameObject.activeSelf == false)
+        switch (towerType)
         {
-            leaders.RemoveAt(0);
-            return;
-        }
-        currentTime = Time.time;
-        Vector3 direction = (leaders[0].endPoint - transform.position).normalized;
-        Rigidbody rb = projectiles[0];
+            case TowerType.ArcherTower:
+                    if (leaders[0].gameObject.activeSelf == false)
+                    {
+                        leaders.RemoveAt(0);
+                       // return;
+                    }
+                targetedLeader = leaders[0];
+                Vector3 direction = (targetedLeader.endPoint - transform.position).normalized;
+                Rigidbody rb = projectiles[0];
+                rb.linearVelocity = Vector3.zero;
+                float distance = Vector3.Distance(transform.position, targetedLeader.endPoint);
         
-        rb.gameObject.SetActive(true);
-        rb.gameObject.GetComponent<Projectile>().StartProjectile();
-        Vector3 pos  = transform.position;
-        rb.position = pos;
-        rb.AddForce(direction * projectileSpeed, ForceMode.Impulse);
-        projectiles.Remove(rb);
+                rb.gameObject.SetActive(true);
+                rb.gameObject.GetComponent<Projectile>().StartProjectile();
+                Vector3 pos  = transform.position;
+                rb.position = pos;
+                float force = (projectileSpeed*(distance/maxDistance));
+                rb.AddForce(direction * force, ForceMode.Impulse);
+                targetedLeader = null;
+                projectiles.Remove(rb);
+                
+                break;
+            case TowerType.CanonTower:
+                break;
+            case TowerType.WallTower:
+                break;
+            case TowerType.BalistaTower:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
+        currentTime = Time.time;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -119,7 +141,10 @@ public class TowerController : MonoBehaviour
         {
             if (other.GetComponent<LeaderScript>())
             {
-                leaders.Add(other.GetComponent<LeaderScript>());
+                if (!leaders.Contains(other.GetComponent<LeaderScript>()))
+                {
+                    leaders.Add(other.GetComponent<LeaderScript>());
+                }
             }
         }
     }
@@ -130,7 +155,15 @@ public class TowerController : MonoBehaviour
         {
             if (other.GetComponent<LeaderScript>())
             {
-                leaders.Remove(other.GetComponent<LeaderScript>());
+                LeaderScript outOfRangeLeader = other.GetComponent<LeaderScript>();
+                if (leaders.Contains(outOfRangeLeader))
+                {
+                    leaders.Remove(outOfRangeLeader);
+                    if (outOfRangeLeader == targetedLeader)
+                    {
+                        targetedLeader = null;
+                    }
+                }
             }
         }
     }
@@ -161,20 +194,20 @@ public class TowerController : MonoBehaviour
             Vector3Int nextBase = towerTile.cubeCoordinates + new Vector3Int(0, 1, -1);
           //  Debug.Log(nextBase);
             Vector3Int prevBase = towerTile.cubeCoordinates - new Vector3Int(0, 1,1);
-            float distance = new float();
+            //float distance = new float();
             
             if (gridManager.tiles.TryGetValue(nextBase, out TileInfo outTileN))
             {
                // Debug.Log(outTileN.name);
-                distance = Vector3.Distance(outTileN.transform.position, towerTile.transform.position);
+                maxDistance = Vector3.Distance(outTileN.transform.position, towerTile.transform.position);
             }
             else if (gridManager.tiles.TryGetValue(prevBase, out TileInfo outTileP))
             {
                 //Debug.Log(outTileP.name);
-                distance = Vector3.Distance(outTileP.transform.position, towerTile.transform.position);
+                maxDistance = Vector3.Distance(outTileP.transform.position, towerTile.transform.position);
             }
 
-            calRange = Mathf.RoundToInt(distance * range);
+            calRange = Mathf.RoundToInt(maxDistance * range);
             Vector3 endPos = new Vector3();
             endPos = transform.position + (calRange * Vector3.forward);
             //Debug.DrawLine(transform.position, endPos, Color.green, 1000f);
