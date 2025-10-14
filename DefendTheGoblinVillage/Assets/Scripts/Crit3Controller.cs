@@ -74,6 +74,7 @@ public class Crit3Controller : MonoBehaviour
                 {
                     if (towerController != null)
                     {
+                        towerController.HideRange();
                         TowerController tower = hit.collider.gameObject.GetComponent<TowerController>();
                         if (tower == towerController)
                         {
@@ -83,6 +84,7 @@ public class Crit3Controller : MonoBehaviour
                     
                         else if (tower != towerController)
                         {
+                            //tower.HideRange();
                             towerController = tower;
                             towerController.ShowRange();
                         }

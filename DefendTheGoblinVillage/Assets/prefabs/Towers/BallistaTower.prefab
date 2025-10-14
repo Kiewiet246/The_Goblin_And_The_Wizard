@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 1
+  maxDistance: 0
   calRange: 0
   towerTile: {fileID: 0}
   gridManager: {fileID: 0}
@@ -198,6 +199,7 @@ MonoBehaviour:
   boxCollider: {fileID: 7938100275898894467}
   boxRecenter: 0
   tilesInRange: []
+  timeToRecenter: 15
   rangeType: 0
   angle: 60
   towerType: 5
@@ -207,6 +209,7 @@ MonoBehaviour:
   attackRate: 1
   currentTime: 0
   canShoot: 1
+  targetedLeader: {fileID: 0}
   projectileSpeed: 20
   projectiles:
   - {fileID: 5906443382985071564}

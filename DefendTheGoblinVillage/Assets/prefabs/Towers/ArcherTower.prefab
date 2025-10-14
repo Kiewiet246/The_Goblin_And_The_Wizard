@@ -197,6 +197,7 @@ MonoBehaviour:
   boxCollider: {fileID: 0}
   boxRecenter: 0
   tilesInRange: []
+  timeToRecenter: 15
   rangeType: 1
   angle: 60
   towerType: 10
@@ -206,6 +207,7 @@ MonoBehaviour:
   attackRate: 2
   currentTime: 0
   canShoot: 1
+  targetedLeader: {fileID: 0}
   projectileSpeed: 10
   projectiles:
   - {fileID: 4976372096249141380}

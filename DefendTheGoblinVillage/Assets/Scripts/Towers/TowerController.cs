@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -20,6 +22,7 @@ public class TowerController : MonoBehaviour
     [SerializeField] private BoxCollider boxCollider;
     [SerializeField] private float boxRecenter;
     [SerializeField] private List<TileInfo> tilesInRange;
+    [SerializeField] private float timeToRecenter;
     
     [Header("Range Types")] [SerializeField]
     private RangeType rangeType;
@@ -251,7 +254,20 @@ public class TowerController : MonoBehaviour
         {
             if (tile.GetComponent<TileInfo>() != null)
             {
-                tilesInRange.Add(tile.GetComponent<TileInfo>());
+                if (!tilesInRange.Contains(tile.GetComponent<TileInfo>()))
+                {
+                    tilesInRange.Add(tile.GetComponent<TileInfo>());
+                }
+               
+            }
+            
+            else if (tile.GetComponentInParent<TileInfo>() != null)
+            {
+                if (!tilesInRange.Contains(tile.GetComponentInParent<TileInfo>()))
+                {
+                    tilesInRange.Add(tile.GetComponentInParent<TileInfo>());
+                }
+               
             }
             
         }
@@ -264,7 +280,20 @@ public class TowerController : MonoBehaviour
         {
             if (tile.GetComponent<TileInfo>() != null)
             {
-                tilesInRange.Add(tile.GetComponent<TileInfo>());
+                if (!tilesInRange.Contains(tile.GetComponent<TileInfo>()))
+                {
+                    tilesInRange.Add(tile.GetComponent<TileInfo>());
+                }
+               
+            }
+            
+            else if (tile.GetComponentInParent<TileInfo>() != null)
+            {
+                if (!tilesInRange.Contains(tile.GetComponentInParent<TileInfo>()))
+                {
+                    tilesInRange.Add(tile.GetComponentInParent<TileInfo>());
+                }
+               
             }
             
         }
@@ -272,23 +301,53 @@ public class TowerController : MonoBehaviour
 
     public void ShowRange()
     {
-        for (int i = 0; i < tilesInRange.Count; i++)
+        Debug.Log("Show");
+        foreach (TileInfo tile in tilesInRange)
         {
-            float dist = Vector3.Distance(towerTile.transform.position, tilesInRange[i].transform.position);
-            dist = Mathf.RoundToInt(dist);
-           // Debug.Log(dist + " : " + tilesInRange[i].name);
-            if (dist <= calRange)
+            float dist = new float();
+            Vector3 target = new Vector3();
+            if (tile.tilesOnTOp.Count > 0)
             {
-                tilesInRange[i].SetHighlight();
+                dist = Vector3.Distance(transform.position, tile.tilesOnTOp.Last().transform.position);
+                target = tile.highLightPos;
+            }
+            else
+            {
+                dist = Vector3.Distance(transform.position, tile.transform.position);
+                target = tile.highLightPos;
+            }
+
+           if (dist <= calRange)
+           {
+               tile.highLight.SetActive(false);
+                tile.highLight.transform.position = transform.position;
+                tile.SetHighlight();
+                //tile.highLight.transform.position = Vector3.Lerp(tile.highLight.transform.position, target, timeToRecenter*Time.fixedDeltaTime);
+                StartCoroutine(LerpPosition(tile.highLight.transform, target, timeToRecenter));
             }
         }
     }
 
+    IEnumerator LerpPosition(Transform theHighlight, Vector3 tarPos, float duration)
+    {
+        float courtime = 0;
+
+        while (courtime < duration && theHighlight.gameObject.activeSelf)
+        {
+            theHighlight.transform.position = Vector3.Lerp( theHighlight.transform.position, tarPos, courtime / duration);
+            courtime += Time.fixedDeltaTime;
+            yield return null;
+        }
+        
+        theHighlight.transform.position = tarPos;
+    }
+    
+
     public void HideRange()
     {
-        for (int i = 0; i < tilesInRange.Count; i++)
+        foreach (TileInfo tile in tilesInRange)
         {
-            tilesInRange[i].DimHighlight();
+            tile.DimHighlight();
         }
     }
 

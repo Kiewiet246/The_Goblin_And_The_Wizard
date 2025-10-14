@@ -145,6 +145,7 @@ public class GridManager : MonoBehaviour
               
               noiseScript.GenerateTerrain(x, y, tileInfo);
               noiseScript.GenerateHeight(x,y, tileInfo);
+              tileInfo.SetHighLightPosition();
               
               cubeObjects.Add(tile);
               cubeCords.Add(GetCubeCoordinate(coordinates));

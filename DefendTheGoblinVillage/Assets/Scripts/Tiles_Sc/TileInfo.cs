@@ -41,7 +41,8 @@ public class TileInfo : MonoBehaviour
     public GameObject structure;
     
     [Header("HighLight")]
-    [SerializeField] private GameObject highLight;
+    public GameObject highLight;
+    public Vector3 highLightPos;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -246,18 +247,27 @@ public class TileInfo : MonoBehaviour
         ChildrenMaterial(materials[6]);
     }
 
+    public void SetHighLightPosition()
+    {
+        if (tilesOnTOp.Count > 0)
+        {
+          highLightPos = highLight.transform.position = new Vector3(transform.position.x, transform.position.y + tilesOnTOp.Last().transform.position.y+ 0.5f, transform.position.z);
+        }
+
+        else
+        {
+            highLightPos = highLight.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+        }
+    }
+
     public void SetHighlight()
     {
         highLight.SetActive(true);
-        if (tilesOnTOp.Count > 0)
-        {
-            highLight.transform.position = new Vector3(transform.position.x, transform.position.y + tilesOnTOp.Last().transform.position.y+ 0.5f, transform.position.z);
-        }
-        
     }
 
     public void DimHighlight()
     {
         highLight.SetActive(false);
+       // highLight.transform.position = highLightPos;
     }
 }

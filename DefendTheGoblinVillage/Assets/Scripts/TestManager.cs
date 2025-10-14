@@ -63,7 +63,7 @@ public class TestManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            towerController.HideRange();
+         //   towerController.HideRange();
         }
 
         if (Input.GetKeyDown(KeyCode.J))
@@ -73,7 +73,7 @@ public class TestManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            towerController.RotateTower();
+            //towerController.RotateTower();
         }
     }
 
