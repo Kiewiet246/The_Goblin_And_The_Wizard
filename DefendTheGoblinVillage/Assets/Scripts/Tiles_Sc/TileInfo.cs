@@ -27,7 +27,10 @@ public class TileInfo : MonoBehaviour
     public TerrainType terrainType;
     [SerializeField] private MeshRenderer terrainMesh;
     
-    [SerializeField] private GameObject Tile;
+    [Header("TIles on top")]
+    [FormerlySerializedAs("Tile")] [SerializeField] private GameObject inbetweenTiles;
+     [SerializeField] private GameObject topTileG;
+     [SerializeField] private TopTile topTile;
     public float adjustHeight = 1f;
     public enum TerrainType
     {
@@ -53,48 +56,60 @@ public class TileInfo : MonoBehaviour
        // structureType = StructureType.normal;
     }
 
-    private void TileIsBorn() //Complete Random Generation
-    {
-       height = Random.Range(0, heightRange);
-       CreateTilesAbove();
-
-       if (randomTerrain)
-       {
-           int random = Random.Range(0, 101);
-           if (random <= 40)
-           {
-               terrainType = TerrainType.Normal;
-           }
-        
-           else if (random <= 60)
-           {
-               terrainType = TerrainType.Muddy;
-           }
-           else if (random <= 80)
-           {
-               terrainType = TerrainType.Forest;
-           }
-        
-           else if (random <= 100)
-           {
-               terrainType = TerrainType.Stone;
-           }
-       }
-
-       else
-       {
-           terrainType = TerrainType.Normal;
-       }
-    }
+    // private void TileIsBorn() //Complete Random Generation
+    // {
+    //    height = Random.Range(0, heightRange);
+    //    CreateTilesAbove();
+    //
+    //    if (randomTerrain)
+    //    {
+    //        int random = Random.Range(0, 101);
+    //        if (random <= 40)
+    //        {
+    //            terrainType = TerrainType.Normal;
+    //        }
+    //     
+    //        else if (random <= 60)
+    //        {
+    //            terrainType = TerrainType.Muddy;
+    //        }
+    //        else if (random <= 80)
+    //        {
+    //            terrainType = TerrainType.Forest;
+    //        }
+    //     
+    //        else if (random <= 100)
+    //        {
+    //            terrainType = TerrainType.Stone;
+    //        }
+    //    }
+    //
+    //    else
+    //    {
+    //        terrainType = TerrainType.Normal;
+    //    }
+    // }
 
     public void CreateTilesAbove()
     {
         RemoveTile();
         for (int j = 1; j <= height; j++)
         {
-           GameObject tileAdded = Instantiate(Tile, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j*(transform.localScale.y/100f)), transform.position.z), transform.rotation, transform);
-           tilesOnTOp.Add(tileAdded);
+            if (j == height)
+            {
+                GameObject tileAdded = Instantiate(topTileG, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j*(transform.localScale.y/100f)), transform.position.z), transform.rotation, transform);
+                tilesOnTOp.Add(tileAdded);
+                topTile = tileAdded.GetComponent<TopTile>();
+            }
+
+            else
+            {
+                GameObject tileAdded = Instantiate(inbetweenTiles, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j*(transform.localScale.y/100f)), transform.position.z), transform.rotation, transform);
+                tilesOnTOp.Add(tileAdded);
+            }
+           
         }
+        
     }
 
     public void RemoveTile()
@@ -111,7 +126,7 @@ public class TileInfo : MonoBehaviour
     {
         if (tilesOnTOp.Count < heightRange)
         {
-            GameObject tileAdded =  Instantiate(Tile, new Vector3(transform.position.x,transform.position.y + (adjustHeight*(tilesOnTOp.Count+1)), transform.position.z), transform.rotation, transform);
+            GameObject tileAdded =  Instantiate(inbetweenTiles, new Vector3(transform.position.x,transform.position.y + (adjustHeight*(tilesOnTOp.Count+1)), transform.position.z), transform.rotation, transform);
             tilesOnTOp.Add(tileAdded);
         }
         
@@ -125,6 +140,7 @@ public class TileInfo : MonoBehaviour
 
     public void SetTerrain()
     {
+        topTile.SetTerrainObjects(terrainType);
         switch (terrainType)
         {
             case TerrainType.Normal:

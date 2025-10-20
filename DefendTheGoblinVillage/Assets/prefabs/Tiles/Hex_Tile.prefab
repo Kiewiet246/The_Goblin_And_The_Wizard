@@ -410,12 +410,13 @@ MonoBehaviour:
   randomTerrain: 1
   terrainType: 0
   terrainMesh: {fileID: 4409428237837930500}
-  Tile: {fileID: 6386571900578494539, guid: a0c5c99d6a5b73448b9484365c0394fc, type: 3}
+  inbetweenTiles: {fileID: 5403570327506518970, guid: b37b85437c20af240a880e761665eaeb, type: 3}
+  topTileG: {fileID: 6386571900578494539, guid: a0c5c99d6a5b73448b9484365c0394fc, type: 3}
   adjustHeight: 0.5
-  structureType: 0
-  Tower: {fileID: 4218912952213699682}
-  Wall: {fileID: 7855661582802538812}
+  structureWeight: 0
+  structure: {fileID: 0}
   highLight: {fileID: 6332750299286322344}
+  highLightPos: {x: 0, y: 0, z: 0}
 --- !u!4 &3277005631474101099 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 424f98263fbf3974aa492024f20b5671, type: 3}

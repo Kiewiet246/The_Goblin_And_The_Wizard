@@ -94,7 +94,7 @@ public class NoiseScript : MonoBehaviour
         }
         else
         {
-            tile.height = 0;
+            tile.height = 1;
         }
         
         tile.CreateTilesAbove();
