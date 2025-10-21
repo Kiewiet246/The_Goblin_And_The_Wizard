@@ -20,6 +20,8 @@ public class TopTile : MonoBehaviour
             case TileInfo.TerrainType.Muddy:
                 break;
             case TileInfo.TerrainType.Forest:
+                transform.rotation = Quaternion.Euler(transform.parent.transform.eulerAngles.x, transform.parent.transform.eulerAngles.y ,transform.eulerAngles.z+ rotateBy);
+                forestTerrain.SetActive(true);
                 break;
             case TileInfo.TerrainType.Stone:
                 break;
