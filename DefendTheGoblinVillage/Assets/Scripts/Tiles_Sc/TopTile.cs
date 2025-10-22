@@ -18,6 +18,8 @@ public class TopTile : MonoBehaviour
                 grassTerrain.SetActive(true);
                 break;
             case TileInfo.TerrainType.Muddy:
+                transform.rotation = Quaternion.Euler(transform.parent.transform.eulerAngles.x, transform.parent.transform.eulerAngles.y ,transform.eulerAngles.z+ rotateBy);
+                swampTerrain.SetActive(true);
                 break;
             case TileInfo.TerrainType.Forest:
                 transform.rotation = Quaternion.Euler(transform.parent.transform.eulerAngles.x, transform.parent.transform.eulerAngles.y ,transform.eulerAngles.z+ rotateBy);
