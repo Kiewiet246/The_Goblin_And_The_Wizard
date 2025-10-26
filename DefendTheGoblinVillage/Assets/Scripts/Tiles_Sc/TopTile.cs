@@ -10,7 +10,7 @@ public class TopTile : MonoBehaviour
     public void SetTerrainObjects(TileInfo.TerrainType terrainType)
     {
         int rotateBy = Random.Range(0, 7) * 60;
-        
+        transform.rotation = Quaternion.Euler(transform.parent.transform.eulerAngles.x, transform.parent.transform.eulerAngles.y ,transform.eulerAngles.z+ rotateBy);
        // transform.rotation = Quaternion.Euler(transform.parent.transform.eulerAngles.x, transform.parent.transform.eulerAngles.y ,transform.eulerAngles.z+ rotateBy);
         switch (terrainType)
         {
@@ -18,11 +18,11 @@ public class TopTile : MonoBehaviour
                 grassTerrain.SetActive(true);
                 break;
             case TileInfo.TerrainType.Muddy:
-                transform.rotation = Quaternion.Euler(transform.parent.transform.eulerAngles.x, transform.parent.transform.eulerAngles.y ,transform.eulerAngles.z+ rotateBy);
+              
                 swampTerrain.SetActive(true);
                 break;
             case TileInfo.TerrainType.Forest:
-                transform.rotation = Quaternion.Euler(transform.parent.transform.eulerAngles.x, transform.parent.transform.eulerAngles.y ,transform.eulerAngles.z+ rotateBy);
+                
                 forestTerrain.SetActive(true);
                 break;
             case TileInfo.TerrainType.Stone:
