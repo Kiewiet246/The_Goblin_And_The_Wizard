@@ -196,17 +196,19 @@ public class TowerController : MonoBehaviour
             Vector3Int towerBase = towerTile.cubeCoordinates;
             Vector3Int nextBase = towerTile.cubeCoordinates + new Vector3Int(0, 1, -1);
           //  Debug.Log(nextBase);
-            Vector3Int prevBase = towerTile.cubeCoordinates - new Vector3Int(0, 1,1);
+            Vector3Int prevBase = towerTile.cubeCoordinates + new Vector3Int(0, -1,1);
             //float distance = new float();
-            
+           
             if (gridManager.tiles.TryGetValue(nextBase, out TileInfo outTileN))
             {
-               // Debug.Log(outTileN.name);
+                Debug.Log("Top: "+ outTileN.name);
+              //Debug.Log(outTileN.name);
                 maxDistance = Vector3.Distance(outTileN.transform.position, towerTile.transform.position);
             }
             else if (gridManager.tiles.TryGetValue(prevBase, out TileInfo outTileP))
             {
-                //Debug.Log(outTileP.name);
+                Debug.Log("Bottom: "+ outTileP.name);
+               // Debug.Log(outTileP.name);
                 maxDistance = Vector3.Distance(outTileP.transform.position, towerTile.transform.position);
             }
 

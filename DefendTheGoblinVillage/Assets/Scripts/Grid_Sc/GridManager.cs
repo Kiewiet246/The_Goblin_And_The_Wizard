@@ -50,14 +50,7 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (xSlider != null && ySlider != null)
-        // {
-        //     gridSize.x = (int)xSlider.value;
-        //     xtext.text = "X: "+ gridSize.x.ToString();
-        //
-        //     gridSize.y = (int)ySlider.value;
-        //     ytext.text = "Y: " + gridSize.y.ToString();
-        // }
+        
     }
 
     public void PointyTop()
@@ -110,8 +103,8 @@ public class GridManager : MonoBehaviour
         cubeCords.Clear();
         cubeObjects.Clear();
         
-       // ClearGrid();
-        ClearGridEditor();
+        ClearGrid();
+       // ClearGridEditor();
         
         noiseScript.UpdateValues();
         
@@ -357,7 +350,6 @@ public class GridManager : MonoBehaviour
         }
         
         Queue<TileInfo> path = new Queue<TileInfo>();
-       // path.Enqueue(start);
         TileInfo curPathTile = start;
 
         while (curPathTile != goal)
@@ -367,44 +359,4 @@ public class GridManager : MonoBehaviour
         }
         return path;
     }
-
-    // public void AssignStartLoc(TileInfo start)
-    // {
-    //     if (startTile != null)
-    //     {
-    //         startTile.SetDefualtTiles();
-    //     }
-    //     
-    //     startTile = start;
-    //     start.StartTile();
-    //     if (endTile != null)
-    //     {
-    //       //  StartListingNeighbors();
-    //         FindPath();
-    //     }
-    // }
-    //
-    // public void AssignGoalLoc(TileInfo goal)
-    // {
-    //     if (endTile != null)
-    //     {
-    //         endTile.SetDefualtTiles();
-    //     }
-    //     endTile = goal;
-    //     endTile.StopTile();
-    //     if (startTile != null)
-    //     {
-    //        // StartListingNeighbors();
-    //         FindPath();
-    //     }
-    //     
-    // }
-
-    // public void ResetMat()
-    // {
-    //     for (int i = 0; i < transform.childCount; i++)
-    //     {
-    //         transform.GetChild(i).GetComponent<TileInfo>().SetTerrain();
-    //     }
-    // }
 }

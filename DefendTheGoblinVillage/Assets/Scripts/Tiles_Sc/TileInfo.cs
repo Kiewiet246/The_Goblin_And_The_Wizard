@@ -51,44 +51,8 @@ public class TileInfo : MonoBehaviour
     void Start()
     {
         costValue = 0;
-     //   SetDefualtTiles();
-     //   TileIsBorn();
-       // structureType = StructureType.normal;
+   
     }
-
-    // private void TileIsBorn() //Complete Random Generation
-    // {
-    //    height = Random.Range(0, heightRange);
-    //    CreateTilesAbove();
-    //
-    //    if (randomTerrain)
-    //    {
-    //        int random = Random.Range(0, 101);
-    //        if (random <= 40)
-    //        {
-    //            terrainType = TerrainType.Normal;
-    //        }
-    //     
-    //        else if (random <= 60)
-    //        {
-    //            terrainType = TerrainType.Muddy;
-    //        }
-    //        else if (random <= 80)
-    //        {
-    //            terrainType = TerrainType.Forest;
-    //        }
-    //     
-    //        else if (random <= 100)
-    //        {
-    //            terrainType = TerrainType.Stone;
-    //        }
-    //    }
-    //
-    //    else
-    //    {
-    //        terrainType = TerrainType.Normal;
-    //    }
-    // }
 
     public void CreateTilesAbove()
     {
