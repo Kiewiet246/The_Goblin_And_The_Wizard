@@ -2655,6 +2655,10 @@ PrefabInstance:
       propertyPath: towerManager
       value: 
       objectReference: {fileID: 497300175}
+    - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: adjustable
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8769730530309136055, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

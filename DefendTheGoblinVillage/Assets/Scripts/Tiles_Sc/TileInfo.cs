@@ -37,7 +37,9 @@ public class TileInfo : MonoBehaviour
         Normal = 5,
         Muddy = 30,
         Forest = 10,
-        Stone = 90
+        Stone = 90,
+        Start = 0,
+        End = 1
     }
 
     [Header("Structure")] public int structureWeight;
@@ -123,6 +125,7 @@ public class TileInfo : MonoBehaviour
                 
                 SetStoneTiles();
                 break;
+            
         }
     }
 
@@ -216,12 +219,16 @@ public class TileInfo : MonoBehaviour
     public void StartTile()
     {
         isPath = true;
+        terrainType = TerrainType.Start;
+        topTile.SwitchTerrainOff();
         gameObject.GetComponent<MeshRenderer>().material = materials[5];
         ChildrenMaterial(materials[5]);
     }
 
     public void StopTile()
     {
+        terrainType = TerrainType.End;
+        topTile.SwitchTerrainOff();
         isPath = true;
         gameObject.GetComponent<MeshRenderer>().material = materials[6];
         ChildrenMaterial(materials[6]);

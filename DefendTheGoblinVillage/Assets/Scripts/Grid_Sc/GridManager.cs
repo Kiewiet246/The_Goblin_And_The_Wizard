@@ -104,7 +104,7 @@ public class GridManager : MonoBehaviour
         cubeObjects.Clear();
         
         ClearGrid();
-       // ClearGridEditor();
+        ClearGridEditor();
         
         noiseScript.UpdateValues();
         
