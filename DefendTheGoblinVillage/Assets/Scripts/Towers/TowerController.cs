@@ -278,6 +278,7 @@ public class TowerController : MonoBehaviour
     private void FindTilesInRangeSphere()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, calRange);
+       // OnDrawGizmosSelected();
         foreach (Collider tile in colliders)
         {
             if (tile.GetComponent<TileInfo>() != null)
@@ -301,6 +302,11 @@ public class TowerController : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawSphere(transform.position, calRange);
+    }
+
     public void ShowRange()
     {
         Debug.Log("Show");
@@ -319,14 +325,14 @@ public class TowerController : MonoBehaviour
                 target = tile.highLightPos;
             }
 
-           if (dist <= calRange)
-           {
+        //   if (dist <= calRange)
+         //  {
                tile.highLight.SetActive(false);
                 tile.highLight.transform.position = transform.position;
                 tile.SetHighlight();
                 //tile.highLight.transform.position = Vector3.Lerp(tile.highLight.transform.position, target, timeToRecenter*Time.fixedDeltaTime);
                 StartCoroutine(LerpPosition(tile.highLight.transform, target, timeToRecenter));
-            }
+           // }
         }
     }
 
