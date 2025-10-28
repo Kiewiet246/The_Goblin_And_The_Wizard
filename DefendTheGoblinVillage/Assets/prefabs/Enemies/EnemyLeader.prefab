@@ -75,10 +75,10 @@ GameObject:
   - component: {fileID: 3570763163987772711}
   - component: {fileID: 6050357597528750216}
   - component: {fileID: 1885691793443544941}
-  - component: {fileID: 7642169978028575211}
   - component: {fileID: 2116061553004528931}
   - component: {fileID: 3321055648117032380}
   - component: {fileID: 1182471341771851369}
+  - component: {fileID: 1676064439128041742}
   m_Layer: 3
   m_Name: EnemyLeader
   m_TagString: Enemy
@@ -160,29 +160,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7642169978028575211
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2215898661835275168}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &2116061553004528931
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -243,11 +220,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d012ae9c995249541a679df968083e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyCollider: {fileID: 2116061553004528931}
+  rb: {fileID: 3321055648117032380}
   waypoints: []
   leaderTarget: {x: 0, y: 0, z: 0}
   distanceToTarget: 0
   closeEnough: 1
-  rb: {fileID: 3321055648117032380}
   movementSpeed: 2
   jumpForce: 2
   sightRange: 3
@@ -260,9 +238,33 @@ MonoBehaviour:
   - {fileID: 8285390419206601743}
   - {fileID: 1191953968234241048}
   health: 6
+  damage: 3
   enemyManager: {fileID: 0}
   difficulty: 1
   endPoint: {x: 0, y: 0, z: 0}
+--- !u!136 &1676064439128041742
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2215898661835275168}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3774450359347052049
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,7 +465,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 314014516708468342}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fccd325483a84804db740b09689da2a4, type: 3}
   m_Name: 
@@ -535,7 +537,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 2344135930104540572}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fccd325483a84804db740b09689da2a4, type: 3}
   m_Name: 
@@ -612,7 +614,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 3908226600616301829}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fccd325483a84804db740b09689da2a4, type: 3}
   m_Name: 
@@ -694,7 +696,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 4723861155786491903}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fccd325483a84804db740b09689da2a4, type: 3}
   m_Name: 
@@ -771,7 +773,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 4825957010230971787}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fccd325483a84804db740b09689da2a4, type: 3}
   m_Name: 
@@ -843,7 +845,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 7842162290334081852}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fccd325483a84804db740b09689da2a4, type: 3}
   m_Name: 

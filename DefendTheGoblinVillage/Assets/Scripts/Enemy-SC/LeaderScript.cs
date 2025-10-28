@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class LeaderScript : MonoBehaviour
 {
+    [Header("Components")] public Collider enemyCollider;
+    public Rigidbody rb;
+
     [Header("Target Movement")]
     [SerializeField] private List<TileInfo> waypoints;
     [SerializeField] private Vector3 leaderTarget;
     [SerializeField] private float distanceToTarget; //How far the Target is
     [SerializeField] private float closeEnough; //How far the leader needs to be to switch target
-    [SerializeField] private Rigidbody rb;
     [SerializeField] private float movementSpeed;
     
     [Header("Jumping")]
@@ -21,7 +23,6 @@ public class LeaderScript : MonoBehaviour
 
     [Header("Health")]
     public int health = 6;
-
     public int damage = 3;
     
     [Header("Other")] [SerializeField] private EnemyManager enemyManager;
@@ -56,7 +57,7 @@ public class LeaderScript : MonoBehaviour
         }
     }
 
-    public void SetEemyMan(EnemyManager enMan)
+    public void SetEnemyMan(EnemyManager enMan)
     {
         enemyManager = enMan;
     }

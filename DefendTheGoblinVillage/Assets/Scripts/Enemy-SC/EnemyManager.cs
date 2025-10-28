@@ -18,6 +18,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private List<LeaderScript> enemiesInPool;
     [SerializeField] private Transform storeEnemiesParent;
     [SerializeField] private GameObject leaderPrefab;
+    [SerializeField] private float spawnForce = 100f;
     
     [Header("Controlling Enemies")]
     [SerializeField] private List<LeaderScript> enemiesInField;
@@ -37,6 +38,9 @@ public class EnemyManager : MonoBehaviour
     [Header("Extra")]
     [SerializeField] private float adjustable;
 
+    [SerializeField] private Transform activateField;
+    [SerializeField] private float adjustActFieldHeight;
+
     void Awake()
     {
         CreateLeaders();
@@ -45,7 +49,8 @@ public class EnemyManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Vector3 spawnPosition = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y + (adjustActFieldHeight*saveStartTile.height), saveStartTile.transform.position.z);
+        activateField.position = spawnPosition;
     }
 
     // Update is called once per frame
@@ -146,7 +151,7 @@ public class EnemyManager : MonoBehaviour
             GameObject leader = Instantiate(leaderPrefab, storeEnemiesParent);
             LeaderScript leaderScript = leader.GetComponent<LeaderScript>();
             enemiesInPool.Add(leaderScript);
-            leaderScript.SetEemyMan(this);
+            leaderScript.SetEnemyMan(this);
             leader.SetActive(false);
         }
     }
@@ -163,10 +168,24 @@ public class EnemyManager : MonoBehaviour
             leader.gameObject.SetActive(true);
             Vector3 placePos = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y+ saveStartTile.height+adjustable, saveStartTile.transform.position.z);
             leader.transform.position = placePos;
+            leader.enemyCollider.enabled = false;
+            leader.rb.AddForce(Vector3.up*(spawnForce*saveStartTile.height), ForceMode.Impulse);
             leader.transform.parent = fieldEnemiesParent;
             leader.health = 6;
-            SetLeaderDifficulty(leader);
             GiveLeadersPath(leader);
+        }
+        else
+        {
+            GameObject leader = Instantiate(leaderPrefab, fieldEnemiesParent);
+            LeaderScript leaderScript = leader.GetComponent<LeaderScript>();
+            enemiesInField.Add(leaderScript);
+            Vector3 placePos = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y+ saveStartTile.height+adjustable, saveStartTile.transform.position.z);
+            leaderScript.transform.position = placePos;
+            leaderScript.enemyCollider.enabled = false;
+            leaderScript.rb.AddForce(Vector3.up*(spawnForce*saveStartTile.height), ForceMode.Impulse);
+            leader.transform.parent = fieldEnemiesParent;
+            leaderScript.health = 6;
+            GiveLeadersPath(leaderScript);
         }
 
         if (enemiesSpawnedInWave == totalEnemiesInWave)
@@ -181,6 +200,7 @@ public class EnemyManager : MonoBehaviour
         enemiesInField.Remove(leader);
         enemiesInPool.Add(leader);
         leader.transform.parent = storeEnemiesParent;
+        leader.enemyCollider.enabled = false;
         leader.gameObject.SetActive(false);
     }
     

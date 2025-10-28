@@ -23,7 +23,7 @@ public class EnemyContoller : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MoveEnemy();
+     //   MoveEnemy();
     }
 
     private void MoveEnemy()
