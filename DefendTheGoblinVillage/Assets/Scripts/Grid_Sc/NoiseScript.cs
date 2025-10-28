@@ -74,23 +74,23 @@ public class NoiseScript : MonoBehaviour
         float noiseValue = Mathf.PerlinNoise(coordX, coordY);
         tile.noiseNumH = noiseValue;
 
-        tile.height = 0;
+        tile.height = 1;
 
-        if (noiseValue < lFiveTh)
+        if (noiseValue <= lFiveTh)
+        {
+            tile.height = 5;
+        }
+        else if (noiseValue <= lFourTh)
         {
             tile.height = 4;
         }
-        else if (noiseValue < lFourTh)
+        else if (noiseValue <= lThreeTh)
         {
             tile.height = 3;
         }
-        else if (noiseValue < lThreeTh)
+        else if (noiseValue <= lTwoTh)
         {
             tile.height = 2;
-        }
-        else if (noiseValue < lTwoTh)
-        {
-            tile.height = 1;
         }
         else
         {

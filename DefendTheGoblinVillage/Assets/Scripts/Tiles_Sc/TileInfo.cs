@@ -29,7 +29,8 @@ public class TileInfo : MonoBehaviour
     
     [Header("TIles on top")]
     [FormerlySerializedAs("Tile")] [SerializeField] private GameObject inbetweenTiles;
-     [SerializeField] private GameObject topTileG;
+     [FormerlySerializedAs("topTileG")] [SerializeField] private GameObject topTilePrefab;
+     public Transform topTileTransform;
      [SerializeField] private TopTile topTile;
     public float adjustHeight = 1f;
     public enum TerrainType
@@ -63,7 +64,7 @@ public class TileInfo : MonoBehaviour
         {
             if (j == height)
             {
-                GameObject tileAdded = Instantiate(topTileG, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j*(transform.localScale.y/100f)), transform.position.z), transform.rotation, transform);
+                GameObject tileAdded = Instantiate(topTilePrefab, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j*(transform.localScale.y/100f)), transform.position.z), transform.rotation, transform);
                 tilesOnTOp.Add(tileAdded);
                 topTile = tileAdded.GetComponent<TopTile>();
             }
@@ -72,6 +73,7 @@ public class TileInfo : MonoBehaviour
             {
                 GameObject tileAdded = Instantiate(inbetweenTiles, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j*(transform.localScale.y/100f)), transform.position.z), transform.rotation, transform);
                 tilesOnTOp.Add(tileAdded);
+                topTileTransform = tileAdded.transform;
             }
            
         }

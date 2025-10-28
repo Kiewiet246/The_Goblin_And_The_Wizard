@@ -192,27 +192,22 @@ public class TowerController : MonoBehaviour
     {
         if (towerTile != null)
         {
-            range = range + towerTile.height;
-            Vector3Int towerBase = towerTile.cubeCoordinates;
+            int totRange = (range + towerTile.height);
+            Debug.Log(towerTile.height);
+            range = Mathf.RoundToInt((totRange / 2));
             Vector3Int nextBase = towerTile.cubeCoordinates + new Vector3Int(0, 1, -1);
-          //  Debug.Log(nextBase);
             Vector3Int prevBase = towerTile.cubeCoordinates + new Vector3Int(0, -1,1);
-            //float distance = new float();
-           
+            
             if (gridManager.tiles.TryGetValue(nextBase, out TileInfo outTileN))
             {
-                Debug.Log("Top: "+ outTileN.name);
-              //Debug.Log(outTileN.name);
                 maxDistance = Vector3.Distance(outTileN.transform.position, towerTile.transform.position);
             }
             else if (gridManager.tiles.TryGetValue(prevBase, out TileInfo outTileP))
             {
-                Debug.Log("Bottom: "+ outTileP.name);
-               // Debug.Log(outTileP.name);
                 maxDistance = Vector3.Distance(outTileP.transform.position, towerTile.transform.position);
             }
-
-            calRange = Mathf.RoundToInt(maxDistance * range);
+           
+            calRange = Mathf.FloorToInt(maxDistance*range);
             Vector3 endPos = new Vector3();
             endPos = transform.position + (calRange * Vector3.forward);
             //Debug.DrawLine(transform.position, endPos, Color.green, 1000f);
@@ -236,7 +231,8 @@ public class TowerController : MonoBehaviour
                 FindTilesInRangeBox();
                 break;
             case RangeType.Radius:
-                sphereCollider.radius = calRange/2;
+                sphereCollider.transform.position = transform.position;
+                sphereCollider.radius = calRange / 2;
                 FindTilesInRangeSphere();
                // ShowRange();
                 break;
@@ -302,37 +298,25 @@ public class TowerController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawSphere(transform.position, calRange);
-    }
+    // private void OnDrawGizmosSelected()
+    // {
+    //     Gizmos.DrawSphere(towerTile.transform.position, calRange);
+    // }
 
     public void ShowRange()
     {
-        Debug.Log("Show");
+        
         foreach (TileInfo tile in tilesInRange)
         {
             float dist = new float();
             Vector3 target = new Vector3();
-            if (tile.tilesOnTOp.Count > 0)
-            {
-                dist = Vector3.Distance(transform.position, tile.tilesOnTOp.Last().transform.position);
-                target = tile.highLightPos;
-            }
-            else
-            {
-                dist = Vector3.Distance(transform.position, tile.transform.position);
-                target = tile.highLightPos;
-            }
+            target = tile.highLightPos;
 
-        //   if (dist <= calRange)
-         //  {
-               tile.highLight.SetActive(false);
-                tile.highLight.transform.position = transform.position;
-                tile.SetHighlight();
-                //tile.highLight.transform.position = Vector3.Lerp(tile.highLight.transform.position, target, timeToRecenter*Time.fixedDeltaTime);
-                StartCoroutine(LerpPosition(tile.highLight.transform, target, timeToRecenter));
-           // }
+            tile.highLight.SetActive(false);
+            tile.highLight.transform.position = transform.position;
+            tile.SetHighlight();
+            //tile.highLight.transform.position = Vector3.Lerp(tile.highLight.transform.position, target, timeToRecenter*Time.fixedDeltaTime);
+            StartCoroutine(LerpPosition(tile.highLight.transform, target, timeToRecenter));
         }
     }
 
