@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float lifetime=2;
     [SerializeField] private float currentTime;
+    [SerializeField] private LeaderScript enemy;
 
     [SerializeField] private int hits;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -43,13 +44,13 @@ public class Projectile : MonoBehaviour
         {
             if (other.gameObject.GetComponent<LeaderScript>())
             {
-                other.gameObject.GetComponent<LeaderScript>().TakeDamage(damage);
-                hits--;
-
-                if (hits <= 0)
+                enemy = other.GetComponent<LeaderScript>();
+                if (enemy != null)
                 {
+                    enemy.TakeDamage(damage);
                     towerController.projectiles.Add(rb);
                     gameObject.SetActive(false);
+                    enemy = null;
                 }
             }
         }

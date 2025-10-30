@@ -53,6 +53,8 @@ public class LeaderScript : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            waypoints.Clear();
+            leaderTarget = Vector3.zero;
             enemyManager.RemoveLeaderFromField(this);
         }
     }

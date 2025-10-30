@@ -110,19 +110,25 @@ public class TowerController : MonoBehaviour
                         return;
                     }
                 targetedLeader = leaders[0];
-                Vector3 direction = (targetedLeader.endPoint - transform.position).normalized;
-                Rigidbody rb = projectiles[0];
-                rb.linearVelocity = Vector3.zero;
-                float distance = Vector3.Distance(transform.position, targetedLeader.endPoint);
-        
-                rb.gameObject.SetActive(true);
-                rb.gameObject.GetComponent<Projectile>().StartProjectile();
-                Vector3 pos  = transform.position;
-                rb.position = pos;
-                float force = (projectileSpeed*(distance/maxDistance));
-                rb.AddForce(direction * force, ForceMode.Impulse);
-                targetedLeader = null;
-                projectiles.Remove(rb);
+                if (CheckIfInRange(targetedLeader))
+                {
+                   ArcherShooting();
+                }
+                else
+                {
+                    float playDis = 8f;
+                    float diff = Vector3.Distance(transform.position, targetedLeader.endPoint);
+
+                    if (diff <= calRange + playDis)
+                    {
+                        ArcherShooting();
+                    }
+
+                    else
+                    {
+                        leaders.RemoveAt(0);
+                    }
+                }
                 
                 break;
             case TowerType.CanonTower:
@@ -136,6 +142,37 @@ public class TowerController : MonoBehaviour
         }
         
         currentTime = Time.time;
+    }
+
+    private void ArcherShooting()
+    {
+        Vector3 direction = (targetedLeader.endPoint - transform.position).normalized;
+        Rigidbody rb = projectiles[0];
+        rb.linearVelocity = Vector3.zero;
+        float distance = Vector3.Distance(transform.position, targetedLeader.endPoint);
+        
+        rb.gameObject.SetActive(true);
+        rb.gameObject.GetComponent<Projectile>().StartProjectile();
+        Vector3 pos  = transform.position;
+        rb.position = pos;
+        float force = (projectileSpeed*(distance/maxDistance));
+        rb.AddForce(direction * force, ForceMode.Impulse);
+        targetedLeader = null;
+        projectiles.Remove(rb);
+    }
+
+    private bool CheckIfInRange(LeaderScript targetedEnemy)
+    {
+        float distance = Vector3.Distance(targetedEnemy.transform.position, transform.position);
+
+        if (distance <= calRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

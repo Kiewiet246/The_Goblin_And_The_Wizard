@@ -152,6 +152,7 @@ public class EnemyManager : MonoBehaviour
             LeaderScript leaderScript = leader.GetComponent<LeaderScript>();
             enemiesInPool.Add(leaderScript);
             leaderScript.SetEnemyMan(this);
+            leaderScript.enemyCollider.enabled = false;
             leader.SetActive(false);
         }
     }
@@ -186,6 +187,7 @@ public class EnemyManager : MonoBehaviour
             leader.transform.parent = fieldEnemiesParent;
             leaderScript.health = 6;
             GiveLeadersPath(leaderScript);
+            leaderScript.SetEnemyMan(this);
         }
 
         if (enemiesSpawnedInWave == totalEnemiesInWave)
