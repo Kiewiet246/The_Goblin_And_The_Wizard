@@ -107,7 +107,7 @@ public class TowerController : MonoBehaviour
                     if (leaders[0].gameObject.activeSelf == false)
                     {
                         leaders.RemoveAt(0);
-                       // return;
+                        return;
                     }
                 targetedLeader = leaders[0];
                 Vector3 direction = (targetedLeader.endPoint - transform.position).normalized;
