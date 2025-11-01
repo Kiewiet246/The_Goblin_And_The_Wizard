@@ -201,7 +201,7 @@ MonoBehaviour:
   timeToRecenter: 15
   rangeType: 1
   angle: 60
-  towerType: 10
+  towerType: 10000
   health: 0
   leaders: []
   damage: 1
@@ -209,7 +209,7 @@ MonoBehaviour:
   currentTime: 0
   canShoot: 1
   targetedLeader: {fileID: 0}
-  projectileSpeed: 10
+  projectileSpeed: 20
   projectiles:
   - {fileID: 4976372096249141380}
   - {fileID: 6629585797539427386}

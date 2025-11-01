@@ -10,12 +10,14 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float currentTime;
     [SerializeField] private LeaderScript enemy;
 
+    [SerializeField] private bool isAlive = false;
+    
     [SerializeField] private int hits;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         damage = towerController.damage;
-        StartProjectile();
+        //StartProjectile();
     }
 
     // Update is called once per frame
@@ -26,17 +28,22 @@ public class Projectile : MonoBehaviour
 
     void FixedUpdate()
     {
-        float difference = Time.time - currentTime;
-        if (difference >= lifetime)
+        if (isAlive)
         {
-            towerController.projectiles.Add(rb);
-            gameObject.SetActive(false);
+            float difference = Time.time - currentTime;
+            if (difference >= lifetime)
+            {
+                isAlive = false;
+                towerController.projectiles.Add(rb);
+                gameObject.SetActive(false);
+            }
         }
     }
 
     public void StartProjectile()
     {
         currentTime = Time.time;
+        isAlive = true;
     }
     
     private void OnTriggerEnter(Collider other)

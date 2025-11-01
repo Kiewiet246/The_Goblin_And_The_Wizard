@@ -698,7 +698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &559856537
 Transform:
   m_ObjectHideFlags: 0
@@ -1587,13 +1587,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134861764}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 85, z: 0}
+  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
+  m_LocalPosition: {x: -10, y: 77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1937454433}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
 --- !u!114 &1134861768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3097,6 +3097,10 @@ PrefabInstance:
     - target: {fileID: 5108844675893139925, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: adjustment
       value: 4.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108844675893139925, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: spawnTowerType
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 6853666320836396211, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: enemyManager

@@ -43,8 +43,10 @@ public class TileInfo : MonoBehaviour
         End = 1
     }
 
-    [Header("Structure")] public int structureWeight;
-    public GameObject structure;
+    [Header("Structure")] 
+    public TowerController towerController;
+
+    [SerializeField] private int filler;
     
     [Header("HighLight")]
     public GameObject highLight;
@@ -179,7 +181,12 @@ public class TileInfo : MonoBehaviour
 
     public int GetCostValue()
     {
-        costValue = (int)terrainType + structureWeight + tilesOnTOp.Count;
+        if (towerController != null)
+        {
+            filler = (int)towerController.towerType;
+        }
+
+        costValue = (int)terrainType + filler + tilesOnTOp.Count;
         return costValue;
     }
 

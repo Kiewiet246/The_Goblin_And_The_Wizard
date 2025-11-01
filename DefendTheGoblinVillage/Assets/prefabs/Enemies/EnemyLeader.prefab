@@ -222,9 +222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38c5f34ecf847e479d2825cb42fa26e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalMat: {fileID: 2100000, guid: c7ea52236004fb647889e7c411353e53, type: 2}
+  normalMat: {fileID: 2100000, guid: 8f66e322a77fd954995b13b463cd7544, type: 2}
   flashMat: {fileID: 2100000, guid: df23b73daf54ac044bbc88d78faaea9c, type: 2}
-  meshRenderer: {fileID: 1885691793443544941}
+  meshRenderer: {fileID: 1066355441050411496}
   flashDuration: 0.1
   startFlash: 0
   flashTimer: 0
@@ -560,6 +560,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 345e016f1ac5ab74eb99e506c8f5cfc1, type: 3}
+--- !u!23 &1066355441050411496 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 345e016f1ac5ab74eb99e506c8f5cfc1, type: 3}
+  m_PrefabInstance: {fileID: 1805346683773517164}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2199823988182653575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 345e016f1ac5ab74eb99e506c8f5cfc1, type: 3}

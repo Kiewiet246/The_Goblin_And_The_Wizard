@@ -34,7 +34,7 @@ public class TowerManager : MonoBehaviour
 
     public void CreateTower(TileInfo spawnPoint)
     {
-        if (spawnPoint.structure == null)
+        if (spawnPoint.towerController == null)
         {
             Vector3 spawnPosition = new Vector3(spawnPoint.transform.position.x,
                 ( spawnPoint.topTileTransform.transform.position.y + adjustment),
@@ -51,8 +51,7 @@ public class TowerManager : MonoBehaviour
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
-                        spawnPoint.structureWeight = (int)towerController.towerType;
-                        spawnPoint.structure = archer;
+                       spawnPoint.towerController = towerController;
                         towers.Add(towerController);
                     }
 
@@ -67,8 +66,7 @@ public class TowerManager : MonoBehaviour
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
-                        spawnPoint.structureWeight = (int)towerController.towerType;
-                        spawnPoint.structure = canon;
+                        
                         towers.Add(towerController);
                     }
 
@@ -83,8 +81,7 @@ public class TowerManager : MonoBehaviour
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
-                        spawnPoint.structureWeight = (int)towerController.towerType;
-                        spawnPoint.structure = wall;
+                        
                         towers.Add(towerController);
                     }
 
@@ -99,8 +96,7 @@ public class TowerManager : MonoBehaviour
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
-                        spawnPoint.structureWeight = (int)towerController.towerType;
-                        spawnPoint.structure = ballista;
+                        
                         towers.Add(towerController);
                     }
 

@@ -327,7 +327,7 @@ public class GridManager : MonoBehaviour
             TileInfo curTile = frontier.Dequeue();
             if (curTile == start)
             {
-                break;
+               // break;
             }
             foreach (TileInfo neighbor in curTile.neighborTiles)
             {

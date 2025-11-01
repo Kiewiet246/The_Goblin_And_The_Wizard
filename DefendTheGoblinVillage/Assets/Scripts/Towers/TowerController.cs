@@ -107,6 +107,7 @@ public class TowerController : MonoBehaviour
                     if (leaders[0].gameObject.activeSelf == false)
                     {
                         leaders.RemoveAt(0);
+                        AttackTheLeaders();
                         return;
                     }
                 targetedLeader = leaders[0];
@@ -148,19 +149,19 @@ public class TowerController : MonoBehaviour
     {
         Vector3 direction = (targetedLeader.endPoint - transform.position).normalized;
         Rigidbody rb = projectiles[0];
+        projectiles.Remove(rb);
         rb.linearVelocity = Vector3.zero;
         float distance = Vector3.Distance(transform.position, targetedLeader.endPoint);
         
         
         rb.gameObject.SetActive(true);
         rb.transform.LookAt(targetedLeader.transform.position);
-        //rb.gameObject.GetComponent<Projectile>().StartProjectile();
+        rb.gameObject.GetComponent<Projectile>().StartProjectile();
         Vector3 pos  = transform.position;
         rb.position = pos;
         float force = (projectileSpeed*(distance/maxDistance));
         rb.AddForce(direction * force, ForceMode.Impulse);
         targetedLeader = null;
-        projectiles.Remove(rb);
     }
 
     private bool CheckIfInRange(LeaderScript targetedEnemy)
@@ -215,8 +216,7 @@ public class TowerController : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            towerTile.structureWeight = 0;
-            towerTile.structure = null;
+            towerTile.towerController = null;
             towerManager.ATowerDied(towerTile);
             towerManager.towers.Remove(this);
             Destroy(gameObject);
