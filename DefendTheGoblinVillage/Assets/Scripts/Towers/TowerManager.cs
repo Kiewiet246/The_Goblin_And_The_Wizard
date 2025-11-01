@@ -11,7 +11,7 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private TowerController.TowerType spawnTowerType;
     [SerializeField] private GridManager gridManager;
     [SerializeField] private EnemyManager enemyManager;
-    [SerializeField] private float adjustment = 1f;
+    [SerializeField] private float adjustment = 0.75f;
     public List<TowerController> towers;
     
     [Header("Tower Prefabs")]
@@ -37,7 +37,7 @@ public class TowerManager : MonoBehaviour
         if (spawnPoint.structure == null)
         {
             Vector3 spawnPosition = new Vector3(spawnPoint.transform.position.x,
-                (spawnPoint.transform.position.y + spawnPoint.tilesOnTOp.Count() + adjustment),
+                ( spawnPoint.topTileTransform.transform.position.y + adjustment),
                 spawnPoint.transform.position.z);
             switch (spawnTowerType)
             {

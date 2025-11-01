@@ -3094,6 +3094,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 5108844675893139925, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: adjustment
+      value: 4.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6853666320836396211, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: enemyManager
       value: 

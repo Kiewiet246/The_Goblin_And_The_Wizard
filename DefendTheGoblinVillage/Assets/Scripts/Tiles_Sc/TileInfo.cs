@@ -67,13 +67,13 @@ public class TileInfo : MonoBehaviour
                 GameObject tileAdded = Instantiate(topTilePrefab, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j*(transform.localScale.y/100f)), transform.position.z), transform.rotation, transform);
                 tilesOnTOp.Add(tileAdded);
                 topTile = tileAdded.GetComponent<TopTile>();
+                topTileTransform = tileAdded.transform;
             }
 
             else
             {
                 GameObject tileAdded = Instantiate(inbetweenTiles, new Vector3(transform.position.x,transform.position.y + (adjustHeight*j*(transform.localScale.y/100f)), transform.position.z), transform.rotation, transform);
                 tilesOnTOp.Add(tileAdded);
-                topTileTransform = tileAdded.transform;
             }
            
         }
