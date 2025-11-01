@@ -31,6 +31,12 @@ public class TopTile : MonoBehaviour
                 currentTerrain = swampTerrain;
                 rockTerrain.SetActive(true);
                 break;
+            case TileInfo.TerrainType.Start:
+                currentTerrain.SetActive(false);
+                break;
+            case TileInfo.TerrainType.End:
+                currentTerrain.SetActive(false);
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(terrainType), terrainType, null);
         }
@@ -39,6 +45,10 @@ public class TopTile : MonoBehaviour
 
     public void SwitchTerrainOff()
     {
+        grassTerrain.SetActive(false);
+        swampTerrain.SetActive(false);
+        forestTerrain.SetActive(false);
+        rockTerrain.SetActive(false);
         currentTerrain.SetActive(false);
     }
 }

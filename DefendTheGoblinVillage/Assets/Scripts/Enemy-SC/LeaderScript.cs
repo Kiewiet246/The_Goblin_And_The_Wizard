@@ -5,6 +5,7 @@ public class LeaderScript : MonoBehaviour
 {
     [Header("Components")] public Collider enemyCollider;
     public Rigidbody rb;
+    [SerializeField] private ShowDamage showDamage;
 
     [Header("Target Movement")]
     [SerializeField] private List<TileInfo> waypoints;
@@ -51,6 +52,7 @@ public class LeaderScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        showDamage.FlashDamage();
         if (health <= 0)
         {
             waypoints.Clear();

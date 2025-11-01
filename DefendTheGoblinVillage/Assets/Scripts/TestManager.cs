@@ -14,67 +14,67 @@ public class TestManager : MonoBehaviour
     public TowerController towerController;
     
     public TowerManager towerManager;
+    
+    public Crit3Controller crit3Controller;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            gridManager.ClearGrid();
-        }
+        // if (Input.GetKeyDown(KeyCode.C))
+        // {
+        //     gridManager.ClearGrid();
+        // }
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            gridManager.CreateGrid();
-            setDestsScript.SetDestinations();
-            enemyManager.ClearPath();
+            crit3Controller.RecreateGrid();
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            gridManager.tiles.TryGetValue(targetTower, out TileInfo tile);
-            TowerTesting(tile);
-        }
+        // if (Input.GetKeyDown(KeyCode.T))
+        // {
+        //     gridManager.tiles.TryGetValue(targetTower, out TileInfo tile);
+        //     TowerTesting(tile);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            setDestsScript.JustToCallStart();
-        }
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        //     setDestsScript.JustToCallStart();
+        // }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            //gridManager.RandomLocations();
-            enemyManager.SetPath();
-            enemyManager.IncreaseWave();
-        }
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     //gridManager.RandomLocations();
+        //     enemyManager.SetPath();
+        //     enemyManager.IncreaseWave();
+        // }
 
         if (Input.GetKeyDown(KeyCode.I))
         {
             enemyManager.IncreaseWave();
         }
         
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            setDestsScript.SetDestinations();
-        }
+        // if (Input.GetKeyDown(KeyCode.S))
+        // {
+        //     setDestsScript.SetDestinations();
+        // }
         
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            towerController.CalculateRange();
-        }
+        // if (Input.GetKeyDown(KeyCode.A))
+        // {
+        //     towerController.CalculateRange();
+        // }
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-         //   towerController.HideRange();
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            towerController.ShowRange();
-        }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            //towerController.RotateTower();
-        }
+        // if (Input.GetKeyDown(KeyCode.H))
+        // {
+        //  //   towerController.HideRange();
+        // }
+        //
+        // if (Input.GetKeyDown(KeyCode.J))
+        // {
+        //     towerController.ShowRange();
+        // }
+        //
+        // if (Input.GetKeyDown(KeyCode.K))
+        // {
+        //     //towerController.RotateTower();
+        // }
     }
 
 

@@ -513,7 +513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &501980951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501980950}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f956652204030854a853db1282a7d09c, type: 3}
   m_Name: 
@@ -532,6 +532,7 @@ MonoBehaviour:
   setDestsScript: {fileID: 825824254}
   towerController: {fileID: 0}
   towerManager: {fileID: 497300175}
+  crit3Controller: {fileID: 724969559}
 --- !u!4 &501980952
 Transform:
   m_ObjectHideFlags: 0
@@ -1050,6 +1051,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c456722e2aab284988dcec14043f325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &724969559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6853666320836396211, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+  m_PrefabInstance: {fileID: 891382903093346397}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724969554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0527f7d7b208e004f87f0361a656986c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &825824249 stripped
@@ -1575,12 +1587,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134861764}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 58, y: 95, z: 25}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1937454433}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &1134861768
 MonoBehaviour:
@@ -2878,11 +2890,12 @@ Transform:
   m_GameObject: {fileID: 1937454426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 10, z: 20}
+  m_LocalPosition: {x: 58, y: 10, z: 25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 559856537}
+  - {fileID: 1134861767}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1937454434
@@ -3091,7 +3104,7 @@ PrefabInstance:
       objectReference: {fileID: 497300175}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: spawnRate
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: adjustable
@@ -3103,11 +3116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: totalWaves
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: currentWave
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: activateField
@@ -3115,7 +3128,7 @@ PrefabInstance:
       objectReference: {fileID: 377294885}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: adjustLeaderDiff
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: adjustActFieldHeight
@@ -3176,10 +3189,9 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1134861767}
+  - {fileID: 1937454433}
   - {fileID: 1494182580}
   - {fileID: 891382903093346397}
   - {fileID: 501980952}
   - {fileID: 17823435}
   - {fileID: 1761084360}
-  - {fileID: 1937454433}

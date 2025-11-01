@@ -19,16 +19,21 @@ public class Crit3Controller : MonoBehaviour
     
     void Awake()
     {
-        gridManager.CreateGrid();
-        setDestsScript.SetDestinations();
-        enemyManager.ClearPath();
-        enemyManager.SetPath();
+        RecreateGrid();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
+    }
+
+    public void RecreateGrid()
+    {
+        gridManager.CreateGrid();
+        setDestsScript.SetDestinations();
+        enemyManager.ClearPath();
+        enemyManager.SetPath();
     }
 
     public void NextWave()

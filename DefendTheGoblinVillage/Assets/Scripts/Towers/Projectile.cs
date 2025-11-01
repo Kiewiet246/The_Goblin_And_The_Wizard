@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         damage = towerController.damage;
+        StartProjectile();
     }
 
     // Update is called once per frame

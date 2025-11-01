@@ -151,8 +151,10 @@ public class TowerController : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         float distance = Vector3.Distance(transform.position, targetedLeader.endPoint);
         
+        
         rb.gameObject.SetActive(true);
-        rb.gameObject.GetComponent<Projectile>().StartProjectile();
+        rb.transform.LookAt(targetedLeader.transform.position);
+        //rb.gameObject.GetComponent<Projectile>().StartProjectile();
         Vector3 pos  = transform.position;
         rb.position = pos;
         float force = (projectileSpeed*(distance/maxDistance));

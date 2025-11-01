@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 1885691793443544941}
   - component: {fileID: 2116061553004528931}
   - component: {fileID: 3321055648117032380}
+  - component: {fileID: 7697952890699729058}
   - component: {fileID: 1182471341771851369}
   - component: {fileID: 1676064439128041742}
   m_Layer: 3
@@ -208,6 +209,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &7697952890699729058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2215898661835275168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38c5f34ecf847e479d2825cb42fa26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalMat: {fileID: 2100000, guid: c7ea52236004fb647889e7c411353e53, type: 2}
+  flashMat: {fileID: 2100000, guid: df23b73daf54ac044bbc88d78faaea9c, type: 2}
+  meshRenderer: {fileID: 1885691793443544941}
+  flashDuration: 0.1
+  startFlash: 0
+  flashTimer: 0
 --- !u!114 &1182471341771851369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyCollider: {fileID: 2116061553004528931}
   rb: {fileID: 3321055648117032380}
+  showDamage: {fileID: 7697952890699729058}
   waypoints: []
   leaderTarget: {x: 0, y: 0, z: 0}
   distanceToTarget: 0
@@ -240,7 +260,7 @@ MonoBehaviour:
   health: 6
   damage: 3
   enemyManager: {fileID: 0}
-  difficulty: 1
+  difficulty: 0
   endPoint: {x: 0, y: 0, z: 0}
 --- !u!136 &1676064439128041742
 CapsuleCollider:
