@@ -131,6 +131,7 @@ public class LeaderScript : MonoBehaviour
             RaycastHit hit = new RaycastHit();
             Vector3 stablilizedTarget = new Vector3(leaderTarget.x, transform.position.y, leaderTarget.z);
             Vector3 direction = (stablilizedTarget - transform.position).normalized;
+            transform.LookAt(stablilizedTarget, Vector3.up);
             Physics.Raycast(transform.position, direction, out hit, sightRange, layerMask);
             Debug.DrawRay(transform.position, direction*sightRange, Color.red);
             if (hit.collider != null)
