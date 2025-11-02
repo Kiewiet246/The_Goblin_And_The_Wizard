@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: fa95802f80bd745cfb5e9c89f7e22341, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: e1ec0e2320d2d4fb9a393769378ce0a1, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2476,6 +2476,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwitchColliderOn
       objectReference: {fileID: 0}
+    - target: {fileID: 7719997422001803625, guid: fb82479e6a4c48340b3e881ade384371, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719997422001803625, guid: fb82479e6a4c48340b3e881ade384371, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c7ea52236004fb647889e7c411353e53, type: 2}
     m_RemovedComponents:
     - {fileID: -5099421653629216571, guid: fb82479e6a4c48340b3e881ade384371, type: 3}
     m_RemovedGameObjects:
@@ -3148,6 +3156,14 @@ PrefabInstance:
       value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2561907532733913015, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: scaleH
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2561907532733913015, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: scaleT
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2561907532733913015, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: lFiveTh
       value: 0.2
       objectReference: {fileID: 0}
@@ -3213,7 +3229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: adjustActFieldHeight
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8769730530309136055, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: m_LocalPosition.x

@@ -13,8 +13,8 @@ public class LeaderScript : MonoBehaviour
     [SerializeField] private float distanceToTarget; //How far the Target is
     [SerializeField] private float closeEnough; //How far the leader needs to be to switch target
     [SerializeField] private float movementSpeed;
-    
-    [Header("Jumping")]
+
+    [Header("Jumping")] public bool checkforStep = false;
     [SerializeField] private float jumpForce;
     [SerializeField] private float sightRange;
     [SerializeField] private int layer;
@@ -44,9 +44,18 @@ public class LeaderScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (enemyCollider.enabled)
+        {
+            checkforStep = true;
+        }
+        else
+        {
+            checkforStep = false;
+        }
         MoveEnemy();
         CheckDistToTarget();
         CheckForStep();
+        CheckYPos();
     }
 
     public void TakeDamage(int damage)
@@ -54,6 +63,16 @@ public class LeaderScript : MonoBehaviour
         health -= damage;
         showDamage.FlashDamage();
         if (health <= 0)
+        {
+            waypoints.Clear();
+            leaderTarget = Vector3.zero;
+            enemyManager.RemoveLeaderFromField(this);
+        }
+    }
+
+    private void CheckYPos()
+    {
+        if (transform.position.y < -20)
         {
             waypoints.Clear();
             leaderTarget = Vector3.zero;
@@ -125,19 +144,22 @@ public class LeaderScript : MonoBehaviour
 
     private void CheckForStep()
     {
-        if (leaderTarget != Vector3.zero)
+        if (checkforStep)
         {
-            LayerMask layerMask = 1 << layer;
-            RaycastHit hit = new RaycastHit();
-            Vector3 stablilizedTarget = new Vector3(leaderTarget.x, transform.position.y, leaderTarget.z);
-            Vector3 direction = (stablilizedTarget - transform.position).normalized;
-            transform.LookAt(stablilizedTarget, Vector3.up);
-            Physics.Raycast(transform.position, direction, out hit, sightRange, layerMask);
-            Debug.DrawRay(transform.position, direction*sightRange, Color.red);
-            if (hit.collider != null)
+            if (leaderTarget != Vector3.zero)
             {
-               // Debug.Log("Wall");
-                rb.AddForce(rb.transform.up * jumpForce, ForceMode.Impulse);
+                LayerMask layerMask = 1 << layer;
+                RaycastHit hit = new RaycastHit();
+                Vector3 stablilizedTarget = new Vector3(leaderTarget.x, transform.position.y, leaderTarget.z);
+                Vector3 direction = (stablilizedTarget - transform.position).normalized;
+                transform.LookAt(stablilizedTarget, Vector3.up);
+                Physics.Raycast(transform.position, direction, out hit, sightRange, layerMask);
+                Debug.DrawRay(transform.position, direction*sightRange, Color.red);
+                if (hit.collider != null)
+                {
+                    // Debug.Log("Wall");
+                    rb.AddForce(rb.transform.up * jumpForce, ForceMode.Impulse);
+                }
             }
         }
     }

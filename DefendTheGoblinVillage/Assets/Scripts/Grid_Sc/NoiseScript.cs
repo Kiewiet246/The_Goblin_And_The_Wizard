@@ -31,8 +31,8 @@ public class NoiseScript : MonoBehaviour
         heightOffset = Random.Range(0, 1000000);
         terrainOffset = Random.Range(0, 1000000);
 
-         scaleH = Random.Range(1, scaleMaxH);
-         scaleT = Random.Range(1, scaleMaxT);
+         scaleH = Random.Range(2, scaleMaxH);
+         scaleT = Random.Range(2, scaleMaxT);
          //Debug.Log("H: " + scaleH);
         // Debug.Log("T: " + scaleT);
         

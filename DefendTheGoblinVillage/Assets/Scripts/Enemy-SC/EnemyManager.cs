@@ -19,6 +19,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private Transform storeEnemiesParent;
     [SerializeField] private GameObject leaderPrefab;
     [SerializeField] private float spawnForce = 100f;
+    [SerializeField] private float forceUp;
     
     [Header("Controlling Enemies")]
     [SerializeField] private List<LeaderScript> enemiesInField;
@@ -51,6 +52,7 @@ public class EnemyManager : MonoBehaviour
     {
         Vector3 spawnPosition = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y + (adjustActFieldHeight*saveStartTile.height), saveStartTile.transform.position.z);
         activateField.position = spawnPosition;
+        forceUp = spawnForce * saveStartTile.height;
     }
 
     // Update is called once per frame
@@ -170,7 +172,8 @@ public class EnemyManager : MonoBehaviour
             Vector3 placePos = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y+ saveStartTile.height+adjustable, saveStartTile.transform.position.z);
             leader.transform.position = placePos;
             leader.enemyCollider.enabled = false;
-            leader.rb.AddForce(Vector3.up*(spawnForce*saveStartTile.height), ForceMode.Impulse);
+            leader.rb.linearVelocity = Vector3.zero;
+            leader.rb.AddForce(Vector3.up*(forceUp), ForceMode.Impulse);
             leader.transform.parent = fieldEnemiesParent;
             leader.health = 6;
             GiveLeadersPath(leader);
@@ -183,7 +186,8 @@ public class EnemyManager : MonoBehaviour
             Vector3 placePos = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y+ saveStartTile.height+adjustable, saveStartTile.transform.position.z);
             leaderScript.transform.position = placePos;
             leaderScript.enemyCollider.enabled = false;
-            leaderScript.rb.AddForce(Vector3.up*(spawnForce*saveStartTile.height), ForceMode.Impulse);
+            leaderScript.rb.linearVelocity = Vector3.zero;
+            leaderScript.rb.AddForce(Vector3.up*(forceUp), ForceMode.Impulse);
             leader.transform.parent = fieldEnemiesParent;
             leaderScript.health = 6;
             GiveLeadersPath(leaderScript);
@@ -203,6 +207,7 @@ public class EnemyManager : MonoBehaviour
         enemiesInPool.Add(leader);
         leader.transform.parent = storeEnemiesParent;
         leader.enemyCollider.enabled = false;
+        leader.rb.linearVelocity = Vector3.zero;
         leader.gameObject.SetActive(false);
     }
     
