@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private LeaderScript enemy;
 
     [SerializeField] private bool isAlive = false;
-    
+    [SerializeField] private Transform target;
     [SerializeField] private int hits;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +30,7 @@ public class Projectile : MonoBehaviour
     {
         if (isAlive)
         {
+            transform.LookAt(target);
             float difference = Time.time - currentTime;
             if (difference >= lifetime)
             {
@@ -40,10 +41,11 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void StartProjectile()
+    public void StartProjectile(Transform target)
     {
         currentTime = Time.time;
         isAlive = true;
+        this.target = target;
     }
     
     private void OnTriggerEnter(Collider other)

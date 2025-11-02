@@ -97,21 +97,37 @@ public class TowerController : MonoBehaviour
         {
             if (canShoot)
             {
-                AttackTheLeaders();
+                if (leaders.Count > 0)
+                {
+                    AttackTheLeaders();
+                }
+                
             }
         }
     }
 
     private void AttackTheLeaders()
     {
+        if (leaders[0] == null)
+        {
+            leaders.RemoveAt(0);
+            return;
+        }
         switch (towerType)
         {
             case TowerType.ArcherTower:
                     if (leaders[0].gameObject.activeSelf == false)
                     {
                         leaders.RemoveAt(0);
-                        AttackTheLeaders();
-                        return;
+                        if (leaders.Count > 0)
+                        {
+                            AttackTheLeaders();
+                            return;
+                        }
+                        else if (leaders.Count == 0)
+                        {
+                            return;
+                        }
                     }
                     targetedLeader = leaders[0];
                     if (CheckIfInRange(targetedLeader))
@@ -159,7 +175,7 @@ public class TowerController : MonoBehaviour
         
         rb.gameObject.SetActive(true);
         rb.transform.LookAt(targetedLeader.transform.position);
-        rb.gameObject.GetComponent<Projectile>().StartProjectile();
+        rb.gameObject.GetComponent<Projectile>().StartProjectile(targetedLeader.transform);
         Vector3 pos  = transform.position;
         rb.position = pos;
         float force = (projectileSpeed*(distance/maxDistance));
