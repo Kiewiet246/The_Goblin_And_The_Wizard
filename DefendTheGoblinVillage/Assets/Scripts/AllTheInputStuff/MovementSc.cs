@@ -5,6 +5,7 @@ public class MovementSc : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private InputController inputController;
+    [SerializeField] private RotateSC rotateSC;
     
     [Header("Movement Values")]
     [SerializeField] private float movementSpeed;
@@ -17,7 +18,10 @@ public class MovementSc : MonoBehaviour
     [FormerlySerializedAs("xHasSpace")] [SerializeField] private bool xHasPosSpace = true;
     [SerializeField] private bool xHasNegSpace = true;
     [SerializeField] private float range;
+    [SerializeField] private Vector2 direection;
 
+    public Vector3 rotationVector;
+    public Vector3 movementVector;
     void FixedUpdate()
     {
         MovePlayer(inputController.movement);
@@ -33,7 +37,18 @@ public class MovementSc : MonoBehaviour
 
     private void MovePlayer(Vector2 movement)
     {
-        Vector2 direection = movement.normalized;
+        Vector3 adjustVector = new Vector3(movement.x, 0, movement.y);
+       rotationVector = Quaternion.AngleAxis(rotateSC.newAngle, UnityEngine.Vector3.up) * adjustVector.normalized;
+       movementVector = rotationVector;
+        // if (rotateSC.rotating)
+        // {
+        //    movementVector = Quaternion.AngleAxis(rotateSC.newAngle, UnityEngine.Vector3.up) * movement;;
+        // }
+        // else
+        // {
+        //     movementVector = movement.normalized;
+        // }
+         direection = new Vector2(movementVector.x, movementVector.z).normalized;
         if (direection.y > 0)
         {
             
@@ -73,8 +88,12 @@ public class MovementSc : MonoBehaviour
                // return;
             }
         }
-        
-        rb.linearVelocity = new Vector3(direection.x* movementSpeed * Time.fixedDeltaTime, rb.linearVelocity.y, direection.y* movementSpeed * Time.fixedDeltaTime);
+        Debug.DrawRay(transform.position, movementVector * movementSpeed, Color.red);
+        Debug.DrawRay(transform.position, direection * movementSpeed, Color.green);
+        Vector3 newPos = new Vector3(direection.x* movementSpeed * Time.fixedDeltaTime, transform.position.y, direection.y*movementSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + newPos);
+       // rb.linearVelocity = new Vector3(direection.x* Vector3.right.x* movementSpeed * Time.fixedDeltaTime, rb.linearVelocity.y, direection.y* Vector3.forward.z*movementSpeed * Time.fixedDeltaTime);
+       
     }
 
     private bool CheckPositiveX()

@@ -201,7 +201,8 @@ MonoBehaviour:
   timeToRecenter: 15
   rangeType: 1
   angle: 60
-  towerType: 10000
+  towerType: 10
+  towerCost: 0
   health: 0
   leaders: []
   damage: 1
@@ -212,13 +213,13 @@ MonoBehaviour:
   projectileSpeed: 20
   projectiles:
   - {fileID: 4976372096249141380}
-  - {fileID: 6629585797539427386}
-  - {fileID: 8378490049398983137}
   - {fileID: 400653008823846809}
-  - {fileID: 6359860054901058052}
-  - {fileID: 2727196767242539003}
   - {fileID: 2891895900340981915}
+  - {fileID: 6629585797539427386}
+  - {fileID: 6359860054901058052}
   - {fileID: 7251198089474832165}
+  - {fileID: 8378490049398983137}
+  - {fileID: 2727196767242539003}
   - {fileID: 765703961039158298}
 --- !u!54 &1327836317734325518
 Rigidbody:

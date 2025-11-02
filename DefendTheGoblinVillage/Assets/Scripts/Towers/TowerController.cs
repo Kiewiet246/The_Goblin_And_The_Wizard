@@ -47,6 +47,8 @@ public class TowerController : MonoBehaviour
         WallTower = 20,
         BalistaTower =  5,
     }
+
+    [SerializeField] private int towerCost;
     #endregion
     
     [Header("Health Values")]
@@ -66,6 +68,7 @@ public class TowerController : MonoBehaviour
     void Start()
     {
        // CalculateRange();
+       towerCost = (int)towerType;
        health = (int)towerType;
     }
 
@@ -110,28 +113,28 @@ public class TowerController : MonoBehaviour
                         AttackTheLeaders();
                         return;
                     }
-                targetedLeader = leaders[0];
-                if (CheckIfInRange(targetedLeader))
-                {
-                   ArcherShooting();
-                }
-                else
-                {
-                    float playDis = 8f;
-                    float diff = Vector3.Distance(transform.position, targetedLeader.endPoint);
-
-                    if (diff <= calRange + playDis)
+                    targetedLeader = leaders[0];
+                    if (CheckIfInRange(targetedLeader))
                     {
                         ArcherShooting();
                     }
-
                     else
                     {
-                        leaders.RemoveAt(0);
+                        float playDis = 8f;
+                        float diff = Vector3.Distance(transform.position, targetedLeader.endPoint);
+
+                        if (diff <= calRange + playDis)
+                        {
+                            ArcherShooting();
+                        }
+
+                        else
+                        {
+                            leaders.RemoveAt(0);
+                        }
                     }
-                }
                 
-                break;
+                    break;
             case TowerType.CanonTower:
                 break;
             case TowerType.WallTower:
@@ -186,7 +189,15 @@ public class TowerController : MonoBehaviour
             {
                 if (!leaders.Contains(other.GetComponent<LeaderScript>()))
                 {
-                    leaders.Add(other.GetComponent<LeaderScript>());
+                    if (leaders.Count == 0)
+                    {
+                        leaders.Add(other.GetComponent<LeaderScript>());
+                        AttackTheLeaders();
+                    }
+                    else
+                    {
+                        leaders.Add(other.GetComponent<LeaderScript>());
+                    }
                 }
             }
         }
