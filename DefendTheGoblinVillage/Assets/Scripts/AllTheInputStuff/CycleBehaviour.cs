@@ -41,7 +41,7 @@ public class CycleBehaviour : MonoBehaviour
 
     private void ChangeSelectedTower()
     {
-        Debug.Log("Hello" + currentTower);
+        
         currentTower += 1;
         if (currentTower < towerTypes.Count)
         {

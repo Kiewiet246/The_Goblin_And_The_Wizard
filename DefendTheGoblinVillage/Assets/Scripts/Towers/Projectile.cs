@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -13,6 +14,9 @@ public class Projectile : MonoBehaviour
     [SerializeField] private bool isAlive = false;
     [SerializeField] private Transform target;
     [SerializeField] private int hits;
+    [SerializeField] private bool oneExplosion = false;
+
+    [Header("CanonBall Stuff")] [SerializeField]private float radius;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,9 +38,7 @@ public class Projectile : MonoBehaviour
             float difference = Time.time - currentTime;
             if (difference >= lifetime)
             {
-                isAlive = false;
-                towerController.projectiles.Add(rb);
-                gameObject.SetActive(false);
+                EndProjectile();
             }
         }
     }
@@ -46,6 +48,13 @@ public class Projectile : MonoBehaviour
         currentTime = Time.time;
         isAlive = true;
         this.target = target;
+    }
+
+    private void EndProjectile()
+    {
+        isAlive = false;
+        towerController.projectiles.Add(rb);
+        gameObject.SetActive(false);
     }
     
     private void OnTriggerEnter(Collider other)
@@ -63,6 +72,25 @@ public class Projectile : MonoBehaviour
                     enemy = null;
                 }
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!oneExplosion)
+        {
+            Debug.Log("Explode");
+            Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+
+            foreach (Collider hit in colliders)
+            {
+                if (hit.GetComponent<LeaderScript>())
+                {
+                    hit.GetComponent<LeaderScript>().TakeDamage(damage);
+                }
+            }
+        
+            EndProjectile();
         }
     }
 }

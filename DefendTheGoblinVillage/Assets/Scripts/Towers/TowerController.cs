@@ -63,6 +63,9 @@ public class TowerController : MonoBehaviour
     
     [SerializeField] private float projectileSpeed = 20f;
     public List<Rigidbody> projectiles;
+    
+    [Header("Couratine Stuff")]
+    [SerializeField] private float delay = 0.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -151,6 +154,41 @@ public class TowerController : MonoBehaviour
                 
                     break;
             case TowerType.CanonTower:
+                Debug.Log("Canon Tower");
+                if (leaders[0].gameObject.activeSelf == false)
+                {
+                    leaders.RemoveAt(0);
+                    if (leaders.Count > 0)
+                    {
+                       AttackTheLeaders();
+                        return;
+                    }
+                    else if (leaders.Count == 0)
+                    {
+                        return;
+                    }
+                }
+                targetedLeader = leaders[0];
+                if (CheckIfInRange(targetedLeader))
+                {
+                    StartCoroutine(CanonShooting());
+                }
+                else
+                {
+                    float playDis = 8f;
+                    float diff = Vector3.Distance(transform.position, targetedLeader.endPoint);
+
+                    if (diff <= calRange + playDis)
+                    {
+                        StartCoroutine(CanonShooting());
+                    }
+
+                    else
+                    {
+                        leaders.RemoveAt(0);
+                    }
+                }
+                
                 break;
             case TowerType.WallTower:
                 break;
@@ -161,6 +199,7 @@ public class TowerController : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
         
+        Debug.Log("Start Again");
         currentTime = Time.time;
     }
 
@@ -181,6 +220,26 @@ public class TowerController : MonoBehaviour
         float force = (projectileSpeed*(distance/maxDistance));
         rb.AddForce(direction * force, ForceMode.Impulse);
         targetedLeader = null;
+    }
+
+    private IEnumerator CanonShooting()
+    {
+        Vector3 pos = targetedLeader.endPoint;
+        Rigidbody rb = projectiles[0];
+        rb.gameObject.GetComponent<Projectile>().StartProjectile(targetedLeader.transform);
+        rb.linearVelocity = Vector3.zero;
+        projectiles.Remove(rb);
+        Vector3 spawnPos = new Vector3(pos.x, pos.y + 4, pos.z);
+        Debug.Log("Fire");
+        
+        yield return new WaitForSeconds(delay);
+        
+        rb.gameObject.SetActive(true);
+        rb.position = spawnPos;
+        rb.AddForce(projectileSpeed*Vector3.down, ForceMode.Impulse);
+        targetedLeader = null;
+        Debug.Log("Splat");
+
     }
 
     private void BalistaShooting()
@@ -280,7 +339,6 @@ public class TowerController : MonoBehaviour
         if (towerTile != null)
         {
             int totRange = (range + towerTile.height);
-            Debug.Log(towerTile.height);
             range = Mathf.RoundToInt((totRange / 2));
             Vector3Int nextBase = towerTile.cubeCoordinates + new Vector3Int(0, 1, -1);
             Vector3Int prevBase = towerTile.cubeCoordinates + new Vector3Int(0, -1,1);

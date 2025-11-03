@@ -54,7 +54,7 @@ public class MovementSc : MonoBehaviour
             
             if (!zHasPosSpace)
             {
-                Debug.Log("PositiveZ");
+                
                 direection.y = 0;
              //   return;
             }
@@ -64,18 +64,18 @@ public class MovementSc : MonoBehaviour
             if (!zHasNegSpace)
             {
                 direection.y = 0;
-                Debug.Log("NegativeZ");
+                
              //   return;
             }
         }
 
         if (direection.x > 0)
         {
-            Debug.Log(CheckPositiveX());
+           
             if (!xHasPosSpace)
             {
                 direection.x = 0;
-                Debug.Log("PositiveX");
+                
              //   return;
             }
         }
@@ -84,7 +84,7 @@ public class MovementSc : MonoBehaviour
             if (!xHasNegSpace)
             {
                 direection.x = 0;
-                Debug.Log("NegativeX");
+                
                // return;
             }
         }

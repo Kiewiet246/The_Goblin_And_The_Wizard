@@ -3244,6 +3244,14 @@ PrefabInstance:
       propertyPath: lThreeTh
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 2561907532733913015, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: scaleMaxH
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2561907532733913015, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: scaleMaxT
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3361806750361512996, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -3258,8 +3266,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5108844675893139925, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: spawnTowerType
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 5108844675893139925, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: canonTowerPrefab
+      value: 
+      objectReference: {fileID: 9043126469732066870, guid: 24ccdcb550632b94faf6a10ae4219359, type: 3}
     - target: {fileID: 6853666320836396211, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: enemyManager
       value: 

@@ -41,7 +41,6 @@ public class ZoomSc : MonoBehaviour
 
     private void ZoomIn()
     {
-        Debug.Log("Going In");
         float zoomAmount = cameraTransform.position.y -zoomSpeed * Time.deltaTime;
         float clampValue = Mathf.Clamp(zoomAmount, minY, maxY);
        // rb.MovePosition(rb.position - new Vector3(0, zoomAmount, 0));
@@ -50,7 +49,6 @@ public class ZoomSc : MonoBehaviour
 
     private void ZoomOut()
     {
-        Debug.Log("Going up");
         zoomAmount = cameraTransform.position.y + zoomSpeed * Time.deltaTime;
         float clampValue = Mathf.Clamp(zoomAmount, minY, maxY);
        // rb.MovePosition(rb.position + new Vector3(0, zoomAmount, 0));
