@@ -66,7 +66,7 @@ public class TowerManager : MonoBehaviour
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
-                        
+                        spawnPoint.towerController = towerController;
                         towers.Add(towerController);
                     }
 
@@ -81,7 +81,7 @@ public class TowerManager : MonoBehaviour
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
-                        
+                        spawnPoint.towerController = towerController;
                         towers.Add(towerController);
                     }
 
@@ -96,7 +96,7 @@ public class TowerManager : MonoBehaviour
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
-                        
+                        spawnPoint.towerController = towerController;
                         towers.Add(towerController);
                     }
 

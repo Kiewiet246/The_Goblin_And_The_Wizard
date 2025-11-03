@@ -23,8 +23,8 @@ public class LeaderScript : MonoBehaviour
     [SerializeField] private List<EnemyContoller> followers;
 
     [Header("Health")]
-    public int health = 6;
-    public int damage = 3;
+    public float health = 6;
+    public float damage = 3;
     
     [Header("Other")] [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private int difficulty = 1;
@@ -58,7 +58,7 @@ public class LeaderScript : MonoBehaviour
         CheckYPos();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         showDamage.FlashDamage();

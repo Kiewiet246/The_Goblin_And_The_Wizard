@@ -59,10 +59,10 @@ public class Crit3Controller : MonoBehaviour
             RotateTheTower();
         }
         
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            DestroyTheTower();
-        }
+        // if (Input.GetKeyDown(KeyCode.D))
+        // {
+        //     DestroyTheTower();
+        // }
     }
     
     private void RightMouseButton()

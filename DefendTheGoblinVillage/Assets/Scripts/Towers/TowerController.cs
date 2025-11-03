@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -52,11 +51,11 @@ public class TowerController : MonoBehaviour
     #endregion
     
     [Header("Health Values")]
-    public int health;
+    public float health;
     
     [Header("Attack Variables")]
     [SerializeField] private List<LeaderScript> leaders;
-    public int damage = 1;
+    public float damage = 1;
     [SerializeField] private float attackRate = 1;
     [SerializeField] private float currentTime;
     [SerializeField] private bool canShoot = true;
@@ -156,6 +155,7 @@ public class TowerController : MonoBehaviour
             case TowerType.WallTower:
                 break;
             case TowerType.BalistaTower:
+                BalistaShooting();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -181,6 +181,27 @@ public class TowerController : MonoBehaviour
         float force = (projectileSpeed*(distance/maxDistance));
         rb.AddForce(direction * force, ForceMode.Impulse);
         targetedLeader = null;
+    }
+
+    private void BalistaShooting()
+    {
+        List<LeaderScript> deadLeaders = new List<LeaderScript>();
+        foreach (LeaderScript leader in leaders)
+        {
+            if (leader.gameObject.activeSelf)
+            {
+                leader.TakeDamage(damage);
+            }
+            else
+            {
+               deadLeaders.Add(leader);
+            }
+        }
+
+        foreach (LeaderScript leaderDead in deadLeaders)
+        {
+            leaders.Remove(leaderDead);
+        }
     }
 
     private bool CheckIfInRange(LeaderScript targetedEnemy)
@@ -238,7 +259,7 @@ public class TowerController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)

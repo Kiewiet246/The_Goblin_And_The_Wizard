@@ -4,7 +4,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private TowerController towerController;
-    [SerializeField] private int damage;
+    [SerializeField] private float damage;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float lifetime=2;
     [SerializeField] private float currentTime;

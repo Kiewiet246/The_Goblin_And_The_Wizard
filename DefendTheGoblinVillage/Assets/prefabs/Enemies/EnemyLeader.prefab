@@ -248,6 +248,7 @@ MonoBehaviour:
   distanceToTarget: 0
   closeEnough: 1
   movementSpeed: 2
+  checkforStep: 0
   jumpForce: 2
   sightRange: 3
   layer: 6
@@ -258,7 +259,7 @@ MonoBehaviour:
   - {fileID: 449919635128837249}
   - {fileID: 8285390419206601743}
   - {fileID: 1191953968234241048}
-  health: 6
+  health: 20
   damage: 3
   enemyManager: {fileID: 0}
   difficulty: 0

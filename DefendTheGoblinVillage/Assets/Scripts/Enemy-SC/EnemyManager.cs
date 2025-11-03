@@ -20,6 +20,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject leaderPrefab;
     [SerializeField] private float spawnForce = 100f;
     [SerializeField] private float forceUp;
+    [SerializeField] private float setHealth = 10f;
     
     [Header("Controlling Enemies")]
     [SerializeField] private List<LeaderScript> enemiesInField;
@@ -169,29 +170,16 @@ public class EnemyManager : MonoBehaviour
             enemiesInPool.RemoveAt(0);
             enemiesInField.Add(leader);
             leader.gameObject.SetActive(true);
-            Vector3 placePos = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y+ saveStartTile.height+adjustable, saveStartTile.transform.position.z);
-            leader.transform.position = placePos;
-            leader.enemyCollider.enabled = false;
-            leader.rb.linearVelocity = Vector3.zero;
-            leader.rb.AddForce(Vector3.up*(forceUp), ForceMode.Impulse);
-            leader.transform.parent = fieldEnemiesParent;
-            leader.health = 6;
-            GiveLeadersPath(leader);
+            LeadersIsSpawnde(leader);
         }
         else
         {
             GameObject leader = Instantiate(leaderPrefab, fieldEnemiesParent);
             LeaderScript leaderScript = leader.GetComponent<LeaderScript>();
-            enemiesInField.Add(leaderScript);
-            Vector3 placePos = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y+ saveStartTile.height+adjustable, saveStartTile.transform.position.z);
-            leaderScript.transform.position = placePos;
-            leaderScript.enemyCollider.enabled = false;
-            leaderScript.rb.linearVelocity = Vector3.zero;
-            leaderScript.rb.AddForce(Vector3.up*(forceUp), ForceMode.Impulse);
-            leader.transform.parent = fieldEnemiesParent;
-            leaderScript.health = 6;
-            GiveLeadersPath(leaderScript);
             leaderScript.SetEnemyMan(this);
+            enemiesInField.Add(leaderScript);
+            LeadersIsSpawnde(leaderScript);
+            
         }
 
         if (enemiesSpawnedInWave == totalEnemiesInWave)
@@ -199,6 +187,18 @@ public class EnemyManager : MonoBehaviour
             canSpawn = false;
             enemiesSpawnedInWave = 0;
         }
+    }
+
+    private void LeadersIsSpawnde(LeaderScript leader)
+    {
+        Vector3 placePos = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y+ saveStartTile.height+adjustable, saveStartTile.transform.position.z);
+        leader.transform.position = placePos;
+        leader.enemyCollider.enabled = false;
+        leader.rb.linearVelocity = Vector3.zero;
+        leader.rb.AddForce(Vector3.up*(forceUp), ForceMode.Impulse);
+        leader.transform.parent = fieldEnemiesParent;
+        leader.health = setHealth;
+        GiveLeadersPath(leader);
     }
 
     public void RemoveLeaderFromField(LeaderScript leader)
