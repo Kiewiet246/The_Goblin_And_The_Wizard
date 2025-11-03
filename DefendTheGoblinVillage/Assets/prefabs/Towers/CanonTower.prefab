@@ -131,7 +131,8 @@ MonoBehaviour:
   isAlive: 0
   target: {fileID: 0}
   hits: 0
-  radius: 10
+  oneExplosion: 0
+  radius: 7.5
 --- !u!54 &5747011940094101399
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -290,7 +291,8 @@ MonoBehaviour:
   isAlive: 0
   target: {fileID: 0}
   hits: 0
-  radius: 10
+  oneExplosion: 0
+  radius: 7.5
 --- !u!54 &2127561409136889712
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -502,7 +504,8 @@ MonoBehaviour:
   isAlive: 0
   target: {fileID: 0}
   hits: 0
-  radius: 10
+  oneExplosion: 0
+  radius: 7.5
 --- !u!54 &6456305147058347780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -661,7 +664,8 @@ MonoBehaviour:
   isAlive: 0
   target: {fileID: 0}
   hits: 0
-  radius: 10
+  oneExplosion: 0
+  radius: 7.5
 --- !u!54 &58613169086313428
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -820,7 +824,8 @@ MonoBehaviour:
   isAlive: 0
   target: {fileID: 0}
   hits: 0
-  radius: 10
+  oneExplosion: 0
+  radius: 7.5
 --- !u!54 &2125289968989143541
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -997,7 +1002,7 @@ MonoBehaviour:
   health: 0
   leaders: []
   damage: 1
-  attackRate: 5
+  attackRate: 4
   currentTime: 0
   canShoot: 1
   targetedLeader: {fileID: 0}
@@ -1008,7 +1013,7 @@ MonoBehaviour:
   - {fileID: 58613169086313428}
   - {fileID: 2127561409136889712}
   - {fileID: 2125289968989143541}
-  delay: 1
+  delay: 0.5
 --- !u!54 &1327836317734325518
 Rigidbody:
   m_ObjectHideFlags: 0

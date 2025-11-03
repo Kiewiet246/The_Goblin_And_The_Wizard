@@ -48,6 +48,7 @@ public class Projectile : MonoBehaviour
         currentTime = Time.time;
         isAlive = true;
         this.target = target;
+        oneExplosion = false;
     }
 
     private void EndProjectile()
@@ -79,6 +80,7 @@ public class Projectile : MonoBehaviour
     {
         if (!oneExplosion)
         {
+            oneExplosion = true;
             Debug.Log("Explode");
             Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 
@@ -89,8 +91,12 @@ public class Projectile : MonoBehaviour
                     hit.GetComponent<LeaderScript>().TakeDamage(damage);
                 }
             }
-        
             EndProjectile();
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

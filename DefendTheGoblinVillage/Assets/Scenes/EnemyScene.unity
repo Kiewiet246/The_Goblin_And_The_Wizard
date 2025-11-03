@@ -3246,11 +3246,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2561907532733913015, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: scaleMaxH
-      value: 1
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2561907532733913015, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: scaleMaxT
-      value: 1
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3361806750361512996, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: m_Enabled

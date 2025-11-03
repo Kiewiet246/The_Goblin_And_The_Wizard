@@ -605,3 +605,4 @@ MonoBehaviour:
   forestTerrain: {fileID: 2344891936347273302}
   swampTerrain: {fileID: 970350611473200587}
   rockTerrain: {fileID: 3625821070297152664}
+  currentTerrain: {fileID: 0}
