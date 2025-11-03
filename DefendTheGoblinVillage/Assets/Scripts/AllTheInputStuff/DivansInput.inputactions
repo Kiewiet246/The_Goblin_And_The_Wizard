@@ -318,7 +318,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard and Mouse",
                     "action": "CycleThroughLists",
                     "isComposite": false,
                     "isPartOfComposite": false

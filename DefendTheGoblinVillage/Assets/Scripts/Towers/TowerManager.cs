@@ -8,7 +8,7 @@ public class TowerManager : MonoBehaviour
 {
     [Header("create Towers")] [SerializeField]
     private Transform towerParents;
-    [SerializeField] private TowerController.TowerType spawnTowerType;
+    public TowerController.TowerType spawnTowerType;
     [SerializeField] private GridManager gridManager;
     [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private float adjustment = 0.75f;

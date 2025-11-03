@@ -10,6 +10,8 @@ public class InputController : MonoBehaviour
     public Vector2 zoom;
     public bool rotateLeft;
     public bool rotateRight;
+    public bool changePhase;
+    public bool cycling;
 
 
     public void PlayerMovement(InputAction.CallbackContext context)
@@ -36,4 +38,14 @@ public class InputController : MonoBehaviour
     {
         attacking = context.ReadValueAsButton();
     }
-}
+
+    public void PlayerChangePhase(InputAction.CallbackContext context)
+    {
+        changePhase = context.ReadValueAsButton();
+    }
+
+    public void PlayerCycle(InputAction.CallbackContext context)
+    {
+        cycling = context.ReadValueAsButton();
+    }
+} 
