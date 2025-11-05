@@ -2753,12 +2753,14 @@ GameObject:
   - component: {fileID: 1937454432}
   - component: {fileID: 1937454431}
   - component: {fileID: 1937454430}
+  - component: {fileID: 1937454437}
   - component: {fileID: 1937454429}
   - component: {fileID: 1937454428}
   - component: {fileID: 1937454427}
   - component: {fileID: 1937454434}
   - component: {fileID: 1937454435}
   - component: {fileID: 1937454436}
+  - component: {fileID: 1937454438}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -2848,7 +2850,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputController: {fileID: 1937454431}
+  control: {fileID: 1937454435}
+  buildingTowers: {fileID: 1937454437}
   towerManager: {fileID: 497300175}
+  leftClick: 0
 --- !u!114 &1937454431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2870,6 +2875,7 @@ MonoBehaviour:
   rotateRight: 0
   changePhase: 0
   cycling: 0
+  isRotatingtower: 0
 --- !u!114 &1937454432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3011,6 +3017,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 78656b1d-01bc-4d8f-b7cc-5beebc5b501f
     m_ActionName: 'Player/RightClick[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1937454431}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: PlayerRotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4c54b83a-192f-4407-a7c5-b78db3dcf554
+    m_ActionName: 'Player/RotateTower[/Keyboard/r]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard and Mouse
   m_DefaultActionMap: Player
@@ -3093,6 +3115,42 @@ MonoBehaviour:
   towerTypes: 0a0000000f0000001400000005000000
   currentTower: 0
   oncePressed: 0
+--- !u!114 &1937454437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937454426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5025c430ca9f3fe488e4dace338a47b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerManager: {fileID: 497300175}
+  tileLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  tileInfo: {fileID: 0}
+  towerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  towerController: {fileID: 0}
+--- !u!114 &1937454438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937454426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af980d78fa775442888609dc2cad57d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputController: {fileID: 1937454431}
+  buildingTowers: {fileID: 1937454437}
+  clickedOnce: 0
 --- !u!1 &2037048632
 GameObject:
   m_ObjectHideFlags: 0
