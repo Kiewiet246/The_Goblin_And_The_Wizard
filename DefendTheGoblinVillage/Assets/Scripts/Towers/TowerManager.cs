@@ -105,6 +105,7 @@ public class TowerManager : MonoBehaviour
                     throw new ArgumentOutOfRangeException();
             }
             enemyManager.CheckIfPathHasChanged(spawnPoint);
+            towerController.gameObject.GetComponentInChildren<TowerMatController>().enabled = false;
             return towerController;
         }
 

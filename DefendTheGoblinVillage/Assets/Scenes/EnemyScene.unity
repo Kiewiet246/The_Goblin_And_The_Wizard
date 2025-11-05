@@ -3160,6 +3160,9 @@ MonoBehaviour:
   desiredTowerType: 0
   adjustment: 4.25
   rotation: {x: 0, y: 0, z: 0, w: 0}
+  selectedLayer:
+    serializedVersion: 2
+    m_Bits: 512
   towerLayer:
     serializedVersion: 2
     m_Bits: 256

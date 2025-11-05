@@ -64,6 +64,8 @@ public class TowerController : MonoBehaviour
     
     [SerializeField] private float projectileSpeed = 20f;
     public List<Rigidbody> projectiles;
+
+    public bool isAttackingTower = true;
     
     [Header("Couratine Stuff")]
     [SerializeField] private float delay = 0.5f;
@@ -280,20 +282,23 @@ public class TowerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (isAttackingTower)
         {
-            if (other.GetComponent<LeaderScript>())
+            if (other.CompareTag("Enemy"))
             {
-                if (!leaders.Contains(other.GetComponent<LeaderScript>()))
+                if (other.GetComponent<LeaderScript>())
                 {
-                    if (leaders.Count == 0)
+                    if (!leaders.Contains(other.GetComponent<LeaderScript>()))
                     {
-                        leaders.Add(other.GetComponent<LeaderScript>());
-                        AttackTheLeaders();
-                    }
-                    else
-                    {
-                        leaders.Add(other.GetComponent<LeaderScript>());
+                        if (leaders.Count == 0)
+                        {
+                            leaders.Add(other.GetComponent<LeaderScript>());
+                            AttackTheLeaders();
+                        }
+                        else
+                        {
+                            leaders.Add(other.GetComponent<LeaderScript>());
+                        }
                     }
                 }
             }

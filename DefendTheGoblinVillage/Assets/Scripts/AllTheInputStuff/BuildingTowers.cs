@@ -18,6 +18,7 @@ public class BuildingTowers : MonoBehaviour
     [FormerlySerializedAs("towerType")] [SerializeField] private TowerController.TowerType desiredTowerType;
     [SerializeField] private float adjustment;
     public Quaternion rotation;
+    [SerializeField] private LayerMask selectedLayer;
     
     [Header("Tower Information")]
     [SerializeField] private LayerMask towerLayer;
@@ -41,7 +42,12 @@ public class BuildingTowers : MonoBehaviour
 
     private void ApplyStuffToTowers(GameObject towerPrefab)
     {
-        towerPrefab.GetComponent<TowerMatController>().BuildTowerMat();
+        towerPrefab.GetComponentInChildren<TowerMatController>().BuildTowerMat();
+        LayerMask mask = 9 << selectedLayer;
+        towerPrefab.layer = mask;
+       // towerPrefab.GetComponent<Collider>().isTrigger = true;
+        TowerController tower = towerPrefab.GetComponent<TowerController>();
+        tower.isAttackingTower = false;
         towerPrefab.SetActive(false);
     }
     
@@ -165,11 +171,15 @@ public class BuildingTowers : MonoBehaviour
     {
         if (preBuildTower.activeSelf == true)
         {
-            preBuildTower.SetActive(false);
-            preTowerController.HideRange();
-            preTowerController.ClearTilesInRange();
-            towerController = towerManager.CreateTower(tileInfo, rotation);
-            towerController.ShowRange();
+            if (preBuildTower.GetComponentInChildren<TowerMatController>().canBuild)
+            {
+                preBuildTower.SetActive(false);
+                preTowerController.HideRange();
+                preTowerController.ClearTilesInRange();
+                towerController = towerManager.CreateTower(tileInfo, rotation);
+                towerController.ShowRange();
+            }
+            
         }
     }
     

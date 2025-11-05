@@ -864,10 +864,8 @@ GameObject:
   - component: {fileID: 3526066292174486198}
   - component: {fileID: 6911567031997100549}
   - component: {fileID: 9155577854707313809}
-  - component: {fileID: 7362337490512932074}
   - component: {fileID: 3473714512335772098}
   - component: {fileID: 1327836317734325518}
-  - component: {fileID: 8996140230037972935}
   - component: {fileID: -9181011414483811559}
   m_Layer: 8
   m_Name: CanonTower
@@ -951,29 +949,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7362337490512932074
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9043126469732066870}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &3473714512335772098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,7 +977,7 @@ MonoBehaviour:
   towerType: 15
   towerCost: 0
   health: 0
-  showDamage: {fileID: 0}
+  showDamage: {fileID: -9181011414483811559}
   leaders: []
   damage: 1
   attackRate: 4
@@ -1016,6 +991,7 @@ MonoBehaviour:
   - {fileID: 58613169086313428}
   - {fileID: 2127561409136889712}
   - {fileID: 2125289968989143541}
+  isAttackingTower: 1
   delay: 0.5
 --- !u!54 &1327836317734325518
 Rigidbody:
@@ -1044,23 +1020,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &8996140230037972935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9043126469732066870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4832a940aba0e9b4aba1099b9142e4a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 6274372326309866262}
-  defaultMat: {fileID: 2100000, guid: c7ea52236004fb647889e7c411353e53, type: 2}
-  buildingMat: {fileID: 2100000, guid: f5bcd008063468648a1703527cfdaefc, type: 2}
-  cannotBuildMat: {fileID: 2100000, guid: df23b73daf54ac044bbc88d78faaea9c, type: 2}
-  canBuild: 1
 --- !u!114 &-9181011414483811559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,13 +1097,63 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f53fce2de9edf0b4ba915dcf52bbd8e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2862555713338724049}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f53fce2de9edf0b4ba915dcf52bbd8e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4287099842818707411}
   m_SourcePrefab: {fileID: 100100000, guid: f53fce2de9edf0b4ba915dcf52bbd8e8, type: 3}
 --- !u!4 &5140894983349489785 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f53fce2de9edf0b4ba915dcf52bbd8e8, type: 3}
   m_PrefabInstance: {fileID: 4670964824465684370}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5481989137790798531 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f53fce2de9edf0b4ba915dcf52bbd8e8, type: 3}
+  m_PrefabInstance: {fileID: 4670964824465684370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2862555713338724049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5481989137790798531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4832a940aba0e9b4aba1099b9142e4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 6274372326309866262}
+  defaultMat: {fileID: 2100000, guid: c7ea52236004fb647889e7c411353e53, type: 2}
+  buildingMat: {fileID: 2100000, guid: f5bcd008063468648a1703527cfdaefc, type: 2}
+  cannotBuildMat: {fileID: 2100000, guid: df23b73daf54ac044bbc88d78faaea9c, type: 2}
+  canBuild: 1
+--- !u!64 &4287099842818707411
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5481989137790798531}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1652432036889418857, guid: f53fce2de9edf0b4ba915dcf52bbd8e8, type: 3}
 --- !u!23 &6274372326309866262 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: f53fce2de9edf0b4ba915dcf52bbd8e8, type: 3}

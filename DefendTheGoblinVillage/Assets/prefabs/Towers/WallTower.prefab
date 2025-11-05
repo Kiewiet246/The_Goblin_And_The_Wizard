@@ -158,7 +158,7 @@ MonoBehaviour:
   towerType: 20
   towerCost: 0
   health: 0
-  showDamage: {fileID: 0}
+  showDamage: {fileID: 3868230317340188351}
   leaders: []
   damage: 1
   attackRate: 1
@@ -167,6 +167,7 @@ MonoBehaviour:
   targetedLeader: {fileID: 0}
   projectileSpeed: 20
   projectiles: []
+  isAttackingTower: 1
   delay: 0.5
 --- !u!114 &3868230317340188351
 MonoBehaviour:
