@@ -6,12 +6,14 @@ public class InputController : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     
     public Vector2 movement;
-    public bool attacking;
+    public bool isLeftClicked;
+    public bool isRightClicked;
     public Vector2 zoom;
     public bool rotateLeft;
     public bool rotateRight;
     public bool changePhase;
     public bool cycling;
+    public bool isRotatingtower;
 
 
     public void PlayerMovement(InputAction.CallbackContext context)
@@ -36,7 +38,12 @@ public class InputController : MonoBehaviour
 
     public void PlayerAttacking(InputAction.CallbackContext context)
     {
-        attacking = context.ReadValueAsButton();
+        isLeftClicked = context.ReadValueAsButton();
+    }
+
+    public void PlayerRightClick(InputAction.CallbackContext context)
+    {
+        isRightClicked = context.ReadValueAsButton();
     }
 
     public void PlayerChangePhase(InputAction.CallbackContext context)
@@ -47,5 +54,10 @@ public class InputController : MonoBehaviour
     public void PlayerCycle(InputAction.CallbackContext context)
     {
         cycling = context.ReadValueAsButton();
+    }
+
+    public void PlayerRotate(InputAction.CallbackContext context)
+    {
+        isRotatingtower = context.ReadValueAsButton();
     }
 } 

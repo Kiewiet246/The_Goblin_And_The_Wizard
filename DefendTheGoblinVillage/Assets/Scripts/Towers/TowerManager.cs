@@ -31,8 +31,9 @@ public class TowerManager : MonoBehaviour
         
     }
 
-    public void CreateTower(TileInfo spawnPoint)
+    public TowerController CreateTower(TileInfo spawnPoint)
     {
+        TowerController towerController = new TowerController();
         if (spawnPoint.towerController == null)
         {
             Vector3 spawnPosition = new Vector3(spawnPoint.transform.position.x,
@@ -45,7 +46,7 @@ public class TowerManager : MonoBehaviour
                     {
                         GameObject archer = Instantiate(archerTowerPrefab, spawnPosition, Quaternion.identity,
                             towerParents);
-                        TowerController towerController = archer.GetComponent<TowerController>();
+                        towerController = archer.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
@@ -60,7 +61,7 @@ public class TowerManager : MonoBehaviour
                     {
                         GameObject canon = Instantiate(canonTowerPrefab, spawnPosition, Quaternion.identity,
                             towerParents);
-                        TowerController towerController = canon.GetComponent<TowerController>();
+                        towerController = canon.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
@@ -75,7 +76,7 @@ public class TowerManager : MonoBehaviour
                     {
                         GameObject wall = Instantiate(wallTowerPrefab, spawnPosition, Quaternion.identity,
                             towerParents);
-                        TowerController towerController = wall.GetComponent<TowerController>();
+                        towerController = wall.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
@@ -90,7 +91,7 @@ public class TowerManager : MonoBehaviour
                     {
                         GameObject ballista = Instantiate(ballistaTowerPrefab, spawnPosition, Quaternion.identity,
                             towerParents);
-                        TowerController towerController = ballista.GetComponent<TowerController>();
+                        towerController = ballista.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
@@ -104,7 +105,10 @@ public class TowerManager : MonoBehaviour
                     throw new ArgumentOutOfRangeException();
             }
             enemyManager.CheckIfPathHasChanged(spawnPoint);
+            return towerController;
         }
+
+        return null;
     }
 
     public void ATowerDied(TileInfo openTile)

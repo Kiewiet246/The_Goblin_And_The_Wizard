@@ -24,6 +24,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "RightClick",
+                    "type": "Button",
+                    "id": "78656b1d-01bc-4d8f-b7cc-5beebc5b501f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Zoom",
                     "type": "Value",
                     "id": "2431892c-3cd2-480e-b342-86b68de34a66",
@@ -63,6 +72,15 @@
                     "name": "CycleThroughLists",
                     "type": "Button",
                     "id": "8defe34f-68c7-43b5-b537-5d143177428b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateTower",
+                    "type": "Button",
+                    "id": "4c54b83a-192f-4407-a7c5-b78db3dcf554",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -320,6 +338,28 @@
                     "processors": "",
                     "groups": ";Keyboard and Mouse",
                     "action": "CycleThroughLists",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1193e864-18de-4473-bae7-41176442f554",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard and Mouse",
+                    "action": "RightClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e5cd8ad-7ca4-4a05-bec6-db69ccd9c40c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard and Mouse",
+                    "action": "RotateTower",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

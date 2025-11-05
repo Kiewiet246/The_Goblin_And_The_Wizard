@@ -2848,6 +2848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputController: {fileID: 1937454431}
+  towerManager: {fileID: 497300175}
 --- !u!114 &1937454431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2862,7 +2863,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1937454432}
   movement: {x: 0, y: 0}
-  attacking: 0
+  isLeftClicked: 0
+  isRightClicked: 0
   zoom: {x: 0, y: 0}
   rotateLeft: 0
   rotateRight: 0
@@ -2910,7 +2912,19 @@ MonoBehaviour:
     m_ActionId: e80cf6b3-f50c-4df3-b16c-ec0a76fcb456
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1937454431}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: PlayerAttacking
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 90669289-8095-4d9e-a113-60857017bc6b
     m_ActionName: 'Player/Attack[/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
@@ -2993,6 +3007,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8defe34f-68c7-43b5-b537-5d143177428b
     m_ActionName: 'Player/CycleThroughLists[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78656b1d-01bc-4d8f-b7cc-5beebc5b501f
+    m_ActionName: 'Player/RightClick[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard and Mouse
   m_DefaultActionMap: Player

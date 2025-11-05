@@ -46,12 +46,12 @@ public class Crit3Controller : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            LeftMouseButton();
+           // LeftMouseButton();
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            RightMouseButton();
+         //  RightMouseButton();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
