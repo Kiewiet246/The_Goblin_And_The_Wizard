@@ -26,6 +26,10 @@ public class LeaderScript : MonoBehaviour
     public float health = 6;
     public float damage = 3;
     
+    [Header("Spells")]
+    public SpellAflections spellAflections;
+    public SpellManager spellManager;
+    
     [Header("Other")] [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private int difficulty = 1;
 

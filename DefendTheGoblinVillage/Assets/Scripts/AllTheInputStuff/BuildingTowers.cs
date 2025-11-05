@@ -83,12 +83,12 @@ public class BuildingTowers : MonoBehaviour
         preTowerController.ClearTilesInRange();
         preBuildTower.SetActive(false);
         Debug.Log("Tower Selected");
-        if (hit.collider.gameObject.GetComponent<TowerController>() != null)
+        if (hit.collider.gameObject.GetComponentInParent<TowerController>() != null)
         {
             if (towerController != null)
             {
                 towerController.HideRange();
-                TowerController tower = hit.collider.gameObject.GetComponent<TowerController>();
+                TowerController tower = hit.collider.gameObject.GetComponentInParent<TowerController>();
                 if (tower == towerController)
                 {
                     HidetowerRange();
@@ -103,7 +103,7 @@ public class BuildingTowers : MonoBehaviour
             }
             else
             {
-                towerController = hit.collider.gameObject.GetComponent<TowerController>();
+                towerController = hit.collider.gameObject.GetComponentInParent<TowerController>();
                 towerController.ShowRange();
             }
         } 

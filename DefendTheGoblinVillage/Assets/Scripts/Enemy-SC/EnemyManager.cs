@@ -39,10 +39,10 @@ public class EnemyManager : MonoBehaviour
     
     [Header("Extra")]
     [SerializeField] private float adjustable;
+    [SerializeField] private SpellManager spellManager;
 
     [SerializeField] private Transform activateField;
     [SerializeField] private float adjustActFieldHeight;
-
     void Awake()
     {
         CreateLeaders();
@@ -198,6 +198,7 @@ public class EnemyManager : MonoBehaviour
         leader.rb.AddForce(Vector3.up*(forceUp), ForceMode.Impulse);
         leader.transform.parent = fieldEnemiesParent;
         leader.health = setHealth;
+        leader.spellManager = spellManager;
         GiveLeadersPath(leader);
     }
 

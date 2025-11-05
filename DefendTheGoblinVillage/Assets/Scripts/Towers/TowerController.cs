@@ -157,7 +157,6 @@ public class TowerController : MonoBehaviour
                 
                     break;
             case TowerType.CanonTower:
-                Debug.Log("Canon Tower");
                 if (leaders[0].gameObject.activeSelf == false)
                 {
                     leaders.RemoveAt(0);
@@ -201,8 +200,6 @@ public class TowerController : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        
-        Debug.Log("Start Again");
         currentTime = Time.time;
     }
 
@@ -233,7 +230,6 @@ public class TowerController : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         projectiles.Remove(rb);
         Vector3 spawnPos = new Vector3(pos.x, pos.y + 4, pos.z);
-        Debug.Log("Fire");
         
         yield return new WaitForSeconds(delay);
         
@@ -241,8 +237,6 @@ public class TowerController : MonoBehaviour
         rb.position = spawnPos;
         rb.AddForce(projectileSpeed*Vector3.down, ForceMode.Impulse);
         targetedLeader = null;
-        Debug.Log("Splat");
-
     }
 
     private void BalistaShooting()
@@ -383,10 +377,8 @@ public class TowerController : MonoBehaviour
                 FindTilesInRangeBox();
                 break;
             case RangeType.Radius:
-                sphereCollider.transform.position = transform.position;
                 sphereCollider.radius = calRange / 2;
                 FindTilesInRangeSphere();
-               // ShowRange();
                 break;
             case RangeType.None:
                 break;
