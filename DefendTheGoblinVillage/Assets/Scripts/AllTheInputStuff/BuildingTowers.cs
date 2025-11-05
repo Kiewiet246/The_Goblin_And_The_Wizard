@@ -8,6 +8,7 @@ public class BuildingTowers : MonoBehaviour
     [Header("Building Tower Variables")]
     [SerializeField] RaycastHit hit = new RaycastHit();
     [SerializeField] private LayerMask tileLayer;
+    [SerializeField] private TileInfo tileInfo;
     
     [Header("Tower Information")]
     [SerializeField] private LayerMask towerLayer;
@@ -51,8 +52,7 @@ public class BuildingTowers : MonoBehaviour
                 TowerController tower = hit.collider.gameObject.GetComponent<TowerController>();
                 if (tower == towerController)
                 {
-                    towerController.HideRange();
-                    towerController = null;
+                    HidetowerRange();
                 }
                     
                 else if (tower != towerController)
@@ -70,18 +70,23 @@ public class BuildingTowers : MonoBehaviour
         } 
     }
 
+    private void HidetowerRange()
+    {
+        towerController.HideRange();
+        towerController = null;
+    }
+
     private void TileSelected()
     {
         if (towerController != null)
         {
-            towerController.HideRange();
-            towerController = null;
+            HidetowerRange();
         }
         Debug.Log("Tile Selected");
         if (hit.collider.gameObject.GetComponentInParent<TileInfo>() != null)
         {
             Debug.Log(hit.collider.gameObject.transform.parent.gameObject.name);
-            TileInfo tileInfo = hit.collider.gameObject.GetComponentInParent<TileInfo>();
+            tileInfo = hit.collider.gameObject.GetComponentInParent<TileInfo>();
             towerController = towerManager.CreateTower(tileInfo);
             towerController.ShowRange();
         }
