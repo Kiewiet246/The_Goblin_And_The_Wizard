@@ -51,7 +51,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 5, z: 0.5}
+  m_Size: {x: 0.5, y: 15, z: 0.5}
   m_Center: {x: 0, y: -0.9, z: 0}
 --- !u!1 &4624593814749473481
 GameObject:
@@ -67,6 +67,8 @@ GameObject:
   - component: {fileID: 129510770307959826}
   - component: {fileID: 7315289145558994041}
   - component: {fileID: 3630126658788195274}
+  - component: {fileID: 7455480579423112257}
+  - component: {fileID: -7312683024463059446}
   m_Layer: 8
   m_Name: BallistaTower
   m_TagString: Tower
@@ -194,6 +196,7 @@ MonoBehaviour:
   towerType: 5
   towerCost: 0
   health: 0
+  showDamage: {fileID: 0}
   leaders: []
   damage: 1
   attackRate: 1.5
@@ -202,6 +205,7 @@ MonoBehaviour:
   targetedLeader: {fileID: 0}
   projectileSpeed: 20
   projectiles: []
+  delay: 0.5
 --- !u!54 &3630126658788195274
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -229,3 +233,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7455480579423112257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624593814749473481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4832a940aba0e9b4aba1099b9142e4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 5946640426567429671}
+  defaultMat: {fileID: 2100000, guid: 2364618a40ba1564e975274d47371bd6, type: 2}
+  buildingMat: {fileID: 2100000, guid: f5bcd008063468648a1703527cfdaefc, type: 2}
+  cannotBuildMat: {fileID: 2100000, guid: df23b73daf54ac044bbc88d78faaea9c, type: 2}
+  canBuild: 1
+--- !u!114 &-7312683024463059446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624593814749473481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38c5f34ecf847e479d2825cb42fa26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalMat: {fileID: 2100000, guid: 2364618a40ba1564e975274d47371bd6, type: 2}
+  flashMat: {fileID: 2100000, guid: df23b73daf54ac044bbc88d78faaea9c, type: 2}
+  meshRenderer: {fileID: 5946640426567429671}
+  flashDuration: 0.1
+  startFlash: 0
+  flashTimer: 0

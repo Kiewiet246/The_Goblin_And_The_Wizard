@@ -81,6 +81,6 @@ public class TestManager : MonoBehaviour
 
     public void TowerTesting(TileInfo tileInfo)
     {
-        towerManager.CreateTower(tileInfo);
+        //towerManager.CreateTower(tileInfo);
     }
 }

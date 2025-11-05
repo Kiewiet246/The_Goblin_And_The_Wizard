@@ -132,17 +132,17 @@ public class Crit3Controller : MonoBehaviour
         if (hit.collider != null)
         {
             
-            if (hit.collider.gameObject.GetComponentInParent<TileInfo>() != null)
-            {
-                TileInfo tileInfo = hit.collider.gameObject.GetComponentInParent<TileInfo>();
-                towerManager.CreateTower(tileInfo);
-            }
-            
-            else if (hit.collider.gameObject.GetComponent<TileInfo>() != null)
-            {
-                TileInfo tileInfo = hit.collider.gameObject.GetComponent<TileInfo>();
-                towerManager.CreateTower(tileInfo);
-            }
+            // if (hit.collider.gameObject.GetComponentInParent<TileInfo>() != null)
+            // {
+            //     TileInfo tileInfo = hit.collider.gameObject.GetComponentInParent<TileInfo>();
+            //     towerManager.CreateTower(tileInfo);
+            // }
+            //
+            // else if (hit.collider.gameObject.GetComponent<TileInfo>() != null)
+            // {
+            //     TileInfo tileInfo = hit.collider.gameObject.GetComponent<TileInfo>();
+            //     towerManager.CreateTower(tileInfo);
+            // }
         }
     }
 }

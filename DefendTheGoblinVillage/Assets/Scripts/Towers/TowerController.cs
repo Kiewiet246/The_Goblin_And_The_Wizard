@@ -52,6 +52,7 @@ public class TowerController : MonoBehaviour
     
     [Header("Health Values")]
     public float health;
+    [SerializeField] private ShowDamage showDamage;
     
     [Header("Attack Variables")]
     [SerializeField] private List<LeaderScript> leaders;
@@ -321,6 +322,7 @@ public class TowerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        showDamage.FlashDamage();
         if (health <= 0)
         {
             towerTile.towerController = null;
@@ -339,7 +341,7 @@ public class TowerController : MonoBehaviour
         if (towerTile != null)
         {
             int totRange = (range + towerTile.height);
-            range = Mathf.RoundToInt((totRange / 2));
+            int useRange = Mathf.FloorToInt((totRange / 2));
             Vector3Int nextBase = towerTile.cubeCoordinates + new Vector3Int(0, 1, -1);
             Vector3Int prevBase = towerTile.cubeCoordinates + new Vector3Int(0, -1,1);
             
@@ -352,7 +354,7 @@ public class TowerController : MonoBehaviour
                 maxDistance = Vector3.Distance(outTileP.transform.position, towerTile.transform.position);
             }
            
-            calRange = Mathf.FloorToInt(maxDistance*range);
+            calRange = Mathf.FloorToInt(maxDistance*useRange);
             Vector3 endPos = new Vector3();
             endPos = transform.position + (calRange * Vector3.forward);
             //Debug.DrawLine(transform.position, endPos, Color.green, 1000f);
@@ -372,7 +374,7 @@ public class TowerController : MonoBehaviour
                 float notRadius = Mathf.RoundToInt(calRange / 2);
                 boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y, notRadius);
                 boxRecenter = Mathf.RoundToInt(notRadius / 2);
-                boxCollider.center = new Vector3(boxCollider.center.x, boxCollider.center.y,boxCollider.center.z + boxRecenter);
+                boxCollider.center = new Vector3(0, 0,0 + boxRecenter);
                 FindTilesInRangeBox();
                 break;
             case RangeType.Radius:
@@ -414,6 +416,11 @@ public class TowerController : MonoBehaviour
             }
             
         }
+    }
+
+    public void ClearTilesInRange()
+    {
+        tilesInRange.Clear();
     }
 
     private void FindTilesInRangeSphere()
@@ -490,7 +497,7 @@ public class TowerController : MonoBehaviour
 
     #endregion
 
-    public void RotateTower()
+    public Quaternion RotateTower()
     {
         HideRange();
         
@@ -501,5 +508,6 @@ public class TowerController : MonoBehaviour
             FindTilesInRangeBox();
             ShowRange();
         }
+        return transform.rotation;
     }
 }

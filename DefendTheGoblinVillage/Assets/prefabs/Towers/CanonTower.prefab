@@ -867,6 +867,8 @@ GameObject:
   - component: {fileID: 7362337490512932074}
   - component: {fileID: 3473714512335772098}
   - component: {fileID: 1327836317734325518}
+  - component: {fileID: 8996140230037972935}
+  - component: {fileID: -9181011414483811559}
   m_Layer: 8
   m_Name: CanonTower
   m_TagString: Tower
@@ -1000,6 +1002,7 @@ MonoBehaviour:
   towerType: 15
   towerCost: 0
   health: 0
+  showDamage: {fileID: 0}
   leaders: []
   damage: 1
   attackRate: 4
@@ -1041,6 +1044,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &8996140230037972935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9043126469732066870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4832a940aba0e9b4aba1099b9142e4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 6274372326309866262}
+  defaultMat: {fileID: 2100000, guid: c7ea52236004fb647889e7c411353e53, type: 2}
+  buildingMat: {fileID: 2100000, guid: f5bcd008063468648a1703527cfdaefc, type: 2}
+  cannotBuildMat: {fileID: 2100000, guid: df23b73daf54ac044bbc88d78faaea9c, type: 2}
+  canBuild: 1
+--- !u!114 &-9181011414483811559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9043126469732066870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38c5f34ecf847e479d2825cb42fa26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalMat: {fileID: 2100000, guid: c7ea52236004fb647889e7c411353e53, type: 2}
+  flashMat: {fileID: 2100000, guid: df23b73daf54ac044bbc88d78faaea9c, type: 2}
+  meshRenderer: {fileID: 6274372326309866262}
+  flashDuration: 0.1
+  startFlash: 0
+  flashTimer: 0
 --- !u!1001 &4670964824465684370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1105,5 +1143,10 @@ PrefabInstance:
 --- !u!4 &5140894983349489785 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f53fce2de9edf0b4ba915dcf52bbd8e8, type: 3}
+  m_PrefabInstance: {fileID: 4670964824465684370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6274372326309866262 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: f53fce2de9edf0b4ba915dcf52bbd8e8, type: 3}
   m_PrefabInstance: {fileID: 4670964824465684370}
   m_PrefabAsset: {fileID: 0}

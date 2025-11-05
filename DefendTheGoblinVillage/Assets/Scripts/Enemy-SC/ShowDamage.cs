@@ -8,7 +8,7 @@ public class ShowDamage : MonoBehaviour
 
     [SerializeField] private Material flashMat;
     [SerializeField] private MeshRenderer meshRenderer;
-    [SerializeField] private float flashDuration;
+    [SerializeField] private float flashDuration = 0.1f;
     
     [SerializeField] private bool startFlash;
 

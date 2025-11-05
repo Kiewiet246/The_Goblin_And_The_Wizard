@@ -2854,6 +2854,7 @@ MonoBehaviour:
   buildingTowers: {fileID: 1937454437}
   towerManager: {fileID: 497300175}
   leftClick: 0
+  rightClick: 0
 --- !u!114 &1937454431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3014,7 +3015,19 @@ MonoBehaviour:
     m_ActionId: 8defe34f-68c7-43b5-b537-5d143177428b
     m_ActionName: 'Player/CycleThroughLists[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1937454431}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: PlayerRightClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 78656b1d-01bc-4d8f-b7cc-5beebc5b501f
     m_ActionName: 'Player/RightClick[/Mouse/rightButton]'
   - m_PersistentCalls:
@@ -3053,6 +3066,7 @@ Transform:
   m_Children:
   - {fileID: 559856537}
   - {fileID: 1134861767}
+  - {fileID: 1968011002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1937454434
@@ -3128,10 +3142,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerManager: {fileID: 497300175}
+  gridManager: {fileID: 825824249}
   tileLayer:
     serializedVersion: 2
     m_Bits: 64
   tileInfo: {fileID: 0}
+  preBuildTower: {fileID: 0}
+  archerTowerPrefab: {fileID: 9043126469732066870, guid: 6b7d3e612891e794799e0f3909fe3b1a, type: 3}
+  archerGO: {fileID: 0}
+  cannonTowerPrefab: {fileID: 9043126469732066870, guid: 24ccdcb550632b94faf6a10ae4219359, type: 3}
+  canonGO: {fileID: 0}
+  wallTowerPrefab: {fileID: 7461022803232179790, guid: 3ea479e305b9c7d4ebeca92a1be2bbaf, type: 3}
+  wallGO: {fileID: 0}
+  balistaTowerPrefab: {fileID: 4624593814749473481, guid: bb69ce111b5bd824c82f6f9ba79ec5a7, type: 3}
+  ballistGO: {fileID: 0}
+  preTowerController: {fileID: 0}
+  desiredTowerType: 0
+  adjustment: 4.25
+  rotation: {x: 0, y: 0, z: 0, w: 0}
   towerLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -3151,6 +3179,37 @@ MonoBehaviour:
   inputController: {fileID: 1937454431}
   buildingTowers: {fileID: 1937454437}
   clickedOnce: 0
+--- !u!1 &1968011001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1968011002}
+  m_Layer: 0
+  m_Name: preTower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1968011002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968011001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1937454433}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2037048632
 GameObject:
   m_ObjectHideFlags: 0

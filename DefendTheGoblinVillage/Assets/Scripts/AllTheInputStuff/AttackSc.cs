@@ -13,6 +13,9 @@ public class AttackSc : MonoBehaviour
 
     [Header("Left Click")]
     [SerializeField] private bool leftClick = false;
+    
+    [Header("Right Click")]
+    [SerializeField] private bool rightClick = false;
     void FixedUpdate()
     {
         if (inputController.isLeftClicked)
@@ -28,6 +31,10 @@ public class AttackSc : MonoBehaviour
         {
             FigureOutWhatWithRightClick();
         }
+        else
+        {
+            rightClick = false;
+        }
     }
 
     private void FigureOutWhatWithLeftClick()
@@ -35,12 +42,31 @@ public class AttackSc : MonoBehaviour
         if (!leftClick)
         {
             leftClick = true;
-            buildingTowers.CastRayOnClick();
+            if (control.isBuildMode)
+            {
+                buildingTowers.CastRayOnClick();
+            }
+            else
+            {
+                
+            }
+            
         }
     }
 
     private void FigureOutWhatWithRightClick()
     {
-        
+        if (!rightClick)
+        {
+            rightClick = true;
+            if (control.isBuildMode)
+            {
+                buildingTowers.TheRightClick();
+            }
+            else
+            {
+                
+            }
+        }
     }
 }

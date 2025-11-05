@@ -31,7 +31,7 @@ public class TowerManager : MonoBehaviour
         
     }
 
-    public TowerController CreateTower(TileInfo spawnPoint)
+    public TowerController CreateTower(TileInfo spawnPoint, Quaternion rotation)
     {
         TowerController towerController = new TowerController();
         if (spawnPoint.towerController == null)
@@ -44,7 +44,7 @@ public class TowerManager : MonoBehaviour
                 case TowerController.TowerType.ArcherTower:
                     if (archerTowerPrefab != null)
                     {
-                        GameObject archer = Instantiate(archerTowerPrefab, spawnPosition, Quaternion.identity,
+                        GameObject archer = Instantiate(archerTowerPrefab, spawnPosition, rotation,
                             towerParents);
                         towerController = archer.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
@@ -59,7 +59,7 @@ public class TowerManager : MonoBehaviour
                 case TowerController.TowerType.CanonTower:
                     if (canonTowerPrefab != null)
                     {
-                        GameObject canon = Instantiate(canonTowerPrefab, spawnPosition, Quaternion.identity,
+                        GameObject canon = Instantiate(canonTowerPrefab, spawnPosition, rotation,
                             towerParents);
                         towerController = canon.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
@@ -74,7 +74,7 @@ public class TowerManager : MonoBehaviour
                 case TowerController.TowerType.WallTower:
                     if (wallTowerPrefab != null)
                     {
-                        GameObject wall = Instantiate(wallTowerPrefab, spawnPosition, Quaternion.identity,
+                        GameObject wall = Instantiate(wallTowerPrefab, spawnPosition, rotation,
                             towerParents);
                         towerController = wall.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
@@ -89,7 +89,7 @@ public class TowerManager : MonoBehaviour
                 case TowerController.TowerType.BalistaTower:
                     if (ballistaTowerPrefab != null)
                     {
-                        GameObject ballista = Instantiate(ballistaTowerPrefab, spawnPosition, Quaternion.identity,
+                        GameObject ballista = Instantiate(ballistaTowerPrefab, spawnPosition, rotation,
                             towerParents);
                         towerController = ballista.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;

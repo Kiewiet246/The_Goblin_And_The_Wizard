@@ -26,6 +26,11 @@ public class TowerRotation : MonoBehaviour
 
     private void RotateTheTower()
     {
+        if (buildingTowers.preBuildTower.activeSelf)
+        {
+            buildingTowers.rotation = buildingTowers.preTowerController.RotateTower();
+        }
+        
         if (buildingTowers.towerController)
         {
             buildingTowers.towerController.RotateTower();

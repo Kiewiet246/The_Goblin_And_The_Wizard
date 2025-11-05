@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 6661803738046057154}
   - component: {fileID: 6269408796285474708}
   - component: {fileID: 1811412088384415886}
+  - component: {fileID: 2167935577149333791}
   - component: {fileID: 3030348161849865723}
+  - component: {fileID: 3868230317340188351}
   m_Layer: 8
   m_Name: WallTower
   m_TagString: Tower
@@ -111,6 +113,23 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &2167935577149333791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461022803232179790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4832a940aba0e9b4aba1099b9142e4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 6269408796285474708}
+  defaultMat: {fileID: 2100000, guid: ebd897a766e00e44cb4ee335d28f0e59, type: 2}
+  buildingMat: {fileID: 2100000, guid: f5bcd008063468648a1703527cfdaefc, type: 2}
+  cannotBuildMat: {fileID: 2100000, guid: df23b73daf54ac044bbc88d78faaea9c, type: 2}
+  canBuild: 1
 --- !u!114 &3030348161849865723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +158,7 @@ MonoBehaviour:
   towerType: 20
   towerCost: 0
   health: 0
+  showDamage: {fileID: 0}
   leaders: []
   damage: 1
   attackRate: 1
@@ -148,3 +168,21 @@ MonoBehaviour:
   projectileSpeed: 20
   projectiles: []
   delay: 0.5
+--- !u!114 &3868230317340188351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461022803232179790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38c5f34ecf847e479d2825cb42fa26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalMat: {fileID: 2100000, guid: ebd897a766e00e44cb4ee335d28f0e59, type: 2}
+  flashMat: {fileID: 2100000, guid: df23b73daf54ac044bbc88d78faaea9c, type: 2}
+  meshRenderer: {fileID: 6269408796285474708}
+  flashDuration: 0.1
+  startFlash: 0
+  flashTimer: 0
