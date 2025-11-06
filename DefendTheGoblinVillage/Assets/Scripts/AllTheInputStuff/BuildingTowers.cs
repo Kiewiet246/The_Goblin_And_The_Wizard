@@ -44,7 +44,7 @@ public class BuildingTowers : MonoBehaviour
     {
         towerPrefab.GetComponentInChildren<TowerMatController>().BuildTowerMat();
         LayerMask mask = 9 << selectedLayer;
-        towerPrefab.layer = mask;
+        towerPrefab.GetComponentInChildren<TowerMatController>().gameObject.layer = mask;
        // towerPrefab.GetComponent<Collider>().isTrigger = true;
         TowerController tower = towerPrefab.GetComponent<TowerController>();
         tower.isAttackingTower = false;
@@ -115,7 +115,7 @@ public class BuildingTowers : MonoBehaviour
         towerController = null;
     }
 
-    private void TileSelected()
+    public void TileSelected()
     {
         if (towerController != null)
         {

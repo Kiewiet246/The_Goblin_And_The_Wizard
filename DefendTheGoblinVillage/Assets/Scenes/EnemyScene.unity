@@ -3125,6 +3125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputController: {fileID: 1937454431}
   modeControl: {fileID: 1937454435}
+  buildingTowers: {fileID: 1937454437}
   towerManager: {fileID: 497300175}
   towerTypes: 0a0000000f0000001400000005000000
   currentTower: 0

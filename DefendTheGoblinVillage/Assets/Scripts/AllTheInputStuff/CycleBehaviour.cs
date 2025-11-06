@@ -6,6 +6,7 @@ public class CycleBehaviour : MonoBehaviour
     [Header("Components")]
     [SerializeField] private InputController inputController;
     [SerializeField] private ModeControl modeControl;
+    [SerializeField] private BuildingTowers buildingTowers;
     
     [Header("Manager Components")]
     [SerializeField] private TowerManager towerManager;
@@ -52,6 +53,11 @@ public class CycleBehaviour : MonoBehaviour
         {
             currentTower = 0;
             towerManager.spawnTowerType = towerTypes[0];
+        }
+
+        if (buildingTowers.preBuildTower.activeSelf == true)
+        {
+            buildingTowers.TileSelected();
         }
     }
   
