@@ -4,12 +4,8 @@ using UnityEngine;
 public class SpellManager : MonoBehaviour
 {
     [Header("Components and Managers")]
-    
-    [Header("Prefabs")]
-    [SerializeField] private GameObject spellPrefab;
 
     [Header("Spells")] public SpellType spell;
-    [SerializeField] private float adjustHeight;
     public enum SpellType
     {
         Normal,
@@ -49,7 +45,7 @@ public class SpellManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log(gameObject.name);
+        
     }
 
     void FixedUpdate()

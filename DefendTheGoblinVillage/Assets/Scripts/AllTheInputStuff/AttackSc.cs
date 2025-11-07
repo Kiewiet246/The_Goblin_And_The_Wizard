@@ -7,6 +7,7 @@ public class AttackSc : MonoBehaviour
     [SerializeField] private InputController inputController;
     [SerializeField] private ModeControl control;
     [SerializeField] private BuildingTowers buildingTowers;
+    [SerializeField] private CastingSpells castingSpells;
 
     [Header("Managers")]
     [SerializeField] private TowerManager towerManager;
@@ -48,7 +49,7 @@ public class AttackSc : MonoBehaviour
             }
             else
             {
-                
+                castingSpells.CastSpellRay();
             }
             
         }
@@ -65,7 +66,7 @@ public class AttackSc : MonoBehaviour
             }
             else
             {
-                
+                castingSpells.ConfirmRightClick();
             }
         }
     }

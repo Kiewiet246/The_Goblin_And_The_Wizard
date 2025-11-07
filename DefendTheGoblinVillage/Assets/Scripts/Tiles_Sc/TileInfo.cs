@@ -51,6 +51,8 @@ public class TileInfo : MonoBehaviour
     [Header("HighLight")]
     public GameObject highLight;
     public Vector3 highLightPos;
+
+    [Header("Spell on Tile")] public SpellManager.SpellType spellOnTile;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
