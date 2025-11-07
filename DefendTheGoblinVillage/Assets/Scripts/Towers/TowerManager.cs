@@ -33,7 +33,7 @@ public class TowerManager : MonoBehaviour
 
     public TowerController CreateTower(TileInfo spawnPoint, Quaternion rotation)
     {
-        TowerController towerController = new TowerController();
+         
         if (spawnPoint.towerController == null)
         {
             Vector3 spawnPosition = new Vector3(spawnPoint.transform.position.x,
@@ -46,13 +46,15 @@ public class TowerManager : MonoBehaviour
                     {
                         GameObject archer = Instantiate(archerTowerPrefab, spawnPosition, rotation,
                             towerParents);
-                        towerController = archer.GetComponent<TowerController>();
+                        TowerController towerController = archer.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
                        spawnPoint.towerController = towerController;
                         towers.Add(towerController);
+                        towerController.gameObject.GetComponentInChildren<TowerMatController>().enabled = false;
+                        return towerController;
                     }
 
                     break;
@@ -61,13 +63,15 @@ public class TowerManager : MonoBehaviour
                     {
                         GameObject canon = Instantiate(canonTowerPrefab, spawnPosition, rotation,
                             towerParents);
-                        towerController = canon.GetComponent<TowerController>();
+                        TowerController towerController = canon.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
                         spawnPoint.towerController = towerController;
                         towers.Add(towerController);
+                        towerController.gameObject.GetComponentInChildren<TowerMatController>().enabled = false;
+                        return towerController;
                     }
 
                     break;
@@ -76,13 +80,15 @@ public class TowerManager : MonoBehaviour
                     {
                         GameObject wall = Instantiate(wallTowerPrefab, spawnPosition, rotation,
                             towerParents);
-                        towerController = wall.GetComponent<TowerController>();
+                        TowerController towerController = wall.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
                         spawnPoint.towerController = towerController;
                         towers.Add(towerController);
+                        towerController.gameObject.GetComponentInChildren<TowerMatController>().enabled = false;
+                        return towerController;
                     }
 
                     break;
@@ -91,13 +97,15 @@ public class TowerManager : MonoBehaviour
                     {
                         GameObject ballista = Instantiate(ballistaTowerPrefab, spawnPosition, rotation,
                             towerParents);
-                        towerController = ballista.GetComponent<TowerController>();
+                        TowerController towerController = ballista.GetComponent<TowerController>();
                         towerController.gridManager = this.gridManager;
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
                         spawnPoint.towerController = towerController;
                         towers.Add(towerController);
+                        towerController.gameObject.GetComponentInChildren<TowerMatController>().enabled = false;
+                        return towerController;
                     }
 
                     break;
@@ -105,8 +113,7 @@ public class TowerManager : MonoBehaviour
                     throw new ArgumentOutOfRangeException();
             }
           //enemyManager.CheckIfPathHasChanged(spawnPoint);
-            towerController.gameObject.GetComponentInChildren<TowerMatController>().enabled = false;
-            return towerController;
+            
         }
 
         return null;

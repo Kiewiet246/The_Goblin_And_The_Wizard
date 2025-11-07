@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.Tilemaps;
 
 public class LeaderScript : MonoBehaviour
 {
@@ -8,11 +10,13 @@ public class LeaderScript : MonoBehaviour
     [SerializeField] private ShowDamage showDamage;
 
     [Header("Target Movement")]
-    [SerializeField] private List<TileInfo> waypoints;
-    [SerializeField] private Vector3 leaderTarget;
+    public List<TileInfo> waypoints;
+    public Vector3 vectorTarget;
+    [SerializeField] private TileInfo targetTile;
     [SerializeField] private float distanceToTarget; //How far the Target is
     [SerializeField] private float closeEnough; //How far the leader needs to be to switch target
     [SerializeField] private float movementSpeed;
+    [SerializeField] private int tilesCrossed;
 
     [Header("Jumping")] public bool checkforStep = false;
     [SerializeField] private float jumpForce;
@@ -32,6 +36,7 @@ public class LeaderScript : MonoBehaviour
     
     [Header("Other")] [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private int difficulty = 1;
+    public int lived = 0;
 
     public Vector3 endPoint;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -69,7 +74,7 @@ public class LeaderScript : MonoBehaviour
         if (health <= 0)
         {
             waypoints.Clear();
-            leaderTarget = Vector3.zero;
+            vectorTarget = Vector3.zero;
             enemyManager.RemoveLeaderFromField(this);
         }
     }
@@ -79,7 +84,7 @@ public class LeaderScript : MonoBehaviour
         if (transform.position.y < -20)
         {
             waypoints.Clear();
-            leaderTarget = Vector3.zero;
+            vectorTarget = Vector3.zero;
             enemyManager.RemoveLeaderFromField(this);
         }
     }
@@ -112,9 +117,9 @@ public class LeaderScript : MonoBehaviour
 
     private void MoveEnemy()
     {
-        if (leaderTarget != Vector3.zero)
+        if (vectorTarget != Vector3.zero)
         {
-            Vector3 direction = leaderTarget - transform.position;
+            Vector3 direction = vectorTarget - transform.position;
             Vector3 movement = direction.normalized * (movementSpeed * Time.deltaTime);
            endPoint = transform.position + movement;
 
@@ -124,9 +129,9 @@ public class LeaderScript : MonoBehaviour
 
     private void CheckDistToTarget()
     {
-        if (waypoints.Count > 0 && leaderTarget != Vector3.zero)
+        if (waypoints.Count > 0 && vectorTarget != Vector3.zero)
         {
-            Vector3 stablilizedTarget = new Vector3(leaderTarget.x, transform.position.y, leaderTarget.z);
+            Vector3 stablilizedTarget = new Vector3(vectorTarget.x, transform.position.y, vectorTarget.z);
             distanceToTarget = Vector3.Distance(transform.position, stablilizedTarget);
 
             if (distanceToTarget <= closeEnough)
@@ -134,7 +139,9 @@ public class LeaderScript : MonoBehaviour
                 waypoints.RemoveAt(0);
                 if (waypoints.Count > 0)
                 {
-                    leaderTarget = new Vector3(waypoints[0].transform.position.x, transform.position.y, waypoints[0].transform.position.z);
+                    vectorTarget = new Vector3(waypoints[0].transform.position.x, transform.position.y, waypoints[0].transform.position.z);
+                    targetTile = waypoints[0];
+                    tilesCrossed += 1;
                     //AssignTargetForFollowers();
                 }
                 
@@ -150,11 +157,11 @@ public class LeaderScript : MonoBehaviour
     {
         if (checkforStep)
         {
-            if (leaderTarget != Vector3.zero)
+            if (vectorTarget != Vector3.zero)
             {
                 LayerMask layerMask = 1 << layer;
                 RaycastHit hit = new RaycastHit();
-                Vector3 stablilizedTarget = new Vector3(leaderTarget.x, transform.position.y, leaderTarget.z);
+                Vector3 stablilizedTarget = new Vector3(vectorTarget.x, transform.position.y, vectorTarget.z);
                 Vector3 direction = (stablilizedTarget - transform.position).normalized;
                 transform.LookAt(stablilizedTarget, Vector3.up);
                 Physics.Raycast(transform.position, direction, out hit, sightRange, layerMask);
@@ -172,19 +179,62 @@ public class LeaderScript : MonoBehaviour
     {
         if (waypoints.Count == 0)
         {
+            tilesCrossed = 0;
             for (int i = 0; i < newWaypoints.Count; i++)
             {
                 waypoints.Add(newWaypoints[i]);
             }
-            leaderTarget = new Vector3(waypoints[0].transform.position.x, transform.position.y, waypoints[0].transform.position.z);
+            vectorTarget = new Vector3(waypoints[0].transform.position.x, transform.position.y, waypoints[0].transform.position.z);
          //   AssignTargetForFollowers();
         }
+    }
 
-        else
+    public void SetNewPath(TileInfo tileThatChanged, List<TileInfo> newWaypoints)
+    {
+        Debug.Log(gameObject.name);
+        int countJ = newWaypoints.Count;
+        int countI = waypoints.Count;
+        List<TileInfo> savedWaypoints = new List<TileInfo>();
+        bool foundTheCrossTile = false;
+        bool breakOuterLoop = false;
+        int savedWaypoint = new int();
+        int savedNewpoint = new int();
+
+        for (int i = 0; i < countI; i++)
         {
-            
+            for (int j = 0; j < countJ; j++)
+            {
+                if (waypoints[i] == newWaypoints[j])
+                {
+                    Debug.Log("Paths Crossed");
+                    savedWaypoints.Add(newWaypoints[j]);
+                    foundTheCrossTile = true;
+                    savedNewpoint = j;
+                    savedWaypoint = i;
+                    breakOuterLoop = true;
+                    break;
+                }
+                else if (j == countJ - 1)
+                {
+                    Debug.Log("endOfLine");
+                    savedWaypoints.Add(waypoints[i]);
+                }
+            }
+
+            if (breakOuterLoop)
+            {
+                break;
+            }
         }
-        
+
+        if (foundTheCrossTile)
+        {
+            for (int j = savedNewpoint; j < newWaypoints.Count; j++)
+            {
+                savedWaypoints.Add(newWaypoints[j]);
+            }
+        }
+        waypoints = savedWaypoints;
     }
 
     private void AssignTargetForFollowers()
@@ -209,6 +259,12 @@ public class LeaderScript : MonoBehaviour
             if (collision.gameObject.GetComponent<TowerController>())
             {
                 collision.gameObject.GetComponent<TowerController>().TakeDamage(damage);
+                enemyManager.RemoveLeaderFromField(this);
+            }
+            
+            else if (collision.gameObject.GetComponentInParent<TowerController>())
+            {
+                collision.gameObject.GetComponentInParent<TowerController>().TakeDamage(damage);
                 enemyManager.RemoveLeaderFromField(this);
             }
         }

@@ -3710,6 +3710,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: totalEnemiesInWave
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: adjustActFieldHeight
       value: 2.5
       objectReference: {fileID: 0}

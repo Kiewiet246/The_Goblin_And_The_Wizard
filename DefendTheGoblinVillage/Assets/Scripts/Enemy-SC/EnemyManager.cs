@@ -76,7 +76,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (pathTiles.Contains(newTileInfo))
         {
-            Debug.Log("New path");
+           // Debug.Log("New path");
             futurePathTiles.Clear();
             CalculateFuturePath();
         }
@@ -89,7 +89,7 @@ public class EnemyManager : MonoBehaviour
 
     public void CalculateFuturePath()
     {
-        Debug.Log(futurePathTiles.Count);
+//        Debug.Log(futurePathTiles.Count);
         futurePath.gameObject.SetActive(true);
         Queue<TileInfo> createPath = new Queue<TileInfo>(); 
         createPath = gridManager.FindPath(saveStartTile, saveEndTile);
@@ -159,19 +159,32 @@ public class EnemyManager : MonoBehaviour
             }
             
             futurePathTiles.Clear();
+            UpdateEnemiesPathOnField(checkTile);
+        
+    }
+
+    private void UpdateEnemiesPathOnField(TileInfo checkTile)
+    {
+        List<LeaderScript> leaders = new List<LeaderScript>();
+        leaders = enemiesInField;
+
+        foreach (LeaderScript thisLeader in leaders)
+        {
+            thisLeader.SetNewPath(checkTile, pathTiles);
+        }
         
     }
     public void AdjustPath()
     {
-        pathTiles.Clear();
+       // pathTiles.Clear();
+       List<TileInfo> newPath = new List<TileInfo>();
         Queue<TileInfo> createPath = gridManager.FindPath(saveStartTile, saveEndTile);
         int count = createPath.Count;
         enemyPath.positionCount = count;
-       
         for (int i = 0; i < count; i++)
         {
             TileInfo pathTile = createPath.Dequeue();
-            pathTiles.Add(pathTile);
+            newPath.Add(pathTile);
             Vector3 pathPos = new Vector3();
             if (pathTile.tilesOnTOp.Count > 0)
             {
@@ -184,11 +197,21 @@ public class EnemyManager : MonoBehaviour
             pathPos = new Vector3(pathPos.x, pathPos.y + adjustable, pathPos.z);
             enemyPath.SetPosition(i, pathPos);
         }
+        Debug.Log(newPath.Count);
+
+        pathTiles.Clear();
+        for (int i = 0; i < newPath.Count; i++)
+        {
+            Debug.Log(newPath[i].name);
+            pathTiles.Add(newPath[i]);
+        }
+        UpdateEnemiesPathOnField(saveEndTile);
+       // LetTheEnemiesGetNewPath(saveEndTile);
     }
 
     public void GiveLeadersPath(LeaderScript leader)
     {
-       leader.SetWaypoints(pathTiles);
+        leader.SetWaypoints(pathTiles);
     }
 
     public void ClearPath()
@@ -252,6 +275,7 @@ public class EnemyManager : MonoBehaviour
         leader.transform.parent = fieldEnemiesParent;
         leader.health = setHealth;
         leader.spellManager = spellManager;
+        leader.lived += 1;
         GiveLeadersPath(leader);
     }
 
@@ -260,7 +284,9 @@ public class EnemyManager : MonoBehaviour
         enemiesInField.Remove(leader);
         enemiesInPool.Add(leader);
         leader.transform.parent = storeEnemiesParent;
+        leader.waypoints.Clear();
         leader.enemyCollider.enabled = false;
+        leader.vectorTarget = Vector3.zero;
         leader.rb.linearVelocity = Vector3.zero;
         leader.gameObject.SetActive(false);
     }
