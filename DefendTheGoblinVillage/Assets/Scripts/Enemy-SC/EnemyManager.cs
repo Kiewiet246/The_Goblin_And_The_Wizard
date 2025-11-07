@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
 
     [Header("Pathfinding Stuff")]
     [SerializeField] private LineRenderer enemyPath;
+    [SerializeField] private LineRenderer futurePath;
     [SerializeField] private List<TileInfo> pathTiles;
 
     [Header("Creating Enemies")] [SerializeField]
@@ -23,7 +24,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float setHealth = 10f;
     
     [Header("Controlling Enemies")]
-    [SerializeField] private List<LeaderScript> enemiesInField;
+    public List<LeaderScript> enemiesInField;
     [SerializeField] private Transform fieldEnemiesParent;
     [SerializeField] private int adjustLeaderDiff; 
     
@@ -69,6 +70,20 @@ public class EnemyManager : MonoBehaviour
             Countdown();
         }
     }
+
+    public void CheckifPathWillChange(TileInfo newTileInfo)
+    {
+        if (pathTiles.Contains(newTileInfo))
+        {
+            CalculateFuturePath();
+        }
+    }
+
+    public void CalculateFuturePath()
+    {
+        
+    }
+    
 
     #region Pathfinding
     public void SetPath()

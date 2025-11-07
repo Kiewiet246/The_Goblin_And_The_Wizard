@@ -81,12 +81,25 @@ public class BuildingTowers : MonoBehaviour
             preTowerController.ClearTilesInRange();
 
             preBuildTower.SetActive(false);
-            if (tileInfo == hit.collider.gameObject.GetComponentInParent<TileInfo>())
+            if (tileInfo != null)
             {
-                preBuildTower.SetActive(false);
-                tileInfo = null;
-                return;
+                if (tileInfo == hit.collider.gameObject.GetComponentInParent<TileInfo>())
+                {
+                    preBuildTower.SetActive(false);
+                    tileInfo.towerController = null;
+                    tileInfo = null;
+                    return;
+                }
+
+                if (tileInfo.towerController != null)
+                {
+                    if (tileInfo.towerController == preTowerController)
+                    {
+                        tileInfo.towerController = null;
+                    }
+                }
             }
+            
             TileSelected();
         }
     }
@@ -174,6 +187,7 @@ public class BuildingTowers : MonoBehaviour
                  preTowerController.towerTile = tileInfo;
                  preTowerController.CalculateRange();
                  preTowerController.ShowRange();
+                 tileInfo.towerController = preTowerController;
              }
             
         }
@@ -192,6 +206,10 @@ public class BuildingTowers : MonoBehaviour
         {
             if (preBuildTower.GetComponentInChildren<TowerMatController>().canBuild)
             {
+                if (tileInfo.towerController == preTowerController)
+                {
+                    tileInfo.towerController = null;
+                }
                 preBuildTower.SetActive(false);
                 preTowerController.HideRange();
                 preTowerController.ClearTilesInRange();

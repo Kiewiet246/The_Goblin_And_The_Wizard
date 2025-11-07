@@ -69,6 +69,7 @@ public class CycleBehaviour : MonoBehaviour
 
         if (buildingTowers.preBuildTower.activeSelf == true)
         {
+            buildingTowers.tileInfo.towerController = null;
             buildingTowers.TileSelected();
         }
     }

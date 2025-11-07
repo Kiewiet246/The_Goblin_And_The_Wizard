@@ -13,6 +13,7 @@ public class TileInfo : MonoBehaviour
     public Vector3Int cubeCoordinates;
     public List<TileInfo> neighborTiles;
     public int costValue = 0;
+    public int extraCostValue = 0;
     [SerializeField] [Range(0, 5)] private int heightRange;
     public int height;
     public List<GameObject> tilesOnTOp;

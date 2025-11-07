@@ -7,6 +7,7 @@ public class CastingSpells : MonoBehaviour
     [SerializeField] private GridManager gridManager;
     [SerializeField] private SpellManager spellManager;
     [SerializeField] private BuildingTowers buildingTowers;
+    [SerializeField] private EnemyManager enemyManager;
     
     [Header("Spells")]
     [SerializeField] private GameObject firePrefab;
@@ -34,10 +35,10 @@ public class CastingSpells : MonoBehaviour
             buildingTowers.preTowerController.HideRange();
             buildingTowers.preTowerController.ClearTilesInRange();
             buildingTowers.preBuildTower.SetActive(false);
+            buildingTowers.tileInfo.towerController = null;
             buildingTowers.tileInfo = null;
             
         }
-        Debug.Log("Casting Spell Ray");
         Vector2 mousePos = Input.mousePosition;
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
         hit = new RaycastHit();
@@ -46,8 +47,6 @@ public class CastingSpells : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.Log(hit.collider.gameObject.name);
-            
             if (hit.collider.gameObject.GetComponentInParent<TileInfo>())
             {
                 TileInfo compareTile = hit.collider.gameObject.GetComponentInParent<TileInfo>();
@@ -78,6 +77,7 @@ public class CastingSpells : MonoBehaviour
             buildingTowers.preTowerController.HideRange();
             buildingTowers.preTowerController.ClearTilesInRange();
             buildingTowers.preBuildTower.SetActive(false);
+            buildingTowers.tileInfo.towerController = null;
             buildingTowers.tileInfo = null;
             
         }
@@ -87,17 +87,36 @@ public class CastingSpells : MonoBehaviour
             switch (spellManager.spell)
             {
                 case SpellManager.SpellType.Fire:
-                    Instantiate(firePrefab, spawnPosition, spellPrefab.transform.rotation, spellHolder);
+                    GameObject fireObject = Instantiate(firePrefab, spawnPosition, spellPrefab.transform.rotation, spellHolder);
+                    CastedSpell fireSpell = fireObject.GetComponent<CastedSpell>();
+                    fireSpell.stackDamage = spellManager.maxFireStacks;
+                    fireSpell.enemyManager = enemyManager;
+                    fireSpell.spellManager = spellManager;
+                    fireSpell.spellTile = tileInfo;
+                    tileInfo.spellOnTile = SpellManager.SpellType.Fire;
                     break;
                 case SpellManager.SpellType.Ice:
-                    Instantiate(icePrefab, spawnPosition, spellPrefab.transform.rotation, spellHolder);
+                    GameObject iceObject = Instantiate(icePrefab, spawnPosition, spellPrefab.transform.rotation, spellHolder);
+                    CastedSpell iceSpell = iceObject.GetComponent<CastedSpell>();
+                    iceSpell.stackDamage = spellManager.maxIceStacks;
+                    iceSpell.enemyManager = enemyManager;
+                    iceSpell.spellManager = spellManager;
+                    iceSpell.spellTile = tileInfo;
+                    tileInfo.spellOnTile = SpellManager.SpellType.Ice;
                     break;
                 case SpellManager.SpellType.Poison:
-                    Instantiate(poisonPrefab, spawnPosition, spellPrefab.transform.rotation, spellHolder);
+                    GameObject poisonObject = Instantiate(poisonPrefab, spawnPosition, spellPrefab.transform.rotation, spellHolder);
+                    CastedSpell poisonSpell = poisonObject.GetComponent<CastedSpell>();
+                    poisonSpell.stackDamage = spellManager.maxPoisonStacks;
+                    poisonSpell.enemyManager = enemyManager;
+                    poisonSpell.spellManager = spellManager;
+                    poisonSpell.spellTile = tileInfo;
+                    tileInfo.spellOnTile = SpellManager.SpellType.Poison;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            tileInfo = null;
             spellPrefab.SetActive(false);
         }
     }

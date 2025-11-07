@@ -1114,27 +1114,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spell: 0
-  burnRate: 0.75
-  removeFireStacks: 0
+  burnRate: 0.5
+  removeFireStacks: 3
   burnDamage: 1
   burningLeaders: []
   isBurning: 0
   burnTime: 0
-  maxFireStacks: 10
+  maxFireStacks: 15
   iceDamage: 0
-  frozenRate: 0
-  removeIceStacks: 0
+  frozenRate: 0.5
+  removeIceStacks: 5
   frozenLeaders: []
   isFrozen: 0
   frozenTime: 0
-  maxIceStacks: 0
+  maxIceStacks: 20
   poisonDamage: 0
   poisonDebuff: 0
   removePoisonStacks: 0
   poisonLeaders: []
   isPoisoning: 0
   poisonTime: 0
-  poisonRate: 0
+  poisonRate: 0.5
   maxPoisonStacks: 0
 --- !u!114 &825824249 stripped
 MonoBehaviour:
@@ -3286,6 +3286,7 @@ MonoBehaviour:
   gridManager: {fileID: 825824249}
   spellManager: {fileID: 724969561}
   buildingTowers: {fileID: 1937454437}
+  enemyManager: {fileID: 1190781908}
   firePrefab: {fileID: 236333515961725516, guid: d748fb0dbe23a9143b4e4c694637bf74, type: 3}
   icePrefab: {fileID: 236333515961725516, guid: d93c689d06e990c4c9344cbab56b539c, type: 3}
   poisonPrefab: {fileID: 236333515961725516, guid: a0a5f701920d25940993f581f3dc1edd, type: 3}

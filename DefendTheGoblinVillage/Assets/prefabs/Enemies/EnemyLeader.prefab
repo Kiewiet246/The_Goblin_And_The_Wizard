@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 7697952890699729058}
   - component: {fileID: 1182471341771851369}
   - component: {fileID: 1676064439128041742}
+  - component: {fileID: 4780600891169509876}
   m_Layer: 3
   m_Name: EnemyLeader
   m_TagString: Enemy
@@ -261,6 +262,8 @@ MonoBehaviour:
   - {fileID: 1191953968234241048}
   health: 20
   damage: 3
+  spellAflections: {fileID: 4780600891169509876}
+  spellManager: {fileID: 0}
   enemyManager: {fileID: 0}
   difficulty: 0
   endPoint: {x: 0, y: 0, z: 0}
@@ -287,6 +290,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4780600891169509876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2215898661835275168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e204ffbf6eaa5dd4cb76ed63b7eeec5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellManager: {fileID: 0}
+  fireStack: 0
+  iceStack: 0
+  poisonStack: 0
 --- !u!1 &3774450359347052049
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +574,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 345e016f1ac5ab74eb99e506c8f5cfc1, type: 3}
       propertyPath: m_Name
       value: Normal Soldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 345e016f1ac5ab74eb99e506c8f5cfc1, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
