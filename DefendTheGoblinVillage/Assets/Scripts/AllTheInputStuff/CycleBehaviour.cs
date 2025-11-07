@@ -10,15 +10,22 @@ public class CycleBehaviour : MonoBehaviour
     
     [Header("Manager Components")]
     [SerializeField] private TowerManager towerManager;
+    [SerializeField] private SpellManager spellManager;
     
     [Header("Towers")] [SerializeField]
     private List<TowerController.TowerType> towerTypes;
     [SerializeField] private int currentTower = 0;
 
+    [Header("Spells")]
+    [SerializeField] private List<SpellManager.SpellType> spellTypes;
+    [SerializeField] private int currentSpell = 0;
+    
+    [Header("Extra")]
     [SerializeField] private bool oncePressed = false;
     void Start()
     {
         towerManager.spawnTowerType = towerTypes[0];
+        spellManager.spell = spellTypes[0];
     }
     
     void FixedUpdate()
@@ -31,6 +38,11 @@ public class CycleBehaviour : MonoBehaviour
                 if (modeControl.isBuildMode)
                 {
                     ChangeSelectedTower();
+                }
+
+                else
+                {
+                    ChangeSelectedSpell();
                 }
             }
         }
@@ -58,6 +70,21 @@ public class CycleBehaviour : MonoBehaviour
         if (buildingTowers.preBuildTower.activeSelf == true)
         {
             buildingTowers.TileSelected();
+        }
+    }
+
+    private void ChangeSelectedSpell()
+    {
+        currentSpell += 1;
+        if (currentSpell < spellTypes.Count)
+        {
+            spellManager.spell = spellTypes[currentSpell];
+        }
+        
+        else if (currentSpell >= spellTypes.Count)
+        {
+            currentSpell = 0;
+            spellManager.spell = spellTypes[0];
         }
     }
   
