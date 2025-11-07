@@ -1064,6 +1064,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0527f7d7b208e004f87f0361a656986c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &724969561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724969554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb118a28776d424a9c815c531dbd73f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellPrefab: {fileID: 0}
+  spell: 0
+  adjustHeight: 0
+  burnRate: 0.75
+  removeFireStacks: 0
+  burnDamage: 1
+  burningLeaders: []
+  isBurning: 0
+  burnTime: 0
+  maxFireStacks: 10
+  iceDamage: 0
+  frozenRate: 0
+  removeIceStacks: 0
+  frozenLeaders: []
+  isFrozen: 0
+  frozenTime: 0
+  maxIceStacks: 0
+  poisonDamage: 0
+  poisonDebuff: 0
+  removePoisonStacks: 0
+  poisonLeaders: []
+  isPoisoning: 0
+  poisonTime: 0
+  poisonRate: 0
+  maxPoisonStacks: 0
 --- !u!114 &825824249 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8743926109157311546, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
@@ -3127,8 +3164,11 @@ MonoBehaviour:
   modeControl: {fileID: 1937454435}
   buildingTowers: {fileID: 1937454437}
   towerManager: {fileID: 497300175}
+  spellManager: {fileID: 724969561}
   towerTypes: 0a0000000f0000001400000005000000
   currentTower: 0
+  spellTypes: 010000000200000003000000
+  currentSpell: 0
   oncePressed: 0
 --- !u!114 &1937454437
 MonoBehaviour:
@@ -3501,6 +3541,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3849464629943096825, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 724969557}
+    - targetCorrespondingSourceObject: {fileID: 3849464629943096825, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 724969561}
   m_SourcePrefab: {fileID: 100100000, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
