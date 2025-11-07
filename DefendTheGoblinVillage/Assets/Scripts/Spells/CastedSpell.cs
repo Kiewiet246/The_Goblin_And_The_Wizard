@@ -6,7 +6,7 @@ public class CastedSpell : MonoBehaviour
 {
     [SerializeField]
     private SpellManager.SpellType spellType;
-    public int stackDamage;
+    public float stackDamage;
     public EnemyManager enemyManager;
     public SpellManager spellManager;
     public TileInfo spellTile;

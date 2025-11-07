@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -17,6 +18,13 @@ public class Projectile : MonoBehaviour
     [SerializeField] private bool oneExplosion = false;
 
     [Header("CanonBall Stuff")] [SerializeField]private float radius;
+
+    public SpellManager.SpellType projectileSpell;
+    [SerializeField] private float applyStack;
+    [SerializeField] private float fireStack;
+    [SerializeField] private float iceStack;
+    [SerializeField] private float poisonStack;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,6 +36,28 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void AssignSpell(SpellManager.SpellType spellType)
+    {
+        projectileSpell = spellType;
+        switch (spellType)
+        {
+            case SpellManager.SpellType.Normal:
+                applyStack = 0;
+                break;
+            case SpellManager.SpellType.Fire:
+                applyStack = fireStack;
+                break;
+            case SpellManager.SpellType.Ice:
+                applyStack = iceStack;
+                break;
+            case SpellManager.SpellType.Poison:
+                applyStack = poisonStack;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(spellType), spellType, null);
+        }
     }
 
     void FixedUpdate()
@@ -56,6 +86,7 @@ public class Projectile : MonoBehaviour
         isAlive = false;
         towerController.projectiles.Add(rb);
         gameObject.SetActive(false);
+        enemy = null;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -65,14 +96,17 @@ public class Projectile : MonoBehaviour
             if (other.gameObject.GetComponent<LeaderScript>())
             {
                 enemy = other.GetComponent<LeaderScript>();
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(damage);
-                    towerController.projectiles.Add(rb);
-                    gameObject.SetActive(false);
-                    enemy = null;
-                }
+               ArrowHitItsMark(enemy);
             }
+        }
+    }
+
+    private void ArrowHitItsMark(LeaderScript leader)
+    {
+        if (leader != null)
+        {
+            enemy.TakeDamage(damage, applyStack, projectileSpell);
+            EndProjectile();
         }
     }
 
@@ -80,19 +114,42 @@ public class Projectile : MonoBehaviour
     {
         if (!oneExplosion)
         {
-            oneExplosion = true;
-            Debug.Log("Explode");
-            Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+            ExplodeTheProjectile();
+        }
+    }
 
-            foreach (Collider hit in colliders)
+    private void ExplodeTheProjectile()
+    {
+        oneExplosion = true;
+        List<LeaderScript> leaders = new List<LeaderScript>();
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+
+        foreach (Collider hit in colliders)
+        {
+            
+            if (hit.GetComponent<LeaderScript>())
             {
-                if (hit.GetComponent<LeaderScript>())
+                LeaderScript hitLeader = hit.GetComponent<LeaderScript>();
+                if (!leaders.Contains(hitLeader))
                 {
-                    hit.GetComponent<LeaderScript>().TakeDamage(damage);
+                    leaders.Add(hitLeader);
                 }
             }
-            EndProjectile();
+            else if (hit.GetComponentInParent<LeaderScript>())
+            {
+                LeaderScript hitLeader = hit.GetComponentInParent<LeaderScript>();
+                if (!leaders.Contains(hitLeader))
+                {
+                    leaders.Add(hitLeader);
+                }
+            }
         }
+
+        foreach (LeaderScript leader in leaders)
+        {
+            leader.TakeDamage(damage, applyStack, projectileSpell);
+        }
+        EndProjectile();
     }
 
     private void OnDrawGizmos()

@@ -133,6 +133,11 @@ MonoBehaviour:
   hits: 0
   oneExplosion: 0
   radius: 7.5
+  projectileSpell: 0
+  applyStack: 0
+  fireStack: 5
+  iceStack: 10
+  poisonStack: 2
 --- !u!54 &5747011940094101399
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -293,6 +298,11 @@ MonoBehaviour:
   hits: 0
   oneExplosion: 0
   radius: 7.5
+  projectileSpell: 0
+  applyStack: 0
+  fireStack: 5
+  iceStack: 10
+  poisonStack: 2
 --- !u!54 &2127561409136889712
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -506,6 +516,11 @@ MonoBehaviour:
   hits: 0
   oneExplosion: 0
   radius: 7.5
+  projectileSpell: 0
+  applyStack: 0
+  fireStack: 5
+  iceStack: 10
+  poisonStack: 2
 --- !u!54 &6456305147058347780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -666,6 +681,11 @@ MonoBehaviour:
   hits: 0
   oneExplosion: 0
   radius: 7.5
+  projectileSpell: 0
+  applyStack: 0
+  fireStack: 5
+  iceStack: 10
+  poisonStack: 2
 --- !u!54 &58613169086313428
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -826,6 +846,11 @@ MonoBehaviour:
   hits: 0
   oneExplosion: 0
   radius: 7.5
+  projectileSpell: 0
+  applyStack: 0
+  fireStack: 5
+  iceStack: 10
+  poisonStack: 2
 --- !u!54 &2125289968989143541
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -992,6 +1017,8 @@ MonoBehaviour:
   - {fileID: 2127561409136889712}
   - {fileID: 2125289968989143541}
   isAttackingTower: 1
+  spellTower: 0
+  balistaStacks: 1
   delay: 0.5
 --- !u!54 &1327836317734325518
 Rigidbody:

@@ -33,7 +33,6 @@ public class TowerManager : MonoBehaviour
 
     public TowerController CreateTower(TileInfo spawnPoint, Quaternion rotation)
     {
-         
         if (spawnPoint.towerController == null)
         {
             Vector3 spawnPosition = new Vector3(spawnPoint.transform.position.x,
@@ -51,7 +50,8 @@ public class TowerManager : MonoBehaviour
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
-                       spawnPoint.towerController = towerController;
+                        AssignSpellToTower(spawnPoint, towerController);
+                        spawnPoint.towerController = towerController;
                         towers.Add(towerController);
                         towerController.gameObject.GetComponentInChildren<TowerMatController>().enabled = false;
                         return towerController;
@@ -68,6 +68,7 @@ public class TowerManager : MonoBehaviour
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
+                        AssignSpellToTower(spawnPoint, towerController);
                         spawnPoint.towerController = towerController;
                         towers.Add(towerController);
                         towerController.gameObject.GetComponentInChildren<TowerMatController>().enabled = false;
@@ -85,6 +86,7 @@ public class TowerManager : MonoBehaviour
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
+                        AssignSpellToTower(spawnPoint, towerController);
                         spawnPoint.towerController = towerController;
                         towers.Add(towerController);
                         towerController.gameObject.GetComponentInChildren<TowerMatController>().enabled = false;
@@ -102,6 +104,7 @@ public class TowerManager : MonoBehaviour
                         towerController.towerManager = this;
                         towerController.towerTile = spawnPoint;
                         towerController.CalculateRange();
+                        AssignSpellToTower(spawnPoint, towerController);
                         spawnPoint.towerController = towerController;
                         towers.Add(towerController);
                         towerController.gameObject.GetComponentInChildren<TowerMatController>().enabled = false;
@@ -117,6 +120,11 @@ public class TowerManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void AssignSpellToTower(TileInfo spellInfo, TowerController towerController)
+    {
+        towerController.spellTower = spellInfo.spellOnTile;
     }
 
     public void ATowerDied(TileInfo openTile)

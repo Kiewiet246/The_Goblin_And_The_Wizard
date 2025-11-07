@@ -6,7 +6,7 @@ public class SpellAflections : MonoBehaviour
     public SpellManager spellManager;
     
     [Header("Stacks")]
-    public int fireStack;
-    public int iceStack;
-    public int poisonStack;
+    public float fireStack;
+    public float iceStack;
+    public float poisonStack;
 }

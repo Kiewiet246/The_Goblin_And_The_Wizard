@@ -226,7 +226,7 @@ public class BuildingTowers : MonoBehaviour
                 preTowerController.ClearTilesInRange();
                 towerController = towerManager.CreateTower(tileInfo, rotation);
                 towerController.ShowRange();
-                enemyManager.LetTheEnemiesGetNewPath(tileInfo);
+                enemyManager.CheckIfPathHasChanged(tileInfo);
                 enemyManager.futurePath.gameObject.SetActive(false);
                 tileInfo = null;
             }

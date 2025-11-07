@@ -67,6 +67,11 @@ public class TowerController : MonoBehaviour
 
     public bool isAttackingTower = true;
     
+    [Header("Magic Stuff")]
+    public SpellManager.SpellType spellTower;
+
+    [SerializeField] private float balistaStacks = 1;
+    
     [Header("Couratine Stuff")]
     [SerializeField] private float delay = 0.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -214,7 +219,9 @@ public class TowerController : MonoBehaviour
         
         rb.gameObject.SetActive(true);
         rb.transform.LookAt(targetedLeader.transform.position);
-        rb.gameObject.GetComponent<Projectile>().StartProjectile(targetedLeader.transform);
+        Projectile projectile = rb.gameObject.GetComponent<Projectile>();
+        projectile.StartProjectile(targetedLeader.transform);
+        projectile.AssignSpell(spellTower);
         Vector3 pos  = transform.position;
         rb.position = pos;
         float force = (projectileSpeed*(distance/maxDistance));
@@ -226,7 +233,9 @@ public class TowerController : MonoBehaviour
     {
         Vector3 pos = targetedLeader.endPoint;
         Rigidbody rb = projectiles[0];
-        rb.gameObject.GetComponent<Projectile>().StartProjectile(targetedLeader.transform);
+        Projectile projectile = rb.gameObject.GetComponent<Projectile>();
+        projectile.StartProjectile(targetedLeader.transform);
+        projectile.AssignSpell(spellTower);
         rb.linearVelocity = Vector3.zero;
         projectiles.Remove(rb);
         Vector3 spawnPos = new Vector3(pos.x, pos.y + 4, pos.z);
@@ -246,7 +255,7 @@ public class TowerController : MonoBehaviour
         {
             if (leader.gameObject.activeSelf)
             {
-                leader.TakeDamage(damage);
+                leader.TakeDamage(damage, balistaStacks, spellTower);
             }
             else
             {

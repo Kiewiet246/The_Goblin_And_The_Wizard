@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -73,9 +74,25 @@ public class LeaderScript : MonoBehaviour
         CheckYPos();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, float stacks, SpellManager.SpellType spell)
     {
         health -= damage;
+        switch (spell)
+        {
+            case SpellManager.SpellType.Normal:
+                break;
+            case SpellManager.SpellType.Fire:
+                spellManager.LeadersGotBurnt(this, stacks);
+                break;
+            case SpellManager.SpellType.Ice:
+                spellManager.LeadersGotIced(this, stacks);
+                break;
+            case SpellManager.SpellType.Poison:
+                spellManager.LeadersGotPoisoned(this, stacks);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(spell), spell, null);
+        }
         showDamage.FlashDamage();
         if (health <= 0)
         {

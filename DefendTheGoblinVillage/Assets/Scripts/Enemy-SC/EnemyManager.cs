@@ -142,7 +142,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (pathTiles.Contains(checkTile))
         {
-          AdjustPath();
+          LetTheEnemiesGetNewPath(checkTile);
         }
     }
 

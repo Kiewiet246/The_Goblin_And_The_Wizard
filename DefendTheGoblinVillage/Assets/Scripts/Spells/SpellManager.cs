@@ -16,31 +16,31 @@ public class SpellManager : MonoBehaviour
     
     [Header("Fire Variables")]
     [SerializeField] private float burnRate; //Rate at which burns happens
-    [SerializeField] private int removeFireStacks;
+    [SerializeField] private float removeFireStacks;
     [SerializeField] private float burnDamage;
     [SerializeField] private List<LeaderScript> burningLeaders;
     [SerializeField] private bool isBurning = false;
     [SerializeField] private float burnTime;
-    public int maxFireStacks;
+    public float maxFireStacks;
     
     [Header("Ice Variables")]
     [SerializeField] private float iceDamage;
     [SerializeField] private float frozenRate;
-    [SerializeField] private int removeIceStacks;
+    [SerializeField] private float removeIceStacks;
     [SerializeField] private List<LeaderScript> frozenLeaders;
     [SerializeField] private bool isFrozen = false;
     [SerializeField] private float frozenTime;
-    public int maxIceStacks;
+    public float maxIceStacks;
     
     [Header("Poison Variables")]
     [SerializeField] private float poisonDamage;
     [SerializeField] private float poisonDebuff;
-    [SerializeField] private int removePoisonStacks;
+    [SerializeField] private float removePoisonStacks;
     [SerializeField] private List<LeaderScript> poisonLeaders;
     [SerializeField] private bool isPoisoning = false;
     [SerializeField] private float poisonTime;
     [SerializeField] private float poisonRate;
-    public int maxPoisonStacks;
+    public float maxPoisonStacks;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -84,7 +84,7 @@ public class SpellManager : MonoBehaviour
         List<LeaderScript> leaders = burningLeaders;
         foreach (LeaderScript burningMan in leaders)
         {
-            burningMan.TakeDamage(burnDamage);
+            burningMan.TakeDamage(burnDamage, 0, SpellType.Fire);
             burningMan.spellAflections.fireStack -= removeFireStacks;
 
             if (burningMan.spellAflections.fireStack <= 0)
@@ -108,7 +108,7 @@ public class SpellManager : MonoBehaviour
         }
     }
 
-    public void LeadersGotBurnt(LeaderScript leader, int burnAmount)
+    public void LeadersGotBurnt(LeaderScript leader, float burnAmount)
     {
         
         if (!burningLeaders.Contains(leader))
@@ -147,7 +147,7 @@ public class SpellManager : MonoBehaviour
 
         foreach (LeaderScript frozen in leaders)
         {
-            frozen.TakeDamage(iceDamage);
+            frozen.TakeDamage(iceDamage, 0, SpellType.Ice);
             frozen.spellAflections.iceStack -= removeIceStacks;
             if (frozen.spellAflections.iceStack <= 0)
             {
@@ -173,7 +173,7 @@ public class SpellManager : MonoBehaviour
         }
     }
 
-    public void LeadersGotIced(LeaderScript leader, int iceAmount)
+    public void LeadersGotIced(LeaderScript leader, float iceAmount)
     {
         if (!frozenLeaders.Contains(leader))
         {
@@ -213,7 +213,7 @@ public class SpellManager : MonoBehaviour
 
         foreach (LeaderScript poisoned in leaders)
         {
-            poisoned.TakeDamage(poisonDamage);
+            poisoned.TakeDamage(poisonDamage, 0, SpellType.Poison);
             poisoned.spellAflections.poisonStack -= removePoisonStacks;
             if (poisoned.spellAflections.poisonStack <= 0)
             {
@@ -237,7 +237,7 @@ public class SpellManager : MonoBehaviour
         }
     }
 
-    public void LeadersGotPoisoned(LeaderScript leader, int poisonAmount)
+    public void LeadersGotPoisoned(LeaderScript leader, float poisonAmount)
     {
         if (!poisonLeaders.Contains(leader))
         {

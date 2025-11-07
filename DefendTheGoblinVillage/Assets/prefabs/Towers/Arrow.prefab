@@ -405,7 +405,15 @@ MonoBehaviour:
   currentTime: 0
   enemy: {fileID: 0}
   isAlive: 0
+  target: {fileID: 0}
   hits: 0
+  oneExplosion: 0
+  radius: 0
+  projectileSpell: 0
+  applyStack: 0
+  fireStack: 3
+  iceStack: 5
+  poisonStack: 1
 --- !u!1001 &8032048807227518731
 PrefabInstance:
   m_ObjectHideFlags: 0
