@@ -37,6 +37,7 @@ public class CastingSpells : MonoBehaviour
             buildingTowers.preBuildTower.SetActive(false);
             buildingTowers.tileInfo.towerController = null;
             buildingTowers.tileInfo = null;
+            buildingTowers.enemyManager.futurePath.gameObject.SetActive(false);
             
         }
         Vector2 mousePos = Input.mousePosition;
@@ -79,7 +80,7 @@ public class CastingSpells : MonoBehaviour
             buildingTowers.preBuildTower.SetActive(false);
             buildingTowers.tileInfo.towerController = null;
             buildingTowers.tileInfo = null;
-            
+            buildingTowers.enemyManager.futurePath.gameObject.SetActive(false);
         }
         if (spellPrefab.activeSelf == true)
         {

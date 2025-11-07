@@ -8,6 +8,7 @@ public class BuildingTowers : MonoBehaviour
     [SerializeField] private TowerManager towerManager;
     [SerializeField] private GridManager gridManager;
     [SerializeField] private CastingSpells castingSpells;
+    public EnemyManager enemyManager;
     
     [Header("Building Tower Variables")]
     [SerializeField] RaycastHit hit = new RaycastHit();
@@ -31,6 +32,7 @@ public class BuildingTowers : MonoBehaviour
         archerGO = Instantiate(archerTowerPrefab, transform.position, Quaternion.identity, towerManager.transform);
         preBuildTower = archerGO;
         preTowerController = preBuildTower.GetComponent<TowerController>();
+        enemyManager.futurePath.gameObject.SetActive(false);
         preBuildTower.SetActive(false);
         ApplyStuffToTowers(archerGO);
         wallGO =  Instantiate(wallTowerPrefab, transform.position, Quaternion.identity, towerManager.transform);
@@ -80,11 +82,13 @@ public class BuildingTowers : MonoBehaviour
             preTowerController.HideRange();
             preTowerController.ClearTilesInRange();
 
+            enemyManager.futurePath.gameObject.SetActive(false);
             preBuildTower.SetActive(false);
             if (tileInfo != null)
             {
                 if (tileInfo == hit.collider.gameObject.GetComponentInParent<TileInfo>())
                 {
+                    enemyManager.futurePath.gameObject.SetActive(false);
                     preBuildTower.SetActive(false);
                     tileInfo.towerController = null;
                     tileInfo = null;
@@ -108,6 +112,7 @@ public class BuildingTowers : MonoBehaviour
     {
         preTowerController.HideRange();
         preTowerController.ClearTilesInRange();
+        enemyManager.futurePath.gameObject.SetActive(false);
         preBuildTower.SetActive(false);
         Debug.Log("Tower Selected");
         if (hit.collider.gameObject.GetComponentInParent<TowerController>() != null)
@@ -150,9 +155,10 @@ public class BuildingTowers : MonoBehaviour
         }
         preTowerController.HideRange();
         preTowerController.ClearTilesInRange();
+        enemyManager.futurePath.gameObject.SetActive(false);
         preBuildTower.SetActive(false);
+        enemyManager.futurePath.gameObject.SetActive(false);
         
-        Debug.Log("Tile Selected");
         if (hit.collider.gameObject.GetComponentInParent<TileInfo>() != null)
         {
              tileInfo = hit.collider.gameObject.GetComponentInParent<TileInfo>();
@@ -188,6 +194,7 @@ public class BuildingTowers : MonoBehaviour
                  preTowerController.CalculateRange();
                  preTowerController.ShowRange();
                  tileInfo.towerController = preTowerController;
+                 enemyManager.CheckifPathWillChange(tileInfo);
              }
             
         }
@@ -215,6 +222,8 @@ public class BuildingTowers : MonoBehaviour
                 preTowerController.ClearTilesInRange();
                 towerController = towerManager.CreateTower(tileInfo, rotation);
                 towerController.ShowRange();
+                enemyManager.LetTheEnemiesGetNewPath(tileInfo);
+                enemyManager.futurePath.gameObject.SetActive(false);
                 tileInfo = null;
             }
             

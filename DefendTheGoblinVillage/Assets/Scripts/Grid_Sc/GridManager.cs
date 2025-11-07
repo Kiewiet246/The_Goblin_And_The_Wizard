@@ -253,6 +253,7 @@ public class GridManager : MonoBehaviour
 
     public Queue<TileInfo> FindPath(TileInfo start, TileInfo end)
     {
+        Debug.Log("FindPath");
         Queue<TileInfo> thePath = new Queue<TileInfo>();
         thePath.Enqueue(start);
 

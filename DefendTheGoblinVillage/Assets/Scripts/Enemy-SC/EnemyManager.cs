@@ -11,8 +11,9 @@ public class EnemyManager : MonoBehaviour
 
     [Header("Pathfinding Stuff")]
     [SerializeField] private LineRenderer enemyPath;
-    [SerializeField] private LineRenderer futurePath;
+    public LineRenderer futurePath;
     [SerializeField] private List<TileInfo> pathTiles;
+    [SerializeField] private List<TileInfo> futurePathTiles;
 
     [Header("Creating Enemies")] [SerializeField]
     private int totalEnemyPool = 30;
@@ -52,9 +53,9 @@ public class EnemyManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Vector3 spawnPosition = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y + (adjustActFieldHeight*saveStartTile.height), saveStartTile.transform.position.z);
+        Vector3 spawnPosition = new Vector3(saveStartTile.topTileTransform.position.x, saveStartTile.topTileTransform.position.y + adjustable, saveStartTile.topTileTransform.position.z);
         activateField.position = spawnPosition;
-        forceUp = spawnForce * saveStartTile.height;
+       // forceUp = spawnForce * saveStartTile.height;
     }
 
     // Update is called once per frame
@@ -75,13 +76,35 @@ public class EnemyManager : MonoBehaviour
     {
         if (pathTiles.Contains(newTileInfo))
         {
+            Debug.Log("New path");
+            futurePathTiles.Clear();
             CalculateFuturePath();
+        }
+        else
+        {
+            futurePathTiles.Clear();
+            futurePath.gameObject.SetActive(false);
         }
     }
 
     public void CalculateFuturePath()
     {
-        
+        Debug.Log(futurePathTiles.Count);
+        futurePath.gameObject.SetActive(true);
+        Queue<TileInfo> createPath = new Queue<TileInfo>(); 
+        createPath = gridManager.FindPath(saveStartTile, saveEndTile);
+        int count = createPath.Count;
+        futurePath.positionCount = count;
+
+        for (int i = 0; i < count; i++)
+        {
+            TileInfo pathTile = createPath.Dequeue();
+            futurePathTiles.Add(pathTile);
+            Vector3 pathPos = new Vector3();
+            pathPos = pathTile.topTileTransform.position;
+            pathPos = new Vector3(pathPos.x, pathPos.y + adjustable, pathPos.z);
+            futurePath.SetPosition(i, pathPos);
+        }
     }
     
 
@@ -101,7 +124,7 @@ public class EnemyManager : MonoBehaviour
             Vector3 pathPos = new Vector3();
             if (pathTile.tilesOnTOp.Count > 0)
             {
-              pathPos = pathTile.tilesOnTOp.Last().transform.position;
+              pathPos = pathTile.topTileTransform.position;
             }
             else
             {
@@ -119,10 +142,25 @@ public class EnemyManager : MonoBehaviour
     {
         if (pathTiles.Contains(checkTile))
         {
-            AdjustPath();
+          AdjustPath();
         }
     }
 
+
+    public void LetTheEnemiesGetNewPath(TileInfo checkTile)
+    {
+            pathTiles.Clear();
+            List<TileInfo> newPath = new List<TileInfo>();
+            enemyPath.positionCount = futurePath.positionCount;
+            for (int i = 0; i < futurePathTiles.Count; i++)
+            {
+                pathTiles.Add(futurePathTiles[i]);
+                enemyPath.SetPosition(i, futurePath.GetPosition(i));
+            }
+            
+            futurePathTiles.Clear();
+        
+    }
     public void AdjustPath()
     {
         pathTiles.Clear();
@@ -206,7 +244,7 @@ public class EnemyManager : MonoBehaviour
 
     private void LeadersIsSpawnde(LeaderScript leader)
     {
-        Vector3 placePos = new Vector3(saveStartTile.transform.position.x, saveStartTile.transform.position.y+ saveStartTile.height+adjustable, saveStartTile.transform.position.z);
+        Vector3 placePos = new Vector3(saveStartTile.topTileTransform.position.x, saveStartTile.topTileTransform.position.y+adjustable, saveStartTile.topTileTransform.position.z);
         leader.transform.position = placePos;
         leader.enemyCollider.enabled = false;
         leader.rb.linearVelocity = Vector3.zero;

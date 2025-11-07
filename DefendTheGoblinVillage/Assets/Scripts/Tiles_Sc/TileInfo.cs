@@ -189,6 +189,11 @@ public class TileInfo : MonoBehaviour
             filler = (int)towerController.towerType;
         }
 
+        else
+        {
+            filler = 0;
+        }
+
         costValue = (int)terrainType + filler + tilesOnTOp.Count;
         return costValue;
     }

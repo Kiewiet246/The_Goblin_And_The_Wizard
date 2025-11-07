@@ -104,7 +104,7 @@ public class TowerManager : MonoBehaviour
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            enemyManager.CheckIfPathHasChanged(spawnPoint);
+          //enemyManager.CheckIfPathHasChanged(spawnPoint);
             towerController.gameObject.GetComponentInChildren<TowerMatController>().enabled = false;
             return towerController;
         }
@@ -114,7 +114,7 @@ public class TowerManager : MonoBehaviour
 
     public void ATowerDied(TileInfo openTile)
     {
-        enemyManager.CheckIfPathHasChanged(openTile);
+        enemyManager.AdjustPath();
     }
     
     #region ForButtons

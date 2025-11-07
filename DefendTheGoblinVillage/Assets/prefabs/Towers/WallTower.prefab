@@ -68,7 +68,7 @@ MonoBehaviour:
   timeToRecenter: 0
   rangeType: 2
   angle: 60
-  towerType: 20
+  towerType: 30
   towerCost: 0
   health: 0
   showDamage: {fileID: 1066301492883557276}

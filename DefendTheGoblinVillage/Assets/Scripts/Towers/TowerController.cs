@@ -41,10 +41,10 @@ public class TowerController : MonoBehaviour
     public TowerType towerType;
     public enum TowerType
     {
-        ArcherTower = 10,
-        CanonTower = 15,
-        WallTower = 20,
-        BalistaTower =  5,
+        ArcherTower = 60,
+        CanonTower = 40,
+        WallTower = 30,
+        BalistaTower =  50,
     }
 
     [SerializeField] private int towerCost;
