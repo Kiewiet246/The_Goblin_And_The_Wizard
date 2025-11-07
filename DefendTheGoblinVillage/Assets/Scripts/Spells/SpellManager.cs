@@ -82,13 +82,17 @@ public class SpellManager : MonoBehaviour
     private void BurnTheLeaders()
     {
         List<LeaderScript> leaders = burningLeaders;
-
         foreach (LeaderScript burningMan in leaders)
         {
             burningMan.TakeDamage(burnDamage);
             burningMan.spellAflections.fireStack -= removeFireStacks;
 
             if (burningMan.spellAflections.fireStack <= 0)
+            {
+                burningLeaders.Remove(burningMan);
+            }
+            
+            else if (burningMan.health <= 0)
             {
                 burningLeaders.Remove(burningMan);
             }
@@ -106,9 +110,10 @@ public class SpellManager : MonoBehaviour
 
     public void LeadersGotBurnt(LeaderScript leader, int burnAmount)
     {
-        leader.spellAflections.fireStack += burnAmount;
+        
         if (!burningLeaders.Contains(leader))
         {
+            leader.spellAflections.fireStack += burnAmount;
             if (leader.spellAflections.fireStack >= maxFireStacks)
             {
                 if (burningLeaders.Count == 0)
@@ -146,7 +151,13 @@ public class SpellManager : MonoBehaviour
             frozen.spellAflections.iceStack -= removeIceStacks;
             if (frozen.spellAflections.iceStack <= 0)
             {
+                frozen.hasBeenFrozen = false;
                 frozenLeaders.Remove(frozen);
+            }
+
+            else if (frozen.health <= 0)
+            {
+                frozen.hasBeenFrozen = false;
             }
         }
 
@@ -174,6 +185,8 @@ public class SpellManager : MonoBehaviour
                     isFrozen = true;
                     frozenTime = Time.time;
                 }
+
+                leader.hasBeenFrozen = true;
                 frozenLeaders.Add(leader);
             }
         }
@@ -203,6 +216,10 @@ public class SpellManager : MonoBehaviour
             poisoned.TakeDamage(poisonDamage);
             poisoned.spellAflections.poisonStack -= removePoisonStacks;
             if (poisoned.spellAflections.poisonStack <= 0)
+            {
+                poisonLeaders.Remove(poisoned);
+            }
+            else if (poisoned.health <= 0)
             {
                 poisonLeaders.Remove(poisoned);
             }

@@ -162,39 +162,43 @@ public class BuildingTowers : MonoBehaviour
         if (hit.collider.gameObject.GetComponentInParent<TileInfo>() != null)
         {
              tileInfo = hit.collider.gameObject.GetComponentInParent<TileInfo>();
-             if (tileInfo.towerController == null)
+
+             if (tileInfo != enemyManager.saveStartTile && tileInfo != enemyManager.saveEndTile)
              {
-                 Vector3 spawnPosition = new Vector3(tileInfo.transform.position.x,
-                     (tileInfo.topTileTransform.transform.position.y + adjustment),
-                     tileInfo.transform.position.z);
-                 desiredTowerType = towerManager.spawnTowerType;
-                 switch (desiredTowerType)
+                 if (tileInfo.towerController == null)
                  {
-                     case TowerController.TowerType.ArcherTower:
-                         preBuildTower = archerGO;
-                         break;
-                     case TowerController.TowerType.CanonTower:
-                         preBuildTower = canonGO;
-                         break;
-                     case TowerController.TowerType.WallTower:
-                         preBuildTower = wallGO;
-                         break;
-                     case TowerController.TowerType.BalistaTower:
-                         preBuildTower = ballistGO;
-                         break;
-                     default:
-                         throw new ArgumentOutOfRangeException();
+                     Vector3 spawnPosition = new Vector3(tileInfo.transform.position.x,
+                         (tileInfo.topTileTransform.transform.position.y + adjustment),
+                         tileInfo.transform.position.z);
+                     desiredTowerType = towerManager.spawnTowerType;
+                     switch (desiredTowerType)
+                     {
+                         case TowerController.TowerType.ArcherTower:
+                             preBuildTower = archerGO;
+                             break;
+                         case TowerController.TowerType.CanonTower:
+                             preBuildTower = canonGO;
+                             break;
+                         case TowerController.TowerType.WallTower:
+                             preBuildTower = wallGO;
+                             break;
+                         case TowerController.TowerType.BalistaTower:
+                             preBuildTower = ballistGO;
+                             break;
+                         default:
+                             throw new ArgumentOutOfRangeException();
+                     }
+                     preBuildTower.SetActive(true);
+                     preTowerController = preBuildTower.GetComponent<TowerController>();
+                     preTowerController.gridManager = this.gridManager;
+                     preBuildTower.transform.position = spawnPosition;
+                     preTowerController.towerType = desiredTowerType;
+                     preTowerController.towerTile = tileInfo;
+                     preTowerController.CalculateRange();
+                     preTowerController.ShowRange();
+                     tileInfo.towerController = preTowerController;
+                     enemyManager.CheckifPathWillChange(tileInfo);
                  }
-                 preBuildTower.SetActive(true);
-                 preTowerController = preBuildTower.GetComponent<TowerController>();
-                 preTowerController.gridManager = this.gridManager;
-                 preBuildTower.transform.position = spawnPosition;
-                 preTowerController.towerType = desiredTowerType;
-                 preTowerController.towerTile = tileInfo;
-                 preTowerController.CalculateRange();
-                 preTowerController.ShowRange();
-                 tileInfo.towerController = preTowerController;
-                 enemyManager.CheckifPathWillChange(tileInfo);
              }
             
         }

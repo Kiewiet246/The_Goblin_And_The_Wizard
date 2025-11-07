@@ -33,6 +33,7 @@ public class LeaderScript : MonoBehaviour
     [Header("Spells")]
     public SpellAflections spellAflections;
     public SpellManager spellManager;
+    public bool hasBeenFrozen = false;
     
     [Header("Other")] [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private int difficulty = 1;
@@ -61,9 +62,14 @@ public class LeaderScript : MonoBehaviour
         {
             checkforStep = false;
         }
-        MoveEnemy();
-        CheckDistToTarget();
-        CheckForStep();
+
+        if (!hasBeenFrozen)
+        {
+            MoveEnemy();
+            CheckDistToTarget();
+            CheckForStep();
+        }
+        
         CheckYPos();
     }
 

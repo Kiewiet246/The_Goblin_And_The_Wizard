@@ -59,12 +59,15 @@ public class CastingSpells : MonoBehaviour
                 }
                 
                 tileInfo = compareTile;
-                if (tileInfo != null)
+                if (tileInfo != enemyManager.saveStartTile && tileInfo != enemyManager.saveEndTile)
                 {
-                    if (tileInfo.spellOnTile == SpellManager.SpellType.Normal)
+                    if (tileInfo != null)
                     {
-                        spellPrefab.SetActive(true);
-                        spellPrefab.transform.position = new Vector3(tileInfo.transform.position.x, tileInfo.topTileTransform.position.y + adjustHeight, tileInfo.transform.position.z);
+                        if (tileInfo.spellOnTile == SpellManager.SpellType.Normal)
+                        {
+                            spellPrefab.SetActive(true);
+                            spellPrefab.transform.position = new Vector3(tileInfo.transform.position.x, tileInfo.topTileTransform.position.y + adjustHeight, tileInfo.transform.position.z);
+                        }
                     }
                 }
             }

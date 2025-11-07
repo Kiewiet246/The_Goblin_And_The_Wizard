@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     [Header("Grid Stuff")]
     [SerializeField] private GridManager gridManager;
-    [SerializeField] private TileInfo saveStartTile, saveEndTile;
+    public TileInfo saveStartTile, saveEndTile;
 
     [Header("Pathfinding Stuff")]
     [SerializeField] private LineRenderer enemyPath;
