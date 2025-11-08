@@ -227,6 +227,7 @@ public class LeaderScript : MonoBehaviour
 
     public void SetWaypoints(List<TileInfo> newWaypoints)
     {
+        waypoints.Clear();
         if (waypoints.Count == 0)
         {
             for (int i = 0; i < newWaypoints.Count; i++)
