@@ -182,6 +182,7 @@ MonoBehaviour:
   distanceToTarget: 0
   closeEnough: 0.85
   movementSpeed: 2.25
+  speedBoost: 0
   normalSpeed: 1.25
   forrestSpeed: 1
   muddyspeed: 0.75
@@ -258,14 +259,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyIdentity: 5
   enemyType: 4
-  castingRange: 0
-  castRate: 0
+  castingRange: 7
+  castRate: 5
   currentTime: 0
-  castValue: 0
+  castValue: 1
   towerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
+  enemiesLayer:
+    serializedVersion: 2
+    m_Bits: 8
   canShoot: 1
+  isCaster: 0
 --- !u!1001 &1805346683773517164
 PrefabInstance:
   m_ObjectHideFlags: 0

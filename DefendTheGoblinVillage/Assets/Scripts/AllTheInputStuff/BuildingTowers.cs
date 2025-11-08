@@ -227,6 +227,7 @@ public class BuildingTowers : MonoBehaviour
                 int costAfterbuild = economy.money - preTowerController.towerCostToBuild;
                 if (costAfterbuild >= 0)
                 {
+                    economy.money -= preTowerController.towerCostToBuild;
                     if (tileInfo.towerController == preTowerController)
                     {
                         tileInfo.towerController = null;

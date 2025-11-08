@@ -1255,7 +1255,7 @@ MonoBehaviour:
   spell: 0
   burnRate: 0.5
   removeFireStacks: 3
-  burnDamage: 1
+  burnDamage: 1.5
   burningLeaders: []
   isBurning: 0
   burnTime: 0
@@ -1267,14 +1267,14 @@ MonoBehaviour:
   isFrozen: 0
   frozenTime: 0
   maxIceStacks: 20
-  poisonDamage: 0
+  poisonDamage: 0.5
   poisonDebuff: 0
-  removePoisonStacks: 0
+  removePoisonStacks: 3
   poisonLeaders: []
   isPoisoning: 0
   poisonTime: 0
   poisonRate: 0.5
-  maxPoisonStacks: 0
+  maxPoisonStacks: 24
 --- !u!114 &724969562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3859,8 +3859,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 497300175}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: economy
+      value: 
+      objectReference: {fileID: 724969562}
+    - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: forceUp
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: spawnRate
@@ -3886,6 +3890,10 @@ PrefabInstance:
       propertyPath: currentWave
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: leaderPrefab
+      value: 
+      objectReference: {fileID: 2215898661835275168, guid: dba4b95e4870d3845a0f0c58d1e41247, type: 3}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: spellManager
       value: 

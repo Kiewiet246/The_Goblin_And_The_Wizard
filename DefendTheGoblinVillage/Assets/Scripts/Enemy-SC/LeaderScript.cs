@@ -18,6 +18,7 @@ public class LeaderScript : MonoBehaviour
     [SerializeField] private float distanceToTarget; //How far the Target is
     [SerializeField] private float closeEnough; //How far the leader needs to be to switch target
     [SerializeField] private float movementSpeed;
+    public float speedBoost = 0;
 
     [Header("Terrain Modifiers")] [SerializeField]
     private float normalSpeed;
@@ -144,13 +145,13 @@ public class LeaderScript : MonoBehaviour
             switch (standingOnTerrain)
             {
                 case TileInfo.TerrainType.Normal:
-                    adjustmovemnt = movementSpeed * normalSpeed;
+                    adjustmovemnt = (movementSpeed + speedBoost) * normalSpeed;
                     break;
                 case TileInfo.TerrainType.Muddy:
-                    adjustmovemnt = movementSpeed * muddyspeed;
+                    adjustmovemnt = (movementSpeed + speedBoost) * muddyspeed;
                     break;
                 case TileInfo.TerrainType.Forest:
-                   adjustmovemnt = movementSpeed * forrestSpeed;
+                   adjustmovemnt = (movementSpeed + speedBoost) * forrestSpeed;
                     break;
                 case TileInfo.TerrainType.Stone:
                     if (!enteredOnce)
@@ -158,7 +159,7 @@ public class LeaderScript : MonoBehaviour
                         enteredOnce = true;
                         TakeDamage(stoneSpeed, 0, SpellManager.SpellType.Normal);
                     }
-                    adjustmovemnt = movementSpeed;
+                    adjustmovemnt = (movementSpeed + speedBoost);
                     break;
                 case TileInfo.TerrainType.Start:
                     adjustmovemnt = movementSpeed;

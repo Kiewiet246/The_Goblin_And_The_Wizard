@@ -408,12 +408,15 @@ MonoBehaviour:
   target: {fileID: 0}
   hits: 0
   oneExplosion: 0
+  enemiesLayer:
+    serializedVersion: 2
+    m_Bits: 0
   radius: 0
   projectileSpell: 0
   applyStack: 0
   fireStack: 3
   iceStack: 5
-  poisonStack: 1
+  poisonStack: 3
 --- !u!1001 &8032048807227518731
 PrefabInstance:
   m_ObjectHideFlags: 0

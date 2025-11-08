@@ -15,7 +15,9 @@ public class EnemyContoller : MonoBehaviour
     [SerializeField] private float castValue;
 
     [SerializeField] private LayerMask towerLayer;
+    [SerializeField] private LayerMask enemiesLayer;
     public bool canShoot;
+    public bool isCaster;
     public enum EnemyType
     {
         Normal,
@@ -28,7 +30,14 @@ public class EnemyContoller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (canShoot)
+        {
+            isCaster = true;
+        }
+        else
+        {
+            isCaster = false;
+        }
     }
 
     // Update is called once per frame
@@ -42,6 +51,10 @@ public class EnemyContoller : MonoBehaviour
         if (canShoot)
         {
             CountDown();
+        }
+        else
+        {
+            currentTime = Time.time;
         }
     }
 
@@ -68,6 +81,7 @@ public class EnemyContoller : MonoBehaviour
                 CastSpellOfDestruction();
                 break;
             case EnemyType.Cleric:
+                CastSpellOfBoosting();
                 break;
         }
     }
@@ -105,5 +119,36 @@ public class EnemyContoller : MonoBehaviour
         int randomeTower = UnityEngine.Random.Range(0, towersInRange.Count);
         Debug.Log(towersInRange[randomeTower].name);
         towersInRange[randomeTower].TakeDamage(castValue);
+    }
+
+    private void CastSpellOfBoosting()
+    {
+        List<LeaderScript> leaders = new List<LeaderScript>();
+        Collider[] colliders = Physics.OverlapSphere(transform.position, castingRange, enemiesLayer);
+
+        foreach (Collider col in colliders)
+        {
+            if (col.GetComponent<LeaderScript>())
+            {
+                LeaderScript hitLeader = col.GetComponent<LeaderScript>();
+                if (!leaders.Contains(hitLeader))
+                {
+                    leaders.Add(hitLeader);
+                }
+            }
+            else if (col.GetComponentInParent<LeaderScript>())
+            {
+                LeaderScript hitLeader = col.GetComponentInParent<LeaderScript>();
+                if (!leaders.Contains(hitLeader))
+                {
+                    leaders.Add(hitLeader);
+                }
+            }
+        }
+
+        for (int i = 0; i < leaders.Count; i++)
+        {
+            leaders[i].speedBoost = castValue;
+        }
     }
 }

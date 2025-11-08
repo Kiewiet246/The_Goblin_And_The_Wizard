@@ -283,6 +283,7 @@ public class EnemyManager : MonoBehaviour
         leader.lived += 1;
         leader.goblinVillage = this.goblinVillage;
         leader.enemyCont.SpawnedAgained();
+        leader.speedBoost = 0;
         GiveLeadersPath(leader);
     }
 

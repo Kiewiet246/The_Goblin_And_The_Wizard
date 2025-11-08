@@ -139,8 +139,8 @@ MonoBehaviour:
   projectileSpell: 0
   applyStack: 0
   fireStack: 5
-  iceStack: 10
-  poisonStack: 2
+  iceStack: 3
+  poisonStack: 7
 --- !u!54 &5747011940094101399
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -307,8 +307,8 @@ MonoBehaviour:
   projectileSpell: 0
   applyStack: 0
   fireStack: 5
-  iceStack: 10
-  poisonStack: 2
+  iceStack: 3
+  poisonStack: 7
 --- !u!54 &2127561409136889712
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -528,8 +528,8 @@ MonoBehaviour:
   projectileSpell: 0
   applyStack: 0
   fireStack: 5
-  iceStack: 10
-  poisonStack: 2
+  iceStack: 3
+  poisonStack: 7
 --- !u!54 &6456305147058347780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -696,8 +696,8 @@ MonoBehaviour:
   projectileSpell: 0
   applyStack: 0
   fireStack: 5
-  iceStack: 10
-  poisonStack: 2
+  iceStack: 3
+  poisonStack: 7
 --- !u!54 &58613169086313428
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -864,8 +864,8 @@ MonoBehaviour:
   projectileSpell: 0
   applyStack: 0
   fireStack: 5
-  iceStack: 10
-  poisonStack: 2
+  iceStack: 3
+  poisonStack: 7
 --- !u!54 &2125289968989143541
 Rigidbody:
   m_ObjectHideFlags: 0

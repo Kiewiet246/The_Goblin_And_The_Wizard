@@ -205,6 +205,7 @@ MonoBehaviour:
   distanceToTarget: 0
   closeEnough: 0.85
   movementSpeed: 1.75
+  speedBoost: 0
   normalSpeed: 1.25
   forrestSpeed: 1
   muddyspeed: 0.75
@@ -265,6 +266,9 @@ MonoBehaviour:
   towerLayer:
     serializedVersion: 2
     m_Bits: 256
+  enemiesLayer:
+    serializedVersion: 2
+    m_Bits: 8
   canShoot: 1
 --- !u!1001 &1805346683773517164
 PrefabInstance:

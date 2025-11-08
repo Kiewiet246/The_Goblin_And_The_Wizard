@@ -217,10 +217,18 @@ public class SpellManager : MonoBehaviour
             poisoned.spellAflections.poisonStack -= removePoisonStacks;
             if (poisoned.spellAflections.poisonStack <= 0)
             {
+                if (poisoned.enemyCont.isCaster)
+                {
+                    poisoned.enemyCont.canShoot = true;
+                }
                 poisonLeaders.Remove(poisoned);
             }
             else if (poisoned.health <= 0)
             {
+                if (poisoned.enemyCont.isCaster)
+                {
+                    poisoned.enemyCont.canShoot = true;
+                }
                 poisonLeaders.Remove(poisoned);
             }
         }
@@ -248,6 +256,11 @@ public class SpellManager : MonoBehaviour
                 {
                     isPoisoning = true;
                     poisonTime = Time.time;
+                }
+
+                if (leader.enemyCont.isCaster)
+                {
+                    leader.enemyCont.canShoot = false;
                 }
                 poisonLeaders.Add(leader);
             }
