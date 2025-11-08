@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WaveManager : MonoBehaviour
 {
@@ -10,13 +11,17 @@ public class WaveManager : MonoBehaviour
     private int waitTimeBetweenWaves;
     [SerializeField] private float currentTime;
     [SerializeField] private int waveCounter = 0;
-    [SerializeField] private int spawnIndividual = 0;
-    [SerializeField] private bool isSpawningIndividuals;
-    [SerializeField] private int spawnBunch;
+    [SerializeField] private int identifySpawnIndividual = 0;
+    [SerializeField] private bool isSpawningIndividuals = false;
+    [SerializeField] private bool isSpawningNextBunch = false;
+    [SerializeField] private bool isSpawningNextWave = false;
+    [SerializeField] private int identifySpawnBunch;
+    [SerializeField] private int bunchRepeatsCount;
+    [SerializeField] private int listRepeatsCount;
     
     [Header("Waves")]
     [SerializeField] private Wave currentWave;
-    [SerializeField] private Wave waveOne;
+    [SerializeField] private Wave waveOne, waveTwo, waveThree, waveFour, waveFive;
 
     [SerializeField] private int createOfEach;
 
@@ -29,7 +34,7 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
       CreateAllTheEnemies();
-      currentWave = waveOne;
+      //currentWave = waveOne;
     }
 
     // Update is called once per frame
@@ -40,45 +45,133 @@ public class WaveManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isSpawningIndividuals)
+        if (isSpawningNextWave)
+        {
+            CountDownWave();
+        }
+        else if (isSpawningNextBunch)
+        {
+            CountDownBunch();
+        }
+        else if (isSpawningIndividuals)
         {
             CountDownIndividual();
+        }
+    }
+
+    private void CountDownWave()
+    {
+        float difference = Time.time - currentTime;
+        if (difference > waitTimeBetweenWaves)
+        {
+            NextWave();
+        }
+    }
+
+    private void CountDownBunch()
+    {
+        float difference = Time.time - currentTime;
+        if (difference >= currentWave.spawnRatesBetweenParty)
+        {
+            Debug.Log("Hello");
+            isSpawningNextBunch = false;
+            isSpawningIndividuals = true;
         }
     }
 
     private void CountDownIndividual()
     {
         float difference = Time.time - currentTime;
-        if (difference >= currentWave.parties[spawnBunch].spawnRateForIndividuals)
+        if (difference >= currentWave.parties[identifySpawnBunch].spawnRateForIndividuals)
         {
-            switch (currentWave.parties[spawnBunch].singleParty[spawnIndividual])
-            {
-                case EnemyContoller.EnemyType.Normal:
-                    SpawnNormalEnemy();
-                    break;
-                case EnemyContoller.EnemyType.Fast:
-                    SpawnFastEnemy();
-                    break;
-                case EnemyContoller.EnemyType.Shield:
-                    SpawnShieldEnemy();
-                    break;
-                case EnemyContoller.EnemyType.Wizard:
-                    SpawnWizardEnemy();
-                    break;
-                case EnemyContoller.EnemyType.Cleric:
-                    SpawnClericEnemy();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+           SpawnIndividual();
+        }
+    }
 
-            spawnIndividual += 1;
-            if (spawnIndividual == currentWave.parties[spawnBunch].singleParty.Count)
+    private void SpawnIndividual()
+    {
+        switch (currentWave.parties[identifySpawnBunch].singleParty[identifySpawnIndividual])
+        {
+            case EnemyContoller.EnemyType.Normal:
+                SpawnNormalEnemy();
+                break;
+            case EnemyContoller.EnemyType.Fast:
+                SpawnFastEnemy();
+                break;
+            case EnemyContoller.EnemyType.Shield:
+                SpawnShieldEnemy();
+                break;
+            case EnemyContoller.EnemyType.Wizard:
+                SpawnWizardEnemy();
+                break;
+            case EnemyContoller.EnemyType.Cleric:
+                SpawnClericEnemy();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
+        identifySpawnIndividual += 1;
+        if (identifySpawnIndividual >= currentWave.parties[identifySpawnBunch].singleParty.Count)
+        {
+            Debug.Log("Gone Through the party");
+            identifySpawnIndividual = 0;
+            bunchRepeatsCount += 1;
+            if (bunchRepeatsCount >= currentWave.parties[identifySpawnBunch].repeatAmountForParty)
             {
+                Debug.Log("Did the party Multiple times");
+                bunchRepeatsCount = 0;
+                currentTime = Time.time;
+                isSpawningNextBunch = true;
                 isSpawningIndividuals = false;
-                spawnIndividual = 0;
+                identifySpawnBunch += 1;
+                if (identifySpawnBunch >= currentWave.parties.Count)
+                {
+                    Debug.Log("BottleNeck?");
+                    identifySpawnBunch = 0;
+                    listRepeatsCount += 1;
+                    if (listRepeatsCount >= currentWave.repeatThroughList)
+                    {
+                        listRepeatsCount = 0;
+                        isSpawningNextBunch = false;
+                        isSpawningIndividuals = false;
+                        isSpawningNextWave = true;
+                        Debug.Log("EndWave");
+                        return;
+                    }
+                }
+                currentTime = Time.time;
+                return;
             }
-            currentTime = Time.time;
+        }
+        currentTime = Time.time;
+    }
+
+    private void NextWave()
+    {
+        currentTime = Time.time;
+        isSpawningNextWave = false;
+        isSpawningNextBunch = false;
+        isSpawningIndividuals = true;
+        currentTime = Time.time;
+        waveCounter += 1;
+        switch (waveCounter)
+        {
+            case(1):
+                currentWave = waveOne;
+                break;
+            case(2):
+                currentWave = waveTwo;
+                break;
+            case (3):
+                currentWave = waveThree;
+                break;
+            case (4):
+                currentWave = waveFour;
+                break;
+            case (5):
+                currentWave = waveFive;
+                break;
         }
     }
 

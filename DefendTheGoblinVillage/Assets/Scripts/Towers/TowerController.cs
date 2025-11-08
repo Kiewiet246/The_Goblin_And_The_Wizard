@@ -513,14 +513,14 @@ public class TowerController : MonoBehaviour
     public Quaternion RotateTower()
     {
         HideRange();
-        
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y+angle, 0);
         if (rangeType == RangeType.SingleLine)
         {
             tilesInRange.Clear();
             FindTilesInRangeBox();
-            ShowRange();
+            
         }
+        ShowRange();
         return transform.rotation;
     }
 }

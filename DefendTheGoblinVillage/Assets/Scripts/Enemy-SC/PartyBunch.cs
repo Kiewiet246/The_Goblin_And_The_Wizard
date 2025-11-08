@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 [Serializable]
 public class PartyBunch
 {
-    [FormerlySerializedAs("singlePArty")] public List<EnemyContoller.EnemyType> singleParty;
-    public int repeatAmountForParty;
+    public int repeatAmountForParty = 1;
     public float spawnRateForIndividuals;
+    public List<EnemyContoller.EnemyType> singleParty;
 }

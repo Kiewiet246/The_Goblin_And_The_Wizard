@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class Wave
 {
-    public List<PartyBunch> parties;
     public float spawnRatesBetweenParty;
-    public int repeatThroughList;
+    public int repeatThroughList = 1;
+    public List<PartyBunch> parties;
 }
