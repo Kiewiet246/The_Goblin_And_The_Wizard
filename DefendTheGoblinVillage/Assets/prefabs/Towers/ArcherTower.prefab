@@ -180,7 +180,7 @@ MonoBehaviour:
   angle: 60
   towerType: 80
   towerCost: 0
-  health: 0
+  health: 5
   showDamage: {fileID: 5925045599602852102}
   leaders: []
   damage: 1

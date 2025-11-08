@@ -12,13 +12,17 @@ public class CastedSpell : MonoBehaviour
     public TileInfo spellTile;
     private bool CastOnce = false;
     [SerializeField] private ShowDamage showDamage;
+    public bool hasTower = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
-        if (other.gameObject.CompareTag("Enemy"))
+        if (!hasTower)
         {
-           SpellIsTriggered();
+            Debug.Log(other.gameObject.name);
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                SpellIsTriggered();
+            }
         }
     }
 

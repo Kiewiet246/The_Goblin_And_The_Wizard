@@ -132,6 +132,7 @@ public class CastingSpells : MonoBehaviour
                     fireSpell.spellManager = spellManager;
                     fireSpell.spellTile = tileInfo;
                     tileInfo.spellOnTile = SpellManager.SpellType.Fire;
+                    tileInfo.castedSpell = fireSpell;
                     break;
                 case SpellManager.SpellType.Ice:
                     GameObject iceObject = Instantiate(icePrefab, spawnPosition, spellPrefab.transform.rotation, spellHolder);
@@ -141,6 +142,7 @@ public class CastingSpells : MonoBehaviour
                     iceSpell.spellManager = spellManager;
                     iceSpell.spellTile = tileInfo;
                     tileInfo.spellOnTile = SpellManager.SpellType.Ice;
+                    tileInfo.castedSpell = iceSpell;
                     break;
                 case SpellManager.SpellType.Poison:
                     GameObject poisonObject = Instantiate(poisonPrefab, spawnPosition, spellPrefab.transform.rotation, spellHolder);
@@ -150,6 +152,7 @@ public class CastingSpells : MonoBehaviour
                     poisonSpell.spellManager = spellManager;
                     poisonSpell.spellTile = tileInfo;
                     tileInfo.spellOnTile = SpellManager.SpellType.Poison;
+                    tileInfo.castedSpell = poisonSpell;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

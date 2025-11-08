@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private int hits;
     [SerializeField] private bool oneExplosion = false;
+    [SerializeField] private LayerMask enemiesLayer;
 
     [Header("CanonBall Stuff")] [SerializeField]private float radius;
 
@@ -122,7 +123,7 @@ public class Projectile : MonoBehaviour
     {
         oneExplosion = true;
         List<LeaderScript> leaders = new List<LeaderScript>();
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, enemiesLayer);
 
         foreach (Collider hit in colliders)
         {

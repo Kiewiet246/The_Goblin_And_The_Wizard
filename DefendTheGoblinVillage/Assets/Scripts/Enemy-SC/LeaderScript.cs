@@ -18,7 +18,6 @@ public class LeaderScript : MonoBehaviour
     [SerializeField] private float distanceToTarget; //How far the Target is
     [SerializeField] private float closeEnough; //How far the leader needs to be to switch target
     [SerializeField] private float movementSpeed;
-    [SerializeField] private int tilesCrossed;
 
     [Header("Terrain Modifiers")] [SerializeField]
     private float normalSpeed;
@@ -32,10 +31,8 @@ public class LeaderScript : MonoBehaviour
     [SerializeField] private float sightRange;
     [SerializeField] private int layer;
     
-    [Header("Followers")]
-    [SerializeField] private List<EnemyContoller> followers;
-
     [Header("Health")]
+    public float baseHealth;
     public float health = 6;
     public float damage = 3;
     public GoblinVillage goblinVillage;
@@ -48,12 +45,16 @@ public class LeaderScript : MonoBehaviour
     [Header("Other")] [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private int difficulty = 1;
     public int lived = 0;
-
     public Vector3 endPoint;
+    public EnemyContoller enemyCont;
+
+    [Header("economy Stuff")] public int dropsMoney;
+    public int dropsMana;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ActivateFollowers();
+       
     }
 
     // Update is called once per frame
@@ -80,6 +81,11 @@ public class LeaderScript : MonoBehaviour
             CheckForStep();
         }
         CheckYPos();
+    }
+
+    public void ResetHealth()
+    {
+        health = baseHealth;
     }
 
     public void TakeDamage(float damage, float stacks, SpellManager.SpellType spell)
@@ -128,22 +134,6 @@ public class LeaderScript : MonoBehaviour
     public void SetDifficulty(int newDifficulty)
     {
        difficulty = newDifficulty; 
-    }
-
-    public void ActivateFollowers()
-    {
-        for (int i = 0; i < difficulty; i++)
-        {
-            followers[i].gameObject.SetActive(true);
-        }
-    }
-
-    public void DeactivateFollowers()
-    {
-        for (int i = 0; i < followers.Count; i++)
-        {
-            followers[i].gameObject.SetActive(false);
-        }
     }
 
     private void MoveEnemy()
@@ -201,7 +191,6 @@ public class LeaderScript : MonoBehaviour
                 {
                     vectorTarget = new Vector3(waypoints[0].transform.position.x, transform.position.y, waypoints[0].transform.position.z);
                     targetTile = waypoints[0];
-                    tilesCrossed += 1;
                     //AssignTargetForFollowers();
                 }
                 
@@ -239,7 +228,6 @@ public class LeaderScript : MonoBehaviour
     {
         if (waypoints.Count == 0)
         {
-            tilesCrossed = 0;
             for (int i = 0; i < newWaypoints.Count; i++)
             {
                 waypoints.Add(newWaypoints[i]);
@@ -296,22 +284,7 @@ public class LeaderScript : MonoBehaviour
         }
         waypoints = savedWaypoints;
     }
-
-    private void AssignTargetForFollowers()
-    {
-        if (followers != null)
-        {
-            for (int i = 0; i < followers.Count; i++)
-            {
-                //followers[i].SetTarget(leaderTarget);
-            }
-        }
-        else
-        {
-            Debug.Log("Null Follows");
-        }
-    }
-
+    
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Tower"))

@@ -70,7 +70,7 @@ MonoBehaviour:
   angle: 60
   towerType: 70
   towerCost: 0
-  health: 0
+  health: 5
   showDamage: {fileID: 1066301492883557276}
   leaders: []
   damage: 1

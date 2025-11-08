@@ -22,7 +22,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject leaderPrefab;
     [SerializeField] private float spawnForce = 100f;
     [SerializeField] private float forceUp;
-    [SerializeField] private float setHealth = 10f;
+    
     
     [Header("Controlling Enemies")]
     public List<LeaderScript> enemiesInField;
@@ -42,6 +42,7 @@ public class EnemyManager : MonoBehaviour
     [Header("Extra")]
     [SerializeField] private float adjustable;
     [SerializeField] private SpellManager spellManager;
+    [SerializeField] private Economy economy;
 
     [SerializeField] private Transform activateField;
     [SerializeField] private float adjustActFieldHeight;
@@ -277,10 +278,11 @@ public class EnemyManager : MonoBehaviour
         leader.rb.linearVelocity = Vector3.zero;
         leader.rb.AddForce(Vector3.up*(forceUp), ForceMode.Impulse);
         leader.transform.parent = fieldEnemiesParent;
-        leader.health = setHealth;
+        leader.ResetHealth();
         leader.spellManager = spellManager;
         leader.lived += 1;
         leader.goblinVillage = this.goblinVillage;
+        leader.enemyCont.SpawnedAgained();
         GiveLeadersPath(leader);
     }
 
@@ -294,6 +296,9 @@ public class EnemyManager : MonoBehaviour
         leader.vectorTarget = Vector3.zero;
         leader.rb.linearVelocity = Vector3.zero;
         leader.gameObject.SetActive(false);
+        
+        economy.AddMana(leader.dropsMana);
+        economy.AddMoney(leader.dropsMoney);
     }
     
     public void SetLeaderDifficulty(LeaderScript leader)

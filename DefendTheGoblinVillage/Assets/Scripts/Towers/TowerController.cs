@@ -80,7 +80,7 @@ public class TowerController : MonoBehaviour
     {
        // CalculateRange();
        towerCost = (int)towerType;
-       health = (int)towerType;
+      // health = (int)towerType;
     }
 
     // Update is called once per frame
@@ -335,6 +335,12 @@ public class TowerController : MonoBehaviour
         if (health <= 0)
         {
             towerTile.towerController = null;
+            if (towerTile.castedSpell != null)
+            {
+                Destroy(towerTile.castedSpell.gameObject);
+            }
+            towerTile.castedSpell = null;
+            towerTile.spellOnTile = SpellManager.SpellType.Normal;
             towerManager.ATowerDied(towerTile);
             towerManager.towers.Remove(this);
             Destroy(gameObject);

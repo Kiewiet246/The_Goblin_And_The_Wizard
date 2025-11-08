@@ -124,7 +124,11 @@ public class TowerManager : MonoBehaviour
 
     private void AssignSpellToTower(TileInfo spellInfo, TowerController towerController)
     {
-        towerController.spellTower = spellInfo.spellOnTile;
+        if (spellInfo.castedSpell != null)
+        {
+            towerController.spellTower = spellInfo.spellOnTile;
+            spellInfo.castedSpell.hasTower = true;
+        }
     }
 
     public void ATowerDied(TileInfo openTile)
