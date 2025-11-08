@@ -200,6 +200,9 @@ MonoBehaviour:
   - {fileID: 2727196767242539003}
   - {fileID: 765703961039158298}
   isAttackingTower: 1
+  spellTower: 0
+  balistaStacks: 1
+  towerCostToBuild: 10
   delay: 0.5
 --- !u!54 &1327836317734325518
 Rigidbody:

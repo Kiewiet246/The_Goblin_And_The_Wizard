@@ -10,6 +10,12 @@ public class TowerMatController : MonoBehaviour
     [SerializeField] private Material buildingMat;
     [SerializeField] private Material cannotBuildMat;
     
+    [SerializeField] private float flashDuration = 0.1f;
+    
+    [SerializeField] private bool startFlash;
+
+    [SerializeField] private float flashTimer;
+    
     public bool canBuild = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -22,14 +28,29 @@ public class TowerMatController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (canBuild)
+        if (startFlash)
         {
-            meshRenderer.material = buildingMat;
+            float diff = Time.time - flashTimer;
+
+            if (diff > flashDuration)
+            {
+                startFlash = false;
+                meshRenderer.material = buildingMat;
+                canBuild = true;
+            }
         }
         else
         {
-            meshRenderer.material = cannotBuildMat;
+            if (canBuild)
+            {
+                meshRenderer.material = buildingMat;
+            }
+            else
+            {
+                meshRenderer.material = cannotBuildMat;
+            }
         }
+        
     }
 
 
@@ -40,18 +61,27 @@ public class TowerMatController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other != null)
-        {
-            canBuild = false;
-        }
-        else
-        {
-            canBuild = true;
-        }
+            if (other != null)
+            {
+                canBuild = false;
+            }
+            else
+            {
+                canBuild = true;
+            }
+       
     }
 
     private void OnTriggerExit(Collider other)
     {
         canBuild = true;
+    }
+
+    public void FlashTowerMat()
+    {
+        canBuild = false;
+        meshRenderer.material = cannotBuildMat;
+        startFlash = true;
+        flashTimer = Time.time;
     }
 }

@@ -69,8 +69,9 @@ public class TowerController : MonoBehaviour
     
     [Header("Magic Stuff")]
     public SpellManager.SpellType spellTower;
-
     [SerializeField] private float balistaStacks = 1;
+
+    public int towerCostToBuild;
     
     [Header("Couratine Stuff")]
     [SerializeField] private float delay = 0.5f;

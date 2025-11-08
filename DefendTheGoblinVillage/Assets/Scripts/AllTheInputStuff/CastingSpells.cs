@@ -8,6 +8,7 @@ public class CastingSpells : MonoBehaviour
     [SerializeField] private SpellManager spellManager;
     [SerializeField] private BuildingTowers buildingTowers;
     [SerializeField] private EnemyManager enemyManager;
+    [SerializeField] private Economy economy;
     
     [Header("Spells")]
     [SerializeField] private GameObject firePrefab;
@@ -21,6 +22,13 @@ public class CastingSpells : MonoBehaviour
     public GameObject spellPrefab;
     [SerializeField] private float adjustHeight = 4;
     [SerializeField] private Transform spellHolder;
+    
+    [Header("Spell costs")]
+    [SerializeField] private int spellCost;
+    [SerializeField] private int fireCost;
+    [SerializeField] private int iceCost;
+    [SerializeField] private int poisonCost;
+    [SerializeField] private ShowDamage showDamage;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -95,7 +103,25 @@ public class CastingSpells : MonoBehaviour
         }
         if (spellPrefab.activeSelf == true)
         {
-            Vector3 spawnPosition = new Vector3(tileInfo.transform.position.x, tileInfo.topTileTransform.position.y + adjustHeight, tileInfo.transform.position.z);
+            switch (spellManager.spell)
+            {
+                case SpellManager.SpellType.Fire:
+                    spellCost = fireCost;
+                    break;
+                case SpellManager.SpellType.Ice:
+                    spellCost = iceCost;
+                    break;
+                case SpellManager.SpellType.Poison:
+                    spellCost = poisonCost;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            int manaAfterCast = economy.mana - spellCost;
+            if (manaAfterCast >= 0)
+            {
+                Vector3 spawnPosition = new Vector3(tileInfo.transform.position.x, tileInfo.topTileTransform.position.y + adjustHeight, tileInfo.transform.position.z);
             switch (spellManager.spell)
             {
                 case SpellManager.SpellType.Fire:
@@ -130,6 +156,13 @@ public class CastingSpells : MonoBehaviour
             }
             tileInfo = null;
             spellPrefab.SetActive(false);
+            economy.mana -= spellCost;
+            }
+            else
+            {
+                showDamage.FlashDamage();
+                Debug.Log("Can't afford spell");
+            }
         }
     }
 }

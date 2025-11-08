@@ -50,6 +50,8 @@ MonoBehaviour:
   stackDamage: 0
   enemyManager: {fileID: 0}
   spellManager: {fileID: 0}
+  spellTile: {fileID: 0}
+  showDamage: {fileID: 0}
 --- !u!54 &-401608243255557674
 Rigidbody:
   m_ObjectHideFlags: 0

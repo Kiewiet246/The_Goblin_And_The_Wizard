@@ -11,6 +11,7 @@ public class CastedSpell : MonoBehaviour
     public SpellManager spellManager;
     public TileInfo spellTile;
     private bool CastOnce = false;
+    [SerializeField] private ShowDamage showDamage;
 
     private void OnTriggerEnter(Collider other)
     {

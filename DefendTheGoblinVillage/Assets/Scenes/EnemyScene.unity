@@ -1275,6 +1275,20 @@ MonoBehaviour:
   poisonTime: 0
   poisonRate: 0.5
   maxPoisonStacks: 0
+--- !u!114 &724969562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724969554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbd22f817792e14ab5ee07c8a58000e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 0
+  mana: 0
 --- !u!114 &825824249 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8743926109157311546, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
@@ -2718,6 +2732,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2246607031834187331, guid: df0944349a331764eae20f74bf3c8590, type: 3}
   m_PrefabInstance: {fileID: 7276427216350783408}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1675003914 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4704178889770377810, guid: df0944349a331764eae20f74bf3c8590, type: 3}
+  m_PrefabInstance: {fileID: 7276427216350783408}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675003912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38c5f34ecf847e479d2825cb42fa26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1761084356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3374,6 +3399,7 @@ MonoBehaviour:
   gridManager: {fileID: 825824249}
   castingSpells: {fileID: 1937454439}
   enemyManager: {fileID: 1190781908}
+  economy: {fileID: 724969562}
   tileLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -3429,6 +3455,7 @@ MonoBehaviour:
   spellManager: {fileID: 724969561}
   buildingTowers: {fileID: 1937454437}
   enemyManager: {fileID: 1190781908}
+  economy: {fileID: 724969562}
   firePrefab: {fileID: 236333515961725516, guid: d748fb0dbe23a9143b4e4c694637bf74, type: 3}
   icePrefab: {fileID: 236333515961725516, guid: d93c689d06e990c4c9344cbab56b539c, type: 3}
   poisonPrefab: {fileID: 236333515961725516, guid: a0a5f701920d25940993f581f3dc1edd, type: 3}
@@ -3439,6 +3466,11 @@ MonoBehaviour:
   spellPrefab: {fileID: 1675003912}
   adjustHeight: 1
   spellHolder: {fileID: 243152036}
+  spellCost: 0
+  fireCost: 5
+  iceCost: 8
+  poisonCost: 3
+  showDamage: {fileID: 1675003914}
 --- !u!1 &1968011001
 GameObject:
   m_ObjectHideFlags: 0
@@ -3636,8 +3668,16 @@ PrefabInstance:
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2561907532733913015, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: muddyTh
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2561907532733913015, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: lThreeTh
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2561907532733913015, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: forrestTh
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2561907532733913015, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: scaleMaxH
@@ -3782,6 +3822,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3849464629943096825, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 724969561}
+    - targetCorrespondingSourceObject: {fileID: 3849464629943096825, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 724969562}
   m_SourcePrefab: {fileID: 100100000, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
 --- !u!1001 &7276427216350783408
 PrefabInstance:

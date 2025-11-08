@@ -9,6 +9,7 @@ public class BuildingTowers : MonoBehaviour
     [SerializeField] private GridManager gridManager;
     [SerializeField] private CastingSpells castingSpells;
     public EnemyManager enemyManager;
+    [SerializeField] private Economy economy;
     
     [Header("Building Tower Variables")]
     [SerializeField] RaycastHit hit = new RaycastHit();
@@ -223,20 +224,27 @@ public class BuildingTowers : MonoBehaviour
         {
             if (preBuildTower.GetComponentInChildren<TowerMatController>().canBuild)
             {
-                if (tileInfo.towerController == preTowerController)
+                int costAfterbuild = economy.money - preTowerController.towerCostToBuild;
+                if (costAfterbuild >= 0)
                 {
-                    tileInfo.towerController = null;
+                    if (tileInfo.towerController == preTowerController)
+                    {
+                        tileInfo.towerController = null;
+                    }
+                    preBuildTower.SetActive(false);
+                    preTowerController.HideRange();
+                    preTowerController.ClearTilesInRange();
+                    towerController = towerManager.CreateTower(tileInfo, rotation);
+                    towerController.ShowRange();
+                    enemyManager.CheckIfPathHasChanged(tileInfo);
+                    enemyManager.futurePath.gameObject.SetActive(false);
+                    tileInfo = null;
                 }
-                preBuildTower.SetActive(false);
-                preTowerController.HideRange();
-                preTowerController.ClearTilesInRange();
-                towerController = towerManager.CreateTower(tileInfo, rotation);
-                towerController.ShowRange();
-                enemyManager.CheckIfPathHasChanged(tileInfo);
-                enemyManager.futurePath.gameObject.SetActive(false);
-                tileInfo = null;
+                else
+                {
+                    preBuildTower.GetComponentInChildren<TowerMatController>().FlashTowerMat();
+                }
             }
-            
         }
     }
     

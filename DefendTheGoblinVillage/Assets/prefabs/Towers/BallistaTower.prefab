@@ -182,6 +182,9 @@ MonoBehaviour:
   projectileSpeed: 20
   projectiles: []
   isAttackingTower: 1
+  spellTower: 0
+  balistaStacks: 1
+  towerCostToBuild: 15
   delay: 0.5
 --- !u!54 &3630126658788195274
 Rigidbody:
