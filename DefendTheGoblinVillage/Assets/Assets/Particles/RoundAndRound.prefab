@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 6834333839861128958}
   - component: {fileID: 206231368944915518}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: RoundAndRound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5810706677294906531
 Transform:
   m_ObjectHideFlags: 0
