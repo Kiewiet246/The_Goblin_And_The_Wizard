@@ -245,13 +245,21 @@ MonoBehaviour:
   rb: {fileID: 3321055648117032380}
   showDamage: {fileID: 7697952890699729058}
   waypoints: []
-  leaderTarget: {x: 0, y: 0, z: 0}
+  vectorTarget: {x: 0, y: 0, z: 0}
+  targetTile: {fileID: 0}
+  standingOnTerrain: 0
   distanceToTarget: 0
-  closeEnough: 1
+  closeEnough: 0.85
   movementSpeed: 2
+  tilesCrossed: 0
+  normalSpeed: 1.25
+  forrestSpeed: 1
+  muddyspeed: 0.75
+  stoneSpeed: 1
+  enteredOnce: 0
   checkforStep: 0
   jumpForce: 2.5
-  sightRange: 3
+  sightRange: 2.25
   layer: 6
   followers:
   - {fileID: 6689628757742310072}
@@ -264,8 +272,10 @@ MonoBehaviour:
   damage: 3
   spellAflections: {fileID: 4780600891169509876}
   spellManager: {fileID: 0}
+  hasBeenFrozen: 0
   enemyManager: {fileID: 0}
   difficulty: 0
+  lived: 0
   endPoint: {x: 0, y: 0, z: 0}
 --- !u!136 &1676064439128041742
 CapsuleCollider:

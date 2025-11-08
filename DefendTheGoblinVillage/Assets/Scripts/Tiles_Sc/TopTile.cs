@@ -7,7 +7,8 @@ public class TopTile : MonoBehaviour
     [SerializeField] private GameObject grassTerrain, forestTerrain, swampTerrain, rockTerrain;
 
     [SerializeField] private GameObject currentTerrain;
-
+    
+    
     public void SetTerrainObjects(TileInfo.TerrainType terrainType)
     {
         int rotateBy = Random.Range(0, 7) * 60;

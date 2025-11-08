@@ -14,11 +14,19 @@ public class LeaderScript : MonoBehaviour
     public List<TileInfo> waypoints;
     public Vector3 vectorTarget;
     [SerializeField] private TileInfo targetTile;
+    [FormerlySerializedAs("terrainType")] [SerializeField] private TileInfo.TerrainType standingOnTerrain;
     [SerializeField] private float distanceToTarget; //How far the Target is
     [SerializeField] private float closeEnough; //How far the leader needs to be to switch target
     [SerializeField] private float movementSpeed;
     [SerializeField] private int tilesCrossed;
 
+    [Header("Terrain Modifiers")] [SerializeField]
+    private float normalSpeed;
+    [SerializeField] private float forrestSpeed;
+    [SerializeField] private float muddyspeed;
+    [SerializeField] private float stoneSpeed;
+    [SerializeField] private bool enteredOnce = false;
+    
     [Header("Jumping")] public bool checkforStep = false;
     [SerializeField] private float jumpForce;
     [SerializeField] private float sightRange;
@@ -70,7 +78,6 @@ public class LeaderScript : MonoBehaviour
             CheckDistToTarget();
             CheckForStep();
         }
-        
         CheckYPos();
     }
 
@@ -142,8 +149,37 @@ public class LeaderScript : MonoBehaviour
     {
         if (vectorTarget != Vector3.zero)
         {
+            float adjustmovemnt = new float();
+            switch (standingOnTerrain)
+            {
+                case TileInfo.TerrainType.Normal:
+                    adjustmovemnt = movementSpeed * normalSpeed;
+                    break;
+                case TileInfo.TerrainType.Muddy:
+                    adjustmovemnt = movementSpeed * muddyspeed;
+                    break;
+                case TileInfo.TerrainType.Forest:
+                   adjustmovemnt = movementSpeed * forrestSpeed;
+                    break;
+                case TileInfo.TerrainType.Stone:
+                    if (!enteredOnce)
+                    {
+                        enteredOnce = true;
+                        TakeDamage(stoneSpeed, 0, SpellManager.SpellType.Normal);
+                    }
+                    adjustmovemnt = movementSpeed;
+                    break;
+                case TileInfo.TerrainType.Start:
+                    adjustmovemnt = movementSpeed;
+                    break;
+                case TileInfo.TerrainType.End:
+                    adjustmovemnt = movementSpeed;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             Vector3 direction = vectorTarget - transform.position;
-            Vector3 movement = direction.normalized * (movementSpeed * Time.deltaTime);
+            Vector3 movement = direction.normalized * (adjustmovemnt * Time.deltaTime);
            endPoint = transform.position + movement;
 
             rb.MovePosition(endPoint);
@@ -289,6 +325,14 @@ public class LeaderScript : MonoBehaviour
             {
                 collision.gameObject.GetComponentInParent<TowerController>().TakeDamage(damage);
                 enemyManager.RemoveLeaderFromField(this);
+            }
+        }
+        
+        else if (collision.gameObject.CompareTag("TopTile"))
+        {
+            if (collision.gameObject.transform == targetTile.topTileTransform)
+            {
+                standingOnTerrain = targetTile.terrainType;
             }
         }
     }

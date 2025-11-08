@@ -36,10 +36,10 @@ public class TileInfo : MonoBehaviour
     public float adjustHeight = 1f;
     public enum TerrainType
     {
-        Normal = 5,
-        Muddy = 30,
-        Forest = 10,
-        Stone = 90,
+        Normal = 20,
+        Muddy = 60,
+        Forest = 40,
+        Stone = 70,
         Start = 0,
         End = 1
     }
