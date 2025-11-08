@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class EnemyManager : MonoBehaviour
 
     [Header("Creating Enemies")] [SerializeField]
     private int totalEnemyPool = 30;
-    [SerializeField] private List<LeaderScript> enemiesInPool;
+    [FormerlySerializedAs("enemiesInPool")] public List<LeaderScript> normalEnemiesInPool, fastEnemiesInPool, shieldEnemiesInPool, clericEnemiesInPool, wizardEnemiesInPool;
     [SerializeField] private Transform storeEnemiesParent;
     [SerializeField] private GameObject leaderPrefab;
     [SerializeField] private float spawnForce = 100f;
@@ -49,7 +50,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GoblinVillage goblinVillage;
     void Awake()
     {
-        CreateLeaders();
+       // CreateLeaders();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -234,7 +235,7 @@ public class EnemyManager : MonoBehaviour
         {
             GameObject leader = Instantiate(leaderPrefab, storeEnemiesParent);
             LeaderScript leaderScript = leader.GetComponent<LeaderScript>();
-            enemiesInPool.Add(leaderScript);
+            normalEnemiesInPool.Add(leaderScript);
             leaderScript.SetEnemyMan(this);
             leaderScript.enemyCollider.enabled = false;
             leader.SetActive(false);
@@ -245,11 +246,11 @@ public class EnemyManager : MonoBehaviour
     {
         currentTime = Time.time;
         enemiesSpawnedInWave += 1;
-        if (enemiesInPool.Count > 0)
+        if (normalEnemiesInPool.Count > 0)
         {
-            LeaderScript leader = enemiesInPool[0];
-            enemiesInPool.RemoveAt(0);
-            enemiesInField.Add(leader);
+            LeaderScript leader = normalEnemiesInPool[0];
+            normalEnemiesInPool.RemoveAt(0);
+            
             leader.gameObject.SetActive(true);
             LeadersIsSpawnde(leader);
         }
@@ -258,7 +259,7 @@ public class EnemyManager : MonoBehaviour
             GameObject leader = Instantiate(leaderPrefab, fieldEnemiesParent);
             LeaderScript leaderScript = leader.GetComponent<LeaderScript>();
             leaderScript.SetEnemyMan(this);
-            enemiesInField.Add(leaderScript);
+            
             LeadersIsSpawnde(leaderScript);
             
         }
@@ -270,9 +271,10 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    private void LeadersIsSpawnde(LeaderScript leader)
+    public void LeadersIsSpawnde(LeaderScript leader)
     {
         Vector3 placePos = new Vector3(saveStartTile.topTileTransform.position.x, saveStartTile.topTileTransform.position.y+adjustable, saveStartTile.topTileTransform.position.z);
+        enemiesInField.Add(leader);
         leader.transform.position = placePos;
         leader.enemyCollider.enabled = false;
         leader.rb.linearVelocity = Vector3.zero;
@@ -290,7 +292,27 @@ public class EnemyManager : MonoBehaviour
     public void RemoveLeaderFromField(LeaderScript leader)
     {
         enemiesInField.Remove(leader);
-        enemiesInPool.Add(leader);
+        switch (leader.enemyCont.enemyType)
+        {
+            case EnemyContoller.EnemyType.Normal:
+                normalEnemiesInPool.Add(leader);
+                break;
+            case EnemyContoller.EnemyType.Fast:
+                fastEnemiesInPool.Add(leader);
+                break;
+            case EnemyContoller.EnemyType.Shield:
+                shieldEnemiesInPool.Add(leader);
+                break;
+            case EnemyContoller.EnemyType.Wizard:
+                wizardEnemiesInPool.Add(leader);
+                break;
+            case EnemyContoller.EnemyType.Cleric:
+                clericEnemiesInPool.Add(leader);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
         leader.transform.parent = storeEnemiesParent;
         leader.waypoints.Clear();
         leader.enemyCollider.enabled = false;
@@ -315,17 +337,17 @@ public class EnemyManager : MonoBehaviour
         float difference = Time.time - currentTime;
         if (difference >= spawnRate)
         {
-            AddLeaderToField();
+            //AddLeaderToField();
         }
     }
 
-    public void IncreaseWave()
-    {
-        currentWave += 1;
-        canSpawn = true;
-        currentTime = Time.time;
-        totalEnemiesInWave += 5;
-    }
+    // public void IncreaseWave()
+    // {
+    //     currentWave += 1;
+    //     canSpawn = true;
+    //     currentTime = Time.time;
+    //     totalEnemiesInWave += 5;
+    // }
     #endregion
     
 }

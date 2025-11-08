@@ -46,11 +46,11 @@ public class TestManager : MonoBehaviour
         //     enemyManager.IncreaseWave();
         // }
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            enemyManager.IncreaseWave();
-        }
-        
+        // if (Input.GetKeyDown(KeyCode.I))
+        // {
+        //     enemyManager.IncreaseWave();
+        // }
+        //
         // if (Input.GetKeyDown(KeyCode.S))
         // {
         //     setDestsScript.SetDestinations();

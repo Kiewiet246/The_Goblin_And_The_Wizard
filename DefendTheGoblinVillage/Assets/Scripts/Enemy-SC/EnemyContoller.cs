@@ -6,7 +6,7 @@ public class EnemyContoller : MonoBehaviour
 {
     [Header("Enemy Identity")]
     [SerializeField] private int enemyIdentity;
-    [SerializeField] private EnemyType enemyType;
+    public EnemyType enemyType;
 
     [Header("Casting Spells")]
     [SerializeField] private float castingRange;

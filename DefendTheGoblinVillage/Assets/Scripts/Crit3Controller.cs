@@ -19,7 +19,7 @@ public class Crit3Controller : MonoBehaviour
     
     void Awake()
     {
-        RecreateGrid();
+       // RecreateGrid();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,10 +36,10 @@ public class Crit3Controller : MonoBehaviour
         enemyManager.SetPath();
     }
 
-    public void NextWave()
-    {
-        enemyManager.IncreaseWave();
-    }
+    // public void NextWave()
+    // {
+    //     enemyManager.IncreaseWave();
+    // }
 
     // Update is called once per frame
     void Update()
@@ -54,10 +54,10 @@ public class Crit3Controller : MonoBehaviour
          //  RightMouseButton();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RotateTheTower();
-        }
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        //     RotateTheTower();
+        // }
         
         // if (Input.GetKeyDown(KeyCode.D))
         // {
