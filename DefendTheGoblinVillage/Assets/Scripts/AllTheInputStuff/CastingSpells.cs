@@ -65,12 +65,20 @@ public class CastingSpells : MonoBehaviour
                     {
                         if (tileInfo.spellOnTile == SpellManager.SpellType.Normal)
                         {
-                            spellPrefab.SetActive(true);
-                            spellPrefab.transform.position = new Vector3(tileInfo.transform.position.x, tileInfo.topTileTransform.position.y + adjustHeight, tileInfo.transform.position.z);
+                            SetSpellOntile();
                         }
                     }
                 }
             }
+        }
+    }
+
+    public void SetSpellOntile()
+    {
+        if (tileInfo != null)
+        {
+            spellPrefab.SetActive(true);
+            spellPrefab.transform.position = new Vector3(tileInfo.transform.position.x, tileInfo.topTileTransform.position.y + adjustHeight, tileInfo.transform.position.z);
         }
     }
 

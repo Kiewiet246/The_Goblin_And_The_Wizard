@@ -167,9 +167,7 @@ public class BuildingTowers : MonoBehaviour
              {
                  if (tileInfo.towerController == null)
                  {
-                     Vector3 spawnPosition = new Vector3(tileInfo.transform.position.x,
-                         (tileInfo.topTileTransform.transform.position.y + adjustment),
-                         tileInfo.transform.position.z);
+                    
                      desiredTowerType = towerManager.spawnTowerType;
                      switch (desiredTowerType)
                      {
@@ -188,20 +186,28 @@ public class BuildingTowers : MonoBehaviour
                          default:
                              throw new ArgumentOutOfRangeException();
                      }
-                     preBuildTower.SetActive(true);
-                     preTowerController = preBuildTower.GetComponent<TowerController>();
-                     preTowerController.gridManager = this.gridManager;
-                     preBuildTower.transform.position = spawnPosition;
-                     preTowerController.towerType = desiredTowerType;
-                     preTowerController.towerTile = tileInfo;
-                     preTowerController.CalculateRange();
-                     preTowerController.ShowRange();
-                     tileInfo.towerController = preTowerController;
-                     enemyManager.CheckifPathWillChange(tileInfo);
+                    SetTowerOnTile();
                  }
              }
             
         }
+    }
+
+    public void SetTowerOnTile()
+    {
+        Vector3 spawnPosition = new Vector3(tileInfo.transform.position.x,
+            (tileInfo.topTileTransform.transform.position.y + adjustment),
+            tileInfo.transform.position.z);
+        preBuildTower.SetActive(true);
+        preTowerController = preBuildTower.GetComponent<TowerController>();
+        preTowerController.gridManager = this.gridManager;
+        preBuildTower.transform.position = spawnPosition;
+        preTowerController.towerType = desiredTowerType;
+        preTowerController.towerTile = tileInfo;
+        preTowerController.CalculateRange();
+        preTowerController.ShowRange();
+        tileInfo.towerController = preTowerController;
+        enemyManager.CheckifPathWillChange(tileInfo);
     }
     
 

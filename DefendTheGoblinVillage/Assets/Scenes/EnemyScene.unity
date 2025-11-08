@@ -3332,6 +3332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputController: {fileID: 1937454431}
+  buildingTowers: {fileID: 1937454437}
+  castingSpells: {fileID: 1937454439}
   oncePressed: 0
   isBuildMode: 1
 --- !u!114 &1937454436

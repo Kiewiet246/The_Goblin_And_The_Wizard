@@ -4,6 +4,8 @@ public class ModeControl : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private InputController inputController;
+    [SerializeField] private BuildingTowers buildingTowers;
+    [SerializeField] private CastingSpells castingSpells;
 
     [Header("Mode Variables")] [SerializeField]
     private bool oncePressed;
@@ -31,11 +33,26 @@ public class ModeControl : MonoBehaviour
         if (isBuildMode)
         {
             isBuildMode = false;
+            if (buildingTowers.preBuildTower.activeSelf)
+            {
+                buildingTowers.preBuildTower.SetActive(false);
+                buildingTowers.preTowerController.HideRange();
+                buildingTowers.preTowerController.ClearTilesInRange();
+                buildingTowers.enemyManager.futurePath.gameObject.SetActive(false);
+                castingSpells.tileInfo = buildingTowers.tileInfo;
+                castingSpells.SetSpellOntile();
+            }
         }
 
         else
         {
             isBuildMode = true;
+            if (castingSpells.spellPrefab.activeSelf)
+            {
+                castingSpells.spellPrefab.SetActive(false);
+                buildingTowers.tileInfo = castingSpells.tileInfo;
+                buildingTowers.SetTowerOnTile();
+            }
         }
     }
 }
