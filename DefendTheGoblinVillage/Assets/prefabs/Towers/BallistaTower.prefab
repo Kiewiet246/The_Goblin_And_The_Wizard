@@ -169,7 +169,7 @@ MonoBehaviour:
   timeToRecenter: 15
   rangeType: 0
   angle: 60
-  towerType: 50
+  towerType: 100
   towerCost: 0
   health: 0
   showDamage: {fileID: -7312683024463059446}
@@ -355,4 +355,7 @@ MonoBehaviour:
   defaultMat: {fileID: 5213194417030236978, guid: d9e0104c5d2586c4b976c1ddd6b76ecb, type: 3}
   buildingMat: {fileID: 2100000, guid: f5bcd008063468648a1703527cfdaefc, type: 2}
   cannotBuildMat: {fileID: 2100000, guid: df23b73daf54ac044bbc88d78faaea9c, type: 2}
+  flashDuration: 0.1
+  startFlash: 0
+  flashTimer: 0
   canBuild: 1
