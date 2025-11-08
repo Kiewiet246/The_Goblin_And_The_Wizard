@@ -45,6 +45,7 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private Transform activateField;
     [SerializeField] private float adjustActFieldHeight;
+    [SerializeField] private GoblinVillage goblinVillage;
     void Awake()
     {
         CreateLeaders();
@@ -55,6 +56,9 @@ public class EnemyManager : MonoBehaviour
     {
         Vector3 spawnPosition = new Vector3(saveStartTile.topTileTransform.position.x, saveStartTile.topTileTransform.position.y + adjustable, saveStartTile.topTileTransform.position.z);
         activateField.position = spawnPosition;
+        
+        Vector3 goblinVillagePosition = new Vector3(saveEndTile.transform.position.x, saveEndTile.topTileTransform.position.y + adjustable, saveEndTile.transform.position.z);
+        goblinVillage.transform.position = goblinVillagePosition;
        // forceUp = spawnForce * saveStartTile.height;
     }
 
@@ -276,6 +280,7 @@ public class EnemyManager : MonoBehaviour
         leader.health = setHealth;
         leader.spellManager = spellManager;
         leader.lived += 1;
+        leader.goblinVillage = this.goblinVillage;
         GiveLeadersPath(leader);
     }
 

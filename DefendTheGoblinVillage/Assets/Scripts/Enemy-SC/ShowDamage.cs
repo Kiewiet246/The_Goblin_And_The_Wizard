@@ -51,11 +51,4 @@ public class ShowDamage : MonoBehaviour
         flashTimer = Time.time;
         meshRenderer.material = flashMat;
     }
-
-    IEnumerator Flash()
-    {
-        meshRenderer.material = flashMat;
-        yield return new WaitForSeconds(flashDuration);
-        meshRenderer.material = normalMat;
-    }
 }

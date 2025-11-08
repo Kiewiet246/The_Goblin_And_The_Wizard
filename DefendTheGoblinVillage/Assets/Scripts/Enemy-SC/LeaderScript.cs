@@ -38,6 +38,7 @@ public class LeaderScript : MonoBehaviour
     [Header("Health")]
     public float health = 6;
     public float damage = 3;
+    public GoblinVillage goblinVillage;
     
     [Header("Spells")]
     public SpellAflections spellAflections;
@@ -326,6 +327,12 @@ public class LeaderScript : MonoBehaviour
                 collision.gameObject.GetComponentInParent<TowerController>().TakeDamage(damage);
                 enemyManager.RemoveLeaderFromField(this);
             }
+        }
+        
+        else if (collision.gameObject.CompareTag("GoblinVillage"))
+        {
+            goblinVillage.TakeDamage(damage);
+            enemyManager.RemoveLeaderFromField(this);
         }
         
         else if (collision.gameObject.CompareTag("TopTile"))
