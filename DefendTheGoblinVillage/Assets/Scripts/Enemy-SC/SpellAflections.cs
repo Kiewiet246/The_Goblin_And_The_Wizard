@@ -9,4 +9,8 @@ public class SpellAflections : MonoBehaviour
     public float fireStack;
     public float iceStack;
     public float poisonStack;
+
+    public GameObject burnFVX;
+    public GameObject freezeFVX;
+    public GameObject poisonFVX;
 }

@@ -84,16 +84,20 @@ public class SpellManager : MonoBehaviour
         List<LeaderScript> leaders = burningLeaders;
         foreach (LeaderScript burningMan in leaders)
         {
+            burningMan.spellAflections.burnFVX.SetActive(false);
             burningMan.TakeDamage(burnDamage, 0, SpellType.Fire);
             burningMan.spellAflections.fireStack -= removeFireStacks;
+            burningMan.spellAflections.burnFVX.SetActive(true);
 
             if (burningMan.spellAflections.fireStack <= 0)
             {
+                burningMan.spellAflections.burnFVX.SetActive(false);
                 burningLeaders.Remove(burningMan);
             }
             
             else if (burningMan.health <= 0)
             {
+                burningMan.spellAflections.burnFVX.SetActive(false);
                 burningLeaders.Remove(burningMan);
             }
         }
@@ -147,17 +151,22 @@ public class SpellManager : MonoBehaviour
 
         foreach (LeaderScript frozen in leaders)
         {
+            frozen.spellAflections.freezeFVX.SetActive(false);
             frozen.TakeDamage(iceDamage, 0, SpellType.Ice);
             frozen.spellAflections.iceStack -= removeIceStacks;
+            frozen.spellAflections.freezeFVX.SetActive(true);
             if (frozen.spellAflections.iceStack <= 0)
             {
+                frozen.spellAflections.freezeFVX.SetActive(false);
                 frozen.hasBeenFrozen = false;
                 frozenLeaders.Remove(frozen);
             }
 
             else if (frozen.health <= 0)
             {
+                frozen.spellAflections.freezeFVX.SetActive(false);
                 frozen.hasBeenFrozen = false;
+                frozenLeaders.Remove(frozen);
             }
         }
 
@@ -213,14 +222,17 @@ public class SpellManager : MonoBehaviour
 
         foreach (LeaderScript poisoned in leaders)
         {
+            poisoned.spellAflections.poisonFVX.SetActive(false);
             poisoned.TakeDamage(poisonDamage, 0, SpellType.Poison);
             poisoned.spellAflections.poisonStack -= removePoisonStacks;
+            poisoned.spellAflections.poisonFVX.SetActive(true);
             if (poisoned.spellAflections.poisonStack <= 0)
             {
                 if (poisoned.enemyCont.isCaster)
                 {
                     poisoned.enemyCont.canShoot = true;
                 }
+                poisoned.spellAflections.poisonFVX.SetActive(false);
                 poisonLeaders.Remove(poisoned);
             }
             else if (poisoned.health <= 0)
@@ -229,6 +241,7 @@ public class SpellManager : MonoBehaviour
                 {
                     poisoned.enemyCont.canShoot = true;
                 }
+                poisoned.spellAflections.poisonFVX.SetActive(false);
                 poisonLeaders.Remove(poisoned);
             }
         }

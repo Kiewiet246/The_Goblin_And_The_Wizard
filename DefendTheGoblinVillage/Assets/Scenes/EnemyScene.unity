@@ -119,6 +119,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &1391008
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279317507}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00376
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+      propertyPath: m_Name
+      value: Village
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
 --- !u!1 &17823432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,6 +1368,11 @@ MonoBehaviour:
   setDestsScript: {fileID: 825824254}
   enemyManager: {fileID: 1190781908}
   waveManager: {fileID: 1635921315}
+--- !u!4 &765902737 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dfdb0ce4a349846499cbe1fda8504d33, type: 3}
+  m_PrefabInstance: {fileID: 1391008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &825824249 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8743926109157311546, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
@@ -1664,7 +1738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7719997422001803625, guid: fb82479e6a4c48340b3e881ade384371, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7719997422001803625, guid: fb82479e6a4c48340b3e881ade384371, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1677,7 +1751,10 @@ PrefabInstance:
     - {fileID: 9108607527939651188, guid: fb82479e6a4c48340b3e881ade384371, type: 3}
     - {fileID: 4814049080482412448, guid: fb82479e6a4c48340b3e881ade384371, type: 3}
     - {fileID: 7760420950554337313, guid: fb82479e6a4c48340b3e881ade384371, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 676963267949156788, guid: fb82479e6a4c48340b3e881ade384371, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 765902737}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5685912500138190163, guid: fb82479e6a4c48340b3e881ade384371, type: 3}
       insertIndex: -1
@@ -2840,14 +2917,14 @@ MonoBehaviour:
     parties:
     - repeatAmountForParty: 1
       spawnRateForIndividuals: 5
-      singleParty: 000000000000000000000000
+      singleParty: 020000000200000002000000
   waveTwo:
     spawnRatesBetweenParty: 5
     repeatThroughList: 10
     parties:
     - repeatAmountForParty: 5
       spawnRateForIndividuals: 1.25
-      singleParty: 000000000000000001000000
+      singleParty: 040000000400000004000000
     - repeatAmountForParty: 3
       spawnRateForIndividuals: 1.25
       singleParty: 000000000000000002000000
@@ -3981,6 +4058,10 @@ PrefabInstance:
       propertyPath: currentWave
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
+      propertyPath: waveManager
+      value: 
+      objectReference: {fileID: 1635921315}
     - target: {fileID: 7431377921484883999, guid: be43601078f059a49ac9591b3a6ff09b, type: 3}
       propertyPath: leaderPrefab
       value: 
