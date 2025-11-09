@@ -30,6 +30,8 @@ public class CastingSpells : MonoBehaviour
     [SerializeField] private int poisonCost;
     [SerializeField] private ShowDamage showDamage;
     
+    [SerializeField] private GameObject fire, ice, poison;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -85,8 +87,33 @@ public class CastingSpells : MonoBehaviour
     {
         if (tileInfo != null)
         {
+            UpdateSprite();
             spellPrefab.SetActive(true);
             spellPrefab.transform.position = new Vector3(tileInfo.transform.position.x, tileInfo.topTileTransform.position.y + adjustHeight, tileInfo.transform.position.z);
+        }
+    }
+
+    public void UpdateSprite()
+    {
+        switch (spellManager.spell)
+        {
+            case SpellManager.SpellType.Fire:
+                fire.SetActive(true);
+                ice.SetActive(false);
+                poison.SetActive(false);
+                break;
+            case SpellManager.SpellType.Ice:
+                fire.SetActive(false);
+                ice.SetActive(true);
+                poison.SetActive(false);
+                break;
+            case SpellManager.SpellType.Poison:
+                fire.SetActive(false);
+                ice.SetActive(false);
+                poison.SetActive(true);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 

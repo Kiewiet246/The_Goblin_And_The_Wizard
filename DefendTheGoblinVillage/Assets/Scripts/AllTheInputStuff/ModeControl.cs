@@ -6,6 +6,7 @@ public class ModeControl : MonoBehaviour
     [SerializeField] private InputController inputController;
     [SerializeField] private BuildingTowers buildingTowers;
     [SerializeField] private CastingSpells castingSpells;
+    [SerializeField] private UIManager uIManager;
 
     [Header("Mode Variables")] [SerializeField]
     private bool oncePressed;
@@ -54,5 +55,7 @@ public class ModeControl : MonoBehaviour
                 buildingTowers.SetTowerOnTile();
             }
         }
+        uIManager.UpdateModeImage();
+        uIManager.UpdateCycleImage();
     }
 }

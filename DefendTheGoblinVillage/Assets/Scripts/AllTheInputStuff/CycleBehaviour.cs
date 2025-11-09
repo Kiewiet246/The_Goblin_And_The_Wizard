@@ -7,6 +7,8 @@ public class CycleBehaviour : MonoBehaviour
     [SerializeField] private InputController inputController;
     [SerializeField] private ModeControl modeControl;
     [SerializeField] private BuildingTowers buildingTowers;
+    [SerializeField] private CastingSpells castingSpells;
+    [SerializeField] private UIManager uiManager;
     
     [Header("Manager Components")]
     [SerializeField] private TowerManager towerManager;
@@ -14,10 +16,12 @@ public class CycleBehaviour : MonoBehaviour
     
     [Header("Towers")] [SerializeField]
     private List<TowerController.TowerType> towerTypes;
+    public TowerController.TowerType visualiseTowerType;
     [SerializeField] private int currentTower = 0;
 
     [Header("Spells")]
     [SerializeField] private List<SpellManager.SpellType> spellTypes;
+    public SpellManager.SpellType visualiseSpell;
     [SerializeField] private int currentSpell = 0;
     
     [Header("Extra")]
@@ -25,7 +29,10 @@ public class CycleBehaviour : MonoBehaviour
     void Start()
     {
         towerManager.spawnTowerType = towerTypes[0];
+        visualiseTowerType = towerManager.spawnTowerType;
         spellManager.spell = spellTypes[0];
+        visualiseSpell = spellManager.spell;
+        uiManager.UpdateCycleImage();
     }
     
     void FixedUpdate()
@@ -59,13 +66,16 @@ public class CycleBehaviour : MonoBehaviour
         if (currentTower < towerTypes.Count)
         {
             towerManager.spawnTowerType = towerTypes[currentTower];
+            visualiseTowerType = towerManager.spawnTowerType;
         }
         
         else if (currentTower >= towerTypes.Count)
         {
             currentTower = 0;
             towerManager.spawnTowerType = towerTypes[0];
+            visualiseTowerType = towerManager.spawnTowerType;
         }
+        uiManager.UpdateCycleImage();
 
         if (buildingTowers.preBuildTower.activeSelf == true)
         {
@@ -80,13 +90,17 @@ public class CycleBehaviour : MonoBehaviour
         if (currentSpell < spellTypes.Count)
         {
             spellManager.spell = spellTypes[currentSpell];
+            visualiseSpell = spellManager.spell;
         }
         
         else if (currentSpell >= spellTypes.Count)
         {
             currentSpell = 0;
             spellManager.spell = spellTypes[0];
+            visualiseSpell = spellManager.spell;
         }
+        uiManager.UpdateCycleImage();
+        castingSpells.UpdateSprite();
     }
   
 }
