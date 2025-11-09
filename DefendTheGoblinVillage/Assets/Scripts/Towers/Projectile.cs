@@ -26,6 +26,9 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float iceStack;
     [SerializeField] private float poisonStack;
     
+    
+    [Header("Canon VFX")]
+    [SerializeField] private GameObject canonVFX;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -76,6 +79,7 @@ public class Projectile : MonoBehaviour
 
     public void StartProjectile(Transform target)
     {
+        canonVFX.SetActive(false);
         currentTime = Time.time;
         isAlive = true;
         this.target = target;
@@ -84,6 +88,7 @@ public class Projectile : MonoBehaviour
 
     private void EndProjectile()
     {
+        //canonVFX.SetActive(false);
         isAlive = false;
         towerController.projectiles.Add(rb);
         gameObject.SetActive(false);
@@ -115,6 +120,9 @@ public class Projectile : MonoBehaviour
     {
         if (!oneExplosion)
         {
+            canonVFX.transform.position = collision.contacts[0].point;
+            canonVFX.SetActive(true);
+            Debug.Log(canonVFX.activeSelf);
             ExplodeTheProjectile();
         }
     }
@@ -122,6 +130,7 @@ public class Projectile : MonoBehaviour
     private void ExplodeTheProjectile()
     {
         oneExplosion = true;
+        
         List<LeaderScript> leaders = new List<LeaderScript>();
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius, enemiesLayer);
 

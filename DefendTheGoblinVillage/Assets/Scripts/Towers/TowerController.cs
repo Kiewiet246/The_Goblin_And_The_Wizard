@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+
 using UnityEngine.Serialization;
 
 public class TowerController : MonoBehaviour
@@ -75,6 +76,10 @@ public class TowerController : MonoBehaviour
     
     [Header("Couratine Stuff")]
     [SerializeField] private float delay = 0.5f;
+    
+    [Header("Canon VFX")]
+    [SerializeField] private GameObject canonVFX;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -240,9 +245,12 @@ public class TowerController : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         projectiles.Remove(rb);
         Vector3 spawnPos = new Vector3(pos.x, pos.y + 4, pos.z);
+        rb.position = spawnPos;
+        canonVFX.SetActive(true);
         
         yield return new WaitForSeconds(delay);
         
+        canonVFX.SetActive(false);
         rb.gameObject.SetActive(true);
         rb.position = spawnPos;
         rb.AddForce(projectileSpeed*Vector3.down, ForceMode.Impulse);

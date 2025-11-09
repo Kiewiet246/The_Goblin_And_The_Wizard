@@ -224,6 +224,30 @@ PrefabInstance:
       propertyPath: ShapeModule.radiusThickness
       value: 0.45
       objectReference: {fileID: 0}
+    - target: {fileID: 6834333839861128958, guid: db05ebb6939b20045b0ab65ba43143ea, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834333839861128958, guid: db05ebb6939b20045b0ab65ba43143ea, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834333839861128958, guid: db05ebb6939b20045b0ab65ba43143ea, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834333839861128958, guid: db05ebb6939b20045b0ab65ba43143ea, type: 3}
+      propertyPath: InitialModule.startSpeed.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834333839861128958, guid: db05ebb6939b20045b0ab65ba43143ea, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834333839861128958, guid: db05ebb6939b20045b0ab65ba43143ea, type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

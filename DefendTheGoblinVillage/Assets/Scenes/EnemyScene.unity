@@ -2841,9 +2841,6 @@ MonoBehaviour:
     - repeatAmountForParty: 1
       spawnRateForIndividuals: 2
       singleParty: 0000000002000000
-    - repeatAmountForParty: 2
-      spawnRateForIndividuals: 1.5
-      singleParty: 040000000100000001000000
   waveTwo:
     spawnRatesBetweenParty: 5
     repeatThroughList: 10
@@ -2855,41 +2852,20 @@ MonoBehaviour:
       spawnRateForIndividuals: 1.25
       singleParty: 000000000000000002000000
   waveThree:
-    spawnRatesBetweenParty: 8
-    repeatThroughList: 10
+    spawnRatesBetweenParty: 3
+    repeatThroughList: 2
     parties:
     - repeatAmountForParty: 6
       spawnRateForIndividuals: 1
       singleParty: 0200000002000000030000000000000000000000
-    - repeatAmountForParty: 4
-      spawnRateForIndividuals: 1
-      singleParty: 00000000020000000300000001000000010000000200000000000000
-    - repeatAmountForParty: 4
-      spawnRateForIndividuals: 0.8
-      singleParty: 0400000001000000010000000100000001000000
   waveFour:
-    spawnRatesBetweenParty: 9
+    spawnRatesBetweenParty: 3
     repeatThroughList: 2
-    parties:
-    - repeatAmountForParty: 10
-      spawnRateForIndividuals: 0.75
-      singleParty: 0200000002000000020000000200000003000000
-    - repeatAmountForParty: 6
-      spawnRateForIndividuals: 0.75
-      singleParty: 0000000000000000040000000000000000000000
+    parties: []
   waveFive:
     spawnRatesBetweenParty: 2
-    repeatThroughList: 10
-    parties:
-    - repeatAmountForParty: 5
-      spawnRateForIndividuals: 1
-      singleParty: 0400000002000000020000000300000000000000
-    - repeatAmountForParty: 10
-      spawnRateForIndividuals: 0.5
-      singleParty: 010000000100000001000000
-    - repeatAmountForParty: 6
-      spawnRateForIndividuals: 0.8
-      singleParty: 020000000300000002000000
+    repeatThroughList: 1
+    parties: []
   createOfEach: 20
   fastEnemy: {fileID: 2215898661835275168, guid: 55db28bbf54d4e14c8566d1f86420fc8, type: 3}
   normalEnemy: {fileID: 2215898661835275168, guid: f636afb2b9203a14aa934c91298bac9f, type: 3}
