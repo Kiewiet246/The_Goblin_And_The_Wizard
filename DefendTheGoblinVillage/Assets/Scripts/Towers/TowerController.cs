@@ -206,6 +206,7 @@ public class TowerController : MonoBehaviour
             case TowerType.WallTower:
                 break;
             case TowerType.BalistaTower:
+                canonVFX.SetActive(false);
                 BalistaShooting();
                 break;
             default:
@@ -259,6 +260,7 @@ public class TowerController : MonoBehaviour
 
     private void BalistaShooting()
     {
+        canonVFX.SetActive(true);
         List<LeaderScript> deadLeaders = new List<LeaderScript>();
         foreach (LeaderScript leader in leaders)
         {
