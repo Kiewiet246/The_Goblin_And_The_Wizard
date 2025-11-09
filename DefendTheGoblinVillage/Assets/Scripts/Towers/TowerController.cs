@@ -250,12 +250,16 @@ public class TowerController : MonoBehaviour
         canonVFX.SetActive(true);
         
         yield return new WaitForSeconds(delay);
+
+        if (rb != null)
+        {
+            canonVFX.SetActive(false);
+            rb.gameObject.SetActive(true);
+            rb.position = spawnPos;
+            rb.AddForce(projectileSpeed*Vector3.down, ForceMode.Impulse);
+            targetedLeader = null;
+        }
         
-        canonVFX.SetActive(false);
-        rb.gameObject.SetActive(true);
-        rb.position = spawnPos;
-        rb.AddForce(projectileSpeed*Vector3.down, ForceMode.Impulse);
-        targetedLeader = null;
     }
 
     private void BalistaShooting()

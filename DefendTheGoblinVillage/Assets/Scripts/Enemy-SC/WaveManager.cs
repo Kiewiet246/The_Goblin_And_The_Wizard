@@ -9,7 +9,8 @@ public class WaveManager : MonoBehaviour
 
     [Header("The Important Values")] [SerializeField]
     private int waitTimeBetweenWaves;
-    [SerializeField] private float currentTime;
+
+    [SerializeField] private float currentTimeIndividual, currentTimeParty, currentTimeWave;
     public int waveCounter = 0;
     [SerializeField] private int identifySpawnIndividual = 0;
     [SerializeField] private bool isSpawningIndividuals = false;
@@ -61,7 +62,7 @@ public class WaveManager : MonoBehaviour
 
     private void CountDownWave()
     {
-        float difference = Time.time - currentTime;
+        float difference = Time.time - currentTimeWave;
         if (difference > waitTimeBetweenWaves)
         {
             NextWave();
@@ -70,7 +71,7 @@ public class WaveManager : MonoBehaviour
 
     private void CountDownBunch()
     {
-        float difference = Time.time - currentTime;
+        float difference = Time.time - currentTimeParty;
         if (difference >= currentWave.spawnRatesBetweenParty)
         {
             Debug.Log("Hello");
@@ -81,7 +82,7 @@ public class WaveManager : MonoBehaviour
 
     private void CountDownIndividual()
     {
-        float difference = Time.time - currentTime;
+        float difference = Time.time - currentTimeIndividual;
         if (difference >= currentWave.parties[identifySpawnBunch].spawnRateForIndividuals)
         {
            SpawnIndividual();
@@ -121,7 +122,7 @@ public class WaveManager : MonoBehaviour
             {
                // Debug.Log("Did the party Multiple times");
                 bunchRepeatsCount = 0;
-                currentTime = Time.time;
+                currentTimeParty = Time.time;
                 isSpawningNextBunch = true;
                 isSpawningIndividuals = false;
                 identifySpawnBunch += 1;
@@ -135,25 +136,26 @@ public class WaveManager : MonoBehaviour
                         listRepeatsCount = 0;
                         isSpawningNextBunch = false;
                         isSpawningIndividuals = false;
+                        currentTimeWave = Time.time;
                         isSpawningNextWave = true;
                        // Debug.Log("EndWave");
                         return;
                     }
                 }
-                currentTime = Time.time;
+                currentTimeParty = Time.time;
                 return;
             }
         }
-        currentTime = Time.time;
+        currentTimeIndividual = Time.time;
     }
 
     private void NextWave()
     {
-        currentTime = Time.time;
+        currentTimeWave = Time.time;
         isSpawningNextWave = false;
         isSpawningNextBunch = false;
         isSpawningIndividuals = true;
-        currentTime = Time.time;
+        currentTimeIndividual = Time.time;
         waveCounter += 1;
         switch (waveCounter)
         {

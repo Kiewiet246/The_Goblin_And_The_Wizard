@@ -87,8 +87,14 @@ public class LeaderScript : MonoBehaviour
 
     public void ResetHealth()
     {
-        float adjustBaseHealth = Mathf.FloorToInt(waveManager.waveCounter / 2);
-        health = baseHealth * adjustBaseHealth;
+        if (waveManager.waveCounter == 0)
+        {
+            health = baseHealth;
+            return;
+        }
+       // float adjustBaseHealth = Mathf.FloorToInt(waveManager.waveCounter / 2);
+        //health = baseHealth * adjustBaseHealth;
+        health = baseHealth * waveManager.waveCounter;
     }
 
     public void TakeDamage(float damage, float stacks, SpellManager.SpellType spell)

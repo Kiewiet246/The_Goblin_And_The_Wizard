@@ -6,7 +6,9 @@ public class ActivateEnemies : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.GetComponent<LeaderScript>().enemyCollider.enabled = true;
+            LeaderScript leaderScript = other.gameObject.GetComponent<LeaderScript>();
+            leaderScript.enemyCollider.enabled = true;
+            leaderScript.ResetHealth();
             //Debug.Log(other.gameObject.name);
         }
     }

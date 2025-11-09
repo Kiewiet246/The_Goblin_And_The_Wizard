@@ -1318,19 +1318,19 @@ MonoBehaviour:
   spell: 0
   burnRate: 0.5
   removeFireStacks: 3
-  burnDamage: 1.5
+  burnDamage: 0.3
   burningLeaders: []
   isBurning: 0
   burnTime: 0
   maxFireStacks: 15
-  iceDamage: 0
+  iceDamage: 0.1
   frozenRate: 0.5
   removeIceStacks: 5
   frozenLeaders: []
   isFrozen: 0
   frozenTime: 0
   maxIceStacks: 20
-  poisonDamage: 0.5
+  poisonDamage: 0.2
   poisonDebuff: 0
   removePoisonStacks: 3
   poisonLeaders: []
@@ -2898,7 +2898,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 1190781908}
   waitTimeBetweenWaves: 20
-  currentTime: 0
+  currentTimeIndividual: 0
+  currentTimeParty: 0
+  currentTimeWave: 0
   waveCounter: 0
   identifySpawnIndividual: 0
   isSpawningIndividuals: 0
@@ -2920,7 +2922,7 @@ MonoBehaviour:
       singleParty: 020000000200000002000000
   waveTwo:
     spawnRatesBetweenParty: 5
-    repeatThroughList: 10
+    repeatThroughList: 2
     parties:
     - repeatAmountForParty: 5
       spawnRateForIndividuals: 1.25
@@ -2930,19 +2932,34 @@ MonoBehaviour:
       singleParty: 000000000000000002000000
   waveThree:
     spawnRatesBetweenParty: 3
-    repeatThroughList: 2
+    repeatThroughList: 1
     parties:
     - repeatAmountForParty: 6
       spawnRateForIndividuals: 1
       singleParty: 0200000002000000030000000000000000000000
+    - repeatAmountForParty: 6
+      spawnRateForIndividuals: 1
+      singleParty: 0200000004000000030000000100000001000000
+    - repeatAmountForParty: 6
+      spawnRateForIndividuals: 1
+      singleParty: 0100000001000000030000000200000002000000
   waveFour:
-    spawnRatesBetweenParty: 3
-    repeatThroughList: 2
-    parties: []
+    spawnRatesBetweenParty: 0.7
+    repeatThroughList: 1
+    parties:
+    - repeatAmountForParty: 5
+      spawnRateForIndividuals: 0.7
+      singleParty: 01000000010000000300000001000000040000000200000002000000
   waveFive:
     spawnRatesBetweenParty: 2
     repeatThroughList: 1
-    parties: []
+    parties:
+    - repeatAmountForParty: 1
+      spawnRateForIndividuals: 1.5
+      singleParty: 0300000003000000030000000300000003000000
+    - repeatAmountForParty: 1
+      spawnRateForIndividuals: 1.5
+      singleParty: 0400000001000000010000000400000003000000
   createOfEach: 20
   fastEnemy: {fileID: 2215898661835275168, guid: 55db28bbf54d4e14c8566d1f86420fc8, type: 3}
   normalEnemy: {fileID: 2215898661835275168, guid: f636afb2b9203a14aa934c91298bac9f, type: 3}
