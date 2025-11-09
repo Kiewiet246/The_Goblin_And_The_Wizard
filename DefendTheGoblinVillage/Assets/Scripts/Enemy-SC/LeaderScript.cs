@@ -34,6 +34,7 @@ public class LeaderScript : MonoBehaviour
     
     [Header("Health")]
     public float baseHealth;
+    public WaveManager waveManager;
     public float health = 6;
     public float damage = 3;
     public GoblinVillage goblinVillage;
@@ -86,7 +87,7 @@ public class LeaderScript : MonoBehaviour
 
     public void ResetHealth()
     {
-        health = baseHealth;
+        health = baseHealth * waveManager.waveCounter;
     }
 
     public void TakeDamage(float damage, float stacks, SpellManager.SpellType spell)

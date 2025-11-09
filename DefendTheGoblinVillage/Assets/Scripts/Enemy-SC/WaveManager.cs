@@ -10,7 +10,7 @@ public class WaveManager : MonoBehaviour
     [Header("The Important Values")] [SerializeField]
     private int waitTimeBetweenWaves;
     [SerializeField] private float currentTime;
-    [SerializeField] private int waveCounter = 0;
+    public int waveCounter = 0;
     [SerializeField] private int identifySpawnIndividual = 0;
     [SerializeField] private bool isSpawningIndividuals = false;
     [SerializeField] private bool isSpawningNextBunch = false;
@@ -20,7 +20,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private int listRepeatsCount;
     
     [Header("Waves")]
-    [SerializeField] private Wave currentWave;
+    public Wave currentWave;
     [SerializeField] private Wave waveOne, waveTwo, waveThree, waveFour, waveFive;
 
     [SerializeField] private int createOfEach;
@@ -114,12 +114,12 @@ public class WaveManager : MonoBehaviour
         identifySpawnIndividual += 1;
         if (identifySpawnIndividual >= currentWave.parties[identifySpawnBunch].singleParty.Count)
         {
-            Debug.Log("Gone Through the party");
+           // Debug.Log("Gone Through the party");
             identifySpawnIndividual = 0;
             bunchRepeatsCount += 1;
             if (bunchRepeatsCount >= currentWave.parties[identifySpawnBunch].repeatAmountForParty)
             {
-                Debug.Log("Did the party Multiple times");
+               // Debug.Log("Did the party Multiple times");
                 bunchRepeatsCount = 0;
                 currentTime = Time.time;
                 isSpawningNextBunch = true;
@@ -127,7 +127,7 @@ public class WaveManager : MonoBehaviour
                 identifySpawnBunch += 1;
                 if (identifySpawnBunch >= currentWave.parties.Count)
                 {
-                    Debug.Log("BottleNeck?");
+                    //Debug.Log("BottleNeck?");
                     identifySpawnBunch = 0;
                     listRepeatsCount += 1;
                     if (listRepeatsCount >= currentWave.repeatThroughList)
@@ -136,7 +136,7 @@ public class WaveManager : MonoBehaviour
                         isSpawningNextBunch = false;
                         isSpawningIndividuals = false;
                         isSpawningNextWave = true;
-                        Debug.Log("EndWave");
+                       // Debug.Log("EndWave");
                         return;
                     }
                 }

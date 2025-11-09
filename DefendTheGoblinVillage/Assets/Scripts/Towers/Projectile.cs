@@ -79,7 +79,10 @@ public class Projectile : MonoBehaviour
 
     public void StartProjectile(Transform target)
     {
-        canonVFX.SetActive(false);
+        if (canonVFX != null)
+        {
+            canonVFX.SetActive(false);
+        }
         currentTime = Time.time;
         isAlive = true;
         this.target = target;
@@ -120,9 +123,11 @@ public class Projectile : MonoBehaviour
     {
         if (!oneExplosion)
         {
-            canonVFX.transform.position = collision.contacts[0].point;
-            canonVFX.SetActive(true);
-            Debug.Log(canonVFX.activeSelf);
+            if (canonVFX != null)
+            {
+                canonVFX.transform.position = collision.contacts[0].point;
+                canonVFX.SetActive(true);
+            }
             ExplodeTheProjectile();
         }
     }

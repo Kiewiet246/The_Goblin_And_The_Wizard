@@ -2835,12 +2835,12 @@ MonoBehaviour:
     repeatThroughList: 0
     parties: []
   waveOne:
-    spawnRatesBetweenParty: 6
+    spawnRatesBetweenParty: 4
     repeatThroughList: 2
     parties:
     - repeatAmountForParty: 1
-      spawnRateForIndividuals: 2
-      singleParty: 0000000002000000
+      spawnRateForIndividuals: 5
+      singleParty: 000000000000000000000000
   waveTwo:
     spawnRatesBetweenParty: 5
     repeatThroughList: 10

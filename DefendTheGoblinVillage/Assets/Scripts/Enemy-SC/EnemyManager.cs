@@ -44,6 +44,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float adjustable;
     [SerializeField] private SpellManager spellManager;
     [SerializeField] private Economy economy;
+    [SerializeField] private WaveManager waveManager;
 
     [SerializeField] private Transform activateField;
     [SerializeField] private float adjustActFieldHeight;
@@ -275,6 +276,7 @@ public class EnemyManager : MonoBehaviour
     {
         Vector3 placePos = new Vector3(saveStartTile.topTileTransform.position.x, saveStartTile.topTileTransform.position.y+adjustable, saveStartTile.topTileTransform.position.z);
         enemiesInField.Add(leader);
+        leader.waveManager = this.waveManager;
         leader.transform.position = placePos;
         leader.enemyCollider.enabled = false;
         leader.rb.linearVelocity = Vector3.zero;
