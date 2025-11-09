@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class GoblinVillage : MonoBehaviour
 {
-    [Header("Basic Stuff")] [SerializeField]
-    private float villageHealth = 10f;
+    [Header("Basic Stuff")] public float villageHealth = 10f;
     [SerializeField] private ShowDamage showDamage;
+    [SerializeField] private UIManager uIManager;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +21,7 @@ public class GoblinVillage : MonoBehaviour
     public void TakeDamage(float damage)
     {
         villageHealth -= damage;
+        uIManager.UpdateHealthSlider();
         showDamage.FlashDamage();
         {
             if (villageHealth <= 0)
