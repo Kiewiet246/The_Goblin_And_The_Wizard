@@ -199,6 +199,7 @@ public class BuildingTowers : MonoBehaviour
         Vector3 spawnPosition = new Vector3(tileInfo.transform.position.x,
             (tileInfo.topTileTransform.transform.position.y + adjustment),
             tileInfo.transform.position.z);
+        preBuildTower.GetComponentInChildren<TowerMatController>().canBuild = true;
         preBuildTower.SetActive(true);
         preTowerController = preBuildTower.GetComponent<TowerController>();
         preTowerController.gridManager = this.gridManager;

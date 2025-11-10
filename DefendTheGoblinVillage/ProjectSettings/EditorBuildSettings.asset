@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/GridGenerator.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 9e795bde60f97534abb1ba9e25968740
   - enabled: 1
     path: Assets/Scenes/EnemyScene.unity
     guid: e41d9ffd17632ff478cf64c0afce2052

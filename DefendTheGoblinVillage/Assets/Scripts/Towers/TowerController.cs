@@ -223,14 +223,13 @@ public class TowerController : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         float distance = Vector3.Distance(transform.position, targetedLeader.endPoint);
         
-        
+        Vector3 pos  = transform.position;
+        rb.position = pos;
         rb.gameObject.SetActive(true);
         rb.transform.LookAt(targetedLeader.transform.position);
         Projectile projectile = rb.gameObject.GetComponent<Projectile>();
         projectile.StartProjectile(targetedLeader.transform);
         projectile.AssignSpell(spellTower);
-        Vector3 pos  = transform.position;
-        rb.position = pos;
         float force = (projectileSpeed*(distance/maxDistance));
         rb.AddForce(direction * force, ForceMode.Impulse);
         targetedLeader = null;

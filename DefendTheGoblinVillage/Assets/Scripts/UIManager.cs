@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -20,6 +21,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite archerSprite, canonSprite, wallSprite, blunderSprite;
     [SerializeField] private Sprite fireballSprite, iceSprite, poisonSprite;
     
+    [Header("Currency Elements")]
+    [SerializeField] private Economy economy;
+    [SerializeField] private TextMeshProUGUI scrapText;
+    [SerializeField] private TextMeshProUGUI manaText;
+    
+    [Header("WaveManager Elements")]
+    [SerializeField] private WaveManager waveManager;
+    [SerializeField] private TextMeshProUGUI waveText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,7 +40,9 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        scrapText.text = economy.money.ToString();
+        manaText.text = economy.mana.ToString();
+        waveText.text = "Current Wave: " + waveManager.waveCounter.ToString();
     }
 
     public void UpdateHealthSlider()

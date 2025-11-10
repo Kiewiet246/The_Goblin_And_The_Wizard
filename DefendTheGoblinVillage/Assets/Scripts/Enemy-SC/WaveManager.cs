@@ -8,14 +8,14 @@ public class WaveManager : MonoBehaviour
     [Header("Manager")] [SerializeField] private EnemyManager enemyManager;
 
     [Header("The Important Values")] [SerializeField]
-    private int waitTimeBetweenWaves;
+    public int waitTimeBetweenWaves;
 
     [SerializeField] private float currentTimeIndividual, currentTimeParty, currentTimeWave;
     public int waveCounter = 0;
     [SerializeField] private int identifySpawnIndividual = 0;
     [SerializeField] private bool isSpawningIndividuals = false;
     [SerializeField] private bool isSpawningNextBunch = false;
-    [SerializeField] private bool isSpawningNextWave = false;
+    public bool isSpawningNextWave = false;
     [SerializeField] private int identifySpawnBunch;
     [SerializeField] private int bunchRepeatsCount;
     [SerializeField] private int listRepeatsCount;
@@ -31,6 +31,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private List<GameObject> allEnemies;
 
     [SerializeField] private Transform storeTheEnemies;
+    [SerializeField] private bool checkForVictory = false;
+    [SerializeField] private GameObject victoryScreen;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -57,6 +59,15 @@ public class WaveManager : MonoBehaviour
         else if (isSpawningIndividuals)
         {
             CountDownIndividual();
+        }
+
+        if (checkForVictory)
+        {
+            if (enemyManager.enemiesInField.Count == 0)
+            {
+                Debug.Log("Victory");
+                victoryScreen.SetActive(true);
+            }
         }
     }
 
@@ -151,11 +162,7 @@ public class WaveManager : MonoBehaviour
 
     private void NextWave()
     {
-        currentTimeWave = Time.time;
-        isSpawningNextWave = false;
-        isSpawningNextBunch = false;
-        isSpawningIndividuals = true;
-        currentTimeIndividual = Time.time;
+        
         waveCounter += 1;
         switch (waveCounter)
         {
@@ -174,7 +181,23 @@ public class WaveManager : MonoBehaviour
             case (5):
                 currentWave = waveFive;
                 break;
+            case(6):
+                isSpawningNextWave = false;
+                isSpawningNextBunch = false;
+                isSpawningIndividuals = false;
+                checkForVictory = true;
+                break;
         }
+
+        if (!checkForVictory)
+        {
+            currentTimeWave = Time.time;
+            isSpawningNextWave = false;
+            isSpawningNextBunch = false;
+            isSpawningIndividuals = true;
+            currentTimeIndividual = Time.time;
+        }
+        
     }
 
     private void SpawnWave()

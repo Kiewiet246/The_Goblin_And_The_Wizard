@@ -5,6 +5,7 @@ public class GoblinVillage : MonoBehaviour
     [Header("Basic Stuff")] public float villageHealth = 10f;
     [SerializeField] private ShowDamage showDamage;
     [SerializeField] private UIManager uIManager;
+    [SerializeField] private GameObject Defeat;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +27,7 @@ public class GoblinVillage : MonoBehaviour
         {
             if (villageHealth <= 0)
             {
+                Defeat.SetActive(true);
                 Debug.Log("Goblin village destroyed");
             }
         }
