@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.InputSystem.HID;
 using UnityEngine.Serialization;
 
 public class TowerController : MonoBehaviour
@@ -79,12 +79,14 @@ public class TowerController : MonoBehaviour
     
     [Header("Canon VFX")]
     [SerializeField] private GameObject canonVFX;
+    [SerializeField] private GameObject lightningEffect;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
        // CalculateRange();
        towerCost = (int)towerType;
+       lightningEffect.SetActive(false);
       // health = (int)towerType;
     }
 
@@ -347,6 +349,7 @@ public class TowerController : MonoBehaviour
         showDamage.FlashDamage();
         if (health <= 0)
         {
+            HideRange();
             towerTile.towerController = null;
             if (towerTile.castedSpell != null)
             {
@@ -357,6 +360,18 @@ public class TowerController : MonoBehaviour
             towerManager.ATowerDied(towerTile);
             towerManager.towers.Remove(this);
             Destroy(gameObject);
+        }
+    }
+
+    public void PlayParticles()
+    {
+        lightningEffect.SetActive(false);
+        if (lightningEffect != null)
+        {
+            if (lightningEffect.activeSelf == false)
+            {
+                lightningEffect.SetActive(true);
+            }
         }
     }
     

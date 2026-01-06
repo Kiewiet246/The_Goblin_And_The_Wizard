@@ -933,6 +933,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8067027903096514966}
+  - {fileID: 3251209212538785682}
   - {fileID: 5140894983349489785}
   - {fileID: 399723150330091102}
   - {fileID: 3281473892230713459}
@@ -1048,6 +1049,7 @@ MonoBehaviour:
   towerCostToBuild: 20
   delay: 0.5
   canonVFX: {fileID: 5182724988429169237}
+  lightningEffect: {fileID: 3938253650808324368}
 --- !u!54 &1327836317734325518
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1688,6 +1690,81 @@ MeshCollider:
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: f53fce2de9edf0b4ba915dcf52bbd8e8, type: 3}
   m_PrefabInstance: {fileID: 4670964824465684370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4678280468563192875
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3526066292174486198}
+    m_Modifications:
+    - target: {fileID: 7922406519272989625, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922406519272989625, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922406519272989625, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922406519272989625, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922406519272989625, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922406519272989625, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922406519272989625, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922406519272989625, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922406519272989625, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922406519272989625, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8145457269098042121, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 8524165761345498427, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_Name
+      value: LightningParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8524165761345498427, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+--- !u!4 &3251209212538785682 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7922406519272989625, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+  m_PrefabInstance: {fileID: 4678280468563192875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3938253650808324368 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8524165761345498427, guid: d35bdc91df99f5b4b9116e5fa90ffd1c, type: 3}
+  m_PrefabInstance: {fileID: 4678280468563192875}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5938431353349293817
 PrefabInstance:

@@ -13,6 +13,7 @@ public class EnemyContoller : MonoBehaviour
     [SerializeField] private float castRate;
     [SerializeField] private float currentTime;
     [SerializeField] private float castValue;
+    [SerializeField] private GameObject castingSpell;
 
     [SerializeField] private LayerMask towerLayer;
     [SerializeField] private LayerMask enemiesLayer;
@@ -88,6 +89,7 @@ public class EnemyContoller : MonoBehaviour
 
     private void CastSpellOfDestruction()
     {
+        castingSpell.SetActive(false);
         List<TowerController> towersInRange = new List<TowerController>();
         Collider[] colliders = Physics.OverlapSphere(transform.position, castingRange, towerLayer);
         if (colliders.Length == 0)
@@ -117,7 +119,8 @@ public class EnemyContoller : MonoBehaviour
         }
         
         int randomeTower = UnityEngine.Random.Range(0, towersInRange.Count);
-        Debug.Log(towersInRange[randomeTower].name);
+        castingSpell.SetActive(true);
+        towersInRange[randomeTower].PlayParticles();
         towersInRange[randomeTower].TakeDamage(castValue);
     }
 
